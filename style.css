@@ -127,6 +127,14 @@ img { display: block; }
 .hero-content {
   position: relative; z-index: 1;
   padding: 80px 0; max-width: 620px;
+  /* Alinha à mesma margem esquerda do container padrão do site (1200px),
+     em vez de centralizar no viewport inteiro — o que empurrava o texto
+     para cima do mosaico de imagens à direita. */
+  margin: 0;
+  margin-left: max(20px, calc((100% - 1200px) / 2));
+}
+@media (max-width: 900px) {
+  .hero-content { margin-left: 20px; }
 }
 .hero-tag {
   display: inline-flex; align-items: center; gap: 6px;

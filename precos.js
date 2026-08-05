@@ -11,7 +11,7 @@ const COTACAO_FILE  = 'https://raw.githubusercontent.com/btoigo-sketch/orlando-d
 const CAL_MAX_MESES = 6;
 
 // Número de WhatsApp da agência (somente dígitos, com DDI)
-const WHATSAPP_NUM = '5500000000000';
+const WHATSAPP_NUM = '5551980585594';
 
 // Fator de conversão: R$ 15,75 a cada 1.000 milhas Azul
 // = R$ 0,01575 por milha/ponto
