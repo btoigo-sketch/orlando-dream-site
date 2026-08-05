@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre Orlando — Orlando Dream Viagens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --accent-gold: #f8d57e;
+      --bg-dark:     #0d0f1a;
+      --bg-card:     #161829;
+      --bg-card2:    #1a1d30;
+      --text-main:   #e8eaf0;
+      --text-sub:    #9098b8;
+    }
+    body { background: var(--bg-dark); color: var(--text-main); font-family: 'Nunito', sans-serif; margin: 0; }
+
+    /* ── HERO ── */
+    .orlando-hero {
+      position: relative; min-height: 380px;
+      display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;
+    }
+    .orlando-hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Magic_Kingdom_castle.jpg/1200px-Magic_Kingdom_castle.jpg') center/cover no-repeat;
+      filter: brightness(.3);
+    }
+    .orlando-hero-content { position: relative; z-index: 1; padding: 60px 20px; }
+    .orlando-hero h1 { font-size: 3rem; font-weight: 900; color: #fff; margin: 0 0 12px; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .orlando-hero h1 span { color: var(--accent-gold); }
+    .orlando-hero p { font-size: 1.15rem; color: #dde; max-width: 640px; margin: 0 auto; }
+
+    /* ── TAB BAR ── */
+    .tab-bar {
+      display: flex; gap: 0; overflow-x: auto;
+      background: #10121f; border-bottom: 2px solid #22264a;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tab-btn {
+      padding: 14px 22px; font-size: .9rem; font-weight: 800;
+      color: var(--text-sub); background: none; border: none; cursor: pointer;
+      white-space: nowrap; border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s; flex-shrink: 0;
+    }
+    .tab-btn:hover { color: #fff; }
+    .tab-btn.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+    .tab-panel { display: none; padding: 0 0 60px; }
+    .tab-panel.active { display: block; }
+
+    /* ── PARK HEADER ── */
+    .park-header { position: relative; height: 260px; overflow: hidden; display: flex; align-items: flex-end; background: #0d1020; }
+    .park-header-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: brightness(.45);
+      transition: opacity .4s;
+    }
+    .park-header-img.loading { opacity: 0; }
+    .park-header-content { position: relative; z-index: 1; padding: 24px 40px; }
+    .park-badge {
+      display: inline-block; font-size: .75rem; font-weight: 800;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 8px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .badge-disney { background: #0057b8; color: #fff; }
+    .badge-universal { background: #6c2d91; color: #fff; }
+    .badge-springs { background: var(--accent-gold); color: #1a1a2e; }
+    .badge-outros { background: #e53935; color: #fff; }
+    .park-header h2 { font-size: 2.2rem; font-weight: 900; color: #fff; margin: 0 0 6px; text-shadow: 0 2px 10px #000; }
+    .park-header p { color: #ccd; font-size: .95rem; margin: 0; max-width: 600px; }
+
+    /* ── CONTEÚDO ── */
+    .park-content { max-width: 1100px; margin: 0 auto; padding: 40px 24px 0; }
+    .section-title {
+      font-size: 1.3rem; font-weight: 900; color: var(--accent-gold);
+      margin: 36px 0 16px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, #f8d57e44, transparent); }
+
+    /* ── INFO BOXES ── */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 12px; }
+    .info-box { background: var(--bg-card2); border-radius: 12px; padding: 18px 20px; border: 1px solid #1e2240; }
+    .info-box-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .info-box-label { font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); }
+    .info-box-val { font-size: 1.1rem; font-weight: 800; color: #fff; margin-top: 4px; }
+
+    /* ── ATRAÇÕES GRID ── */
+    .attractions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+    .attraction-card {
+      background: var(--bg-card); border-radius: 14px; overflow: hidden;
+      border: 1px solid #1e2240; transition: transform .2s, box-shadow .2s;
+    }
+    .attraction-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+
+    /* Imagem com shimmer enquanto carrega */
+    .card-img-wrap {
+      width: 100%; height: 180px; overflow: hidden; position: relative;
+      background: linear-gradient(90deg, #1a1d30 25%, #22264a 50%, #1a1d30 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    .other-card .card-img-wrap { height: 160px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .card-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity .4s;
+      position: absolute; inset: 0;
+    }
+    .card-img-wrap img.loaded { opacity: 1; }
+    .card-img-wrap.no-photo { animation: none; background: linear-gradient(135deg, #1a1d30, #22264a); }
+    .card-img-wrap.no-photo::after { content: '🌴'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; opacity: .3; }
+
+    .attraction-info { padding: 14px 16px; }
+    .attraction-name { font-size: 1rem; font-weight: 800; color: #fff; margin: 0 0 4px; }
+    .attraction-desc { font-size: .82rem; color: var(--text-sub); margin: 0 0 10px; line-height: 1.5; }
+    .attraction-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+    .meta-tag { font-size: .72rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; background: #222546; color: #aab; }
+    .tag-wait { background: #1a2d1a; color: #81c784; }
+    .tag-thrill { background: #2d1a1a; color: #ef9a9a; }
+    .tag-family { background: #1a2040; color: #90caf9; }
+    .tag-show { background: #2d2040; color: #ce93d8; }
+    .attraction-movie {
+      margin-top: 8px; padding-top: 8px; border-top: 1px dashed #2a2e50;
+      font-size: .78rem; color: var(--text-sub); line-height: 1.4;
+    }
+    .attraction-movie strong { color: var(--accent-gold); font-weight: 800; }
+
+    /* ── TIPS ── */
+    .tips-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tips-list li { background: var(--bg-card2); border-radius: 10px; padding: 12px 16px; font-size: .85rem; color: #ccd; border-left: 3px solid var(--accent-gold); line-height: 1.4; }
+
+    /* ── OUTRAS ATRAÇÕES ── */
+    .other-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+    .other-card { background: var(--bg-card); border-radius: 14px; overflow: hidden; border: 1px solid #1e2240; transition: transform .2s; }
+    .other-card:hover { transform: translateY(-3px); }
+    .other-card-body { padding: 14px 16px; }
+    .other-card-body h4 { margin: 0 0 6px; font-size: 1rem; font-weight: 800; color: #fff; }
+    .other-card-body p { margin: 0; font-size: .82rem; color: var(--text-sub); line-height: 1.5; }
+
+    /* ── HEADER OVERRIDE ── */
+    .header { background: #10121f !important; border-bottom: 1px solid #1e2240; }
+
+    @media(max-width:600px) {
+      .orlando-hero h1 { font-size: 2rem; }
+      .park-header { height: 200px; }
+      .park-header h2 { font-size: 1.5rem; }
+      .park-header-content { padding: 16px 20px; }
+      .tips-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== UTILITY BAR ===== -->
+<div class="util-bar">
+  <div class="container util-bar-inner">
+    <div class="util-left">
+      <a href="https://wa.me/5500000000000" target="_blank" class="util-whatsapp">📱 WhatsApp: (00) 00000-0000</a>
+      <span>✉️ contato@orlandodream.com.br</span>
+    </div>
+    <div class="util-right">
+      <a href="index.html#como-funciona">Como funciona?</a>
+      <a href="index.html#depoimentos">Depoimentos</a>
+      <a href="index.html#cotacao" class="util-cta-link">Solicitar cotação</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">✨</span>
+      <div>
+        <div class="logo-text">Orlando<strong>Dream</strong></div>
+        <div class="logo-sub">Especialistas em Orlando</div>
+      </div>
+    </a>
+    <nav class="header-nav" style="display:flex;gap:20px;margin-left:32px;">
+      <a href="index.html#ingressos"  style="font-weight:800;font-size:.9rem;color:#90a0c0;">🎟️ Ingressos</a>
+      <a href="index.html#parques"    style="font-weight:800;font-size:.9rem;color:#90a0c0;">🏰 Os Parques</a>
+      <a href="sobre-orlando.html"    style="font-weight:800;font-size:.9rem;color:var(--accent-gold);">🌴 Sobre Orlando</a>
+      <a href="index.html#contato"    style="font-weight:800;font-size:.9rem;color:#90a0c0;">💬 Contato</a>
+    </nav>
+    <div class="header-right">
+      <a href="index.html#cotacao" class="btn btn-gold">📋 Solicitar cotação</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="orlando-hero">
+  <div class="orlando-hero-bg"></div>
+  <div class="orlando-hero-content">
+    <div style="font-size:.8rem;font-weight:800;letter-spacing:2px;color:var(--accent-gold);text-transform:uppercase;margin-bottom:12px;">🌴 Guia Completo</div>
+    <h1>Descubra <span>Orlando</span></h1>
+    <p>Tudo o que você precisa saber sobre os parques Disney e Universal, atrações, shows e o melhor que a cidade tem a oferecer.</p>
+  </div>
+</section>
+
+<!-- ===== TABS ===== -->
+<div class="tab-bar" id="tabBar">
+  <button type="button" class="tab-btn active" onclick="showTab('mk',this)">🏰 Magic Kingdom</button>
+  <button type="button" class="tab-btn" onclick="showTab('epcot',this)">🌐 EPCOT</button>
+  <button type="button" class="tab-btn" onclick="showTab('hs',this)">🎬 Hollywood Studios</button>
+  <button type="button" class="tab-btn" onclick="showTab('ak',this)">🦁 Animal Kingdom</button>
+  <button type="button" class="tab-btn" onclick="showTab('springs',this)">🛍️ Disney Springs</button>
+  <button type="button" class="tab-btn" onclick="showTab('eu',this)">🚀 Epic Universe</button>
+  <button type="button" class="tab-btn" onclick="showTab('ioa',this)">⚡ Islands of Adventure</button>
+  <button type="button" class="tab-btn" onclick="showTab('usf',this)">🎥 Studios Florida</button>
+  <button type="button" class="tab-btn" onclick="showTab('outros',this)">🗺️ Outras Atrações</button>
+</div>
+
+<!-- Helper macro: card img wrapper -->
+<!-- Each img uses data-wiki="Wikipedia Article Title" for automatic image loading -->
+
+<!-- ============================================================ -->
+<!-- MAGIC KINGDOM -->
+<!-- ============================================================ -->
+<div class="tab-panel active" id="panel-mk">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Magic Kingdom" alt="Magic Kingdom" />
+    <div class="park-header-content">
+      <span class="park-badge badge-disney">Walt Disney World</span>
+      <h2>🏰 Magic Kingdom</h2>
+      <p>O parque mais visitado do mundo, lar do Castelo da Cinderela e das atrações mais icônicas da Disney.</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="info-grid">
+      <div class="info-box"><div class="info-box-icon">🕗</div><div class="info-box-label">Horário típico</div><div class="info-box-val">9h às 22h</div></div>
+      <div class="info-box"><div class="info-box-icon">👣</div><div class="info-box-label">Área total</div><div class="info-box-val">~43 hectares</div></div>
+      <div class="info-box"><div class="info-box-icon">🎢</div><div class="info-box-label">Nº de atrações</div><div class="info-box-val">25+ atrações e shows</div></div>
+      <div class="info-box"><div class="info-box-icon">⏱️</div><div class="info-box-label">Fila média geral</div><div class="info-box-val">45–75 minutos</div></div>
+    </div>
+    <div class="section-title">⭐ Principais Atrações</div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Seven Dwarfs Mine Train" alt="Seven Dwarfs Mine Train" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Seven Dwarfs Mine Train</div>
+          <div class="attraction-desc">Montanha-russa suave pelos túneis da mina dos Sete Anões. Favorita de toda a família.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 60–90 min</span><span class="meta-tag tag-family">👨‍👩‍👧 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Branca de Neve e os Sete Anões (1937)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Space Mountain (Magic Kingdom)" alt="Space Mountain" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Space Mountain</div>
+          <div class="attraction-desc">Clássico da Disney: corrida no escuro pelo espaço sideral com efeitos de estrelas e nebulosas.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–70 min</span><span class="meta-tag tag-thrill">🎢 Emoção</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="The Haunted Mansion" alt="Haunted Mansion" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Haunted Mansion</div>
+          <div class="attraction-desc">Passeio de doom buggy com 999 fantasmas amigáveis. Clássico absoluto que encanta gerações.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 30–60 min</span><span class="meta-tag tag-family">👨‍👩‍👧 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>A Mansão Mal-Assombrada (2003)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Pirates of the Caribbean (attraction)" alt="Pirates of the Caribbean" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Pirates of the Caribbean</div>
+          <div class="attraction-desc">Barco pelos mares piratas com cenas animadas incríveis e trilha sonora inesquecível.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 20–40 min</span><span class="meta-tag tag-family">👨‍👩‍👧 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Piratas do Caribe: A Maldição do Pérola Negra (2003)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Big Thunder Mountain Railroad" alt="Big Thunder Mountain" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Big Thunder Mountain Railroad</div>
+          <div class="attraction-desc">"O trem mais louco do Oeste!" Montanha-russa temática pelo deserto com quedas e curvas.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 35–55 min</span><span class="meta-tag tag-thrill">🎢 Emoção</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Tron Lightcycle Power Run" alt="TRON Lightcycle Run" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">TRON Lightcycle / Run</div>
+          <div class="attraction-desc">A mais veloz montanha-russa do Magic Kingdom. Experiência futurista inspirada no filme TRON.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 70–120 min</span><span class="meta-tag tag-thrill">🎢 Adrenalina</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>TRON: O Legado (2010)</strong></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-title">🎆 Shows e Espetáculos</div>
+    <div class="attractions-grid">
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Festival of Fantasy Parade" alt="Festival of Fantasy" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Festival of Fantasy Parade</div>
+          <div class="attraction-desc">Desfile com carros alegóricos gigantes, personagens Disney e dançarinos. Imperdível!</div>
+          <div class="attraction-meta"><span class="meta-tag tag-show">🎭 Show</span><span class="meta-tag">⏰ ~15h</span></div>
+        </div>
+      </div>
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Happily Ever After (Disney World show)" alt="Disney Enchantment" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Disney Enchantment</div>
+          <div class="attraction-desc">Espetáculo noturno de fogos e projeções sobre o Castelo da Cinderela. Mágico e inesquecível.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-show">🎆 Noturno</span><span class="meta-tag">⏰ Fechamento</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 Dicas Importantes</div>
+    <ul class="tips-list">
+      <li>🌅 <strong>Chegue 30 min antes:</strong> Pegue TRON e Seven Dwarfs sem fila no rope drop.</li>
+      <li>⚡ <strong>Lightning Lane:</strong> Vale muito para Seven Dwarfs e TRON nos dias movimentados.</li>
+      <li>🎆 <strong>Fogos:</strong> Chegue 1h antes para bom lugar em frente ao castelo.</li>
+      <li>🍽️ <strong>Be Our Guest:</strong> Restaurante temático de A Bela e a Fera — reserve antes.</li>
+      <li>👧 <strong>Fantasias:</strong> Crianças até 14 anos podem usar fantasias dos personagens.</li>
+      <li>📅 <strong>Menos filas:</strong> Terças e quartas têm menor movimento.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- EPCOT -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-epcot">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Epcot" alt="EPCOT" />
+    <div class="park-header-content">
+      <span class="park-badge badge-disney">Walt Disney World</span>
+      <h2>🌐 EPCOT</h2>
+      <p>Tecnologia, ciência e cultura de 11 países do mundo. Lar do Guardians e do World Showcase.</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="info-grid">
+      <div class="info-box"><div class="info-box-icon">🕗</div><div class="info-box-label">Horário típico</div><div class="info-box-val">9h às 21h</div></div>
+      <div class="info-box"><div class="info-box-icon">🌍</div><div class="info-box-label">Países no Showcase</div><div class="info-box-val">11 países</div></div>
+      <div class="info-box"><div class="info-box-icon">🎢</div><div class="info-box-label">Nº de atrações</div><div class="info-box-val">20+ experiências</div></div>
+      <div class="info-box"><div class="info-box-icon">⏱️</div><div class="info-box-label">Fila média geral</div><div class="info-box-val">35–65 minutos</div></div>
+    </div>
+    <div class="section-title">⭐ Principais Atrações</div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Guardians of the Galaxy: Cosmic Rewind" alt="Guardians Cosmic Rewind" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Guardians of the Galaxy: Cosmic Rewind</div>
+          <div class="attraction-desc">Montanha-russa indoor reverse-launch com rotações e trilha dos Guardiões. Sensacional!</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 60–100 min</span><span class="meta-tag tag-thrill">🎢 Emoção</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Guardiões da Galáxia (2014)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Test Track (Disney World)" alt="Test Track" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Test Track</div>
+          <div class="attraction-desc">Crie seu carro virtual e teste-o em condições extremas atingindo 104 km/h ao final.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–75 min</span><span class="meta-tag tag-family">👨‍👩‍👧 Família</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Frozen Ever After" alt="Frozen Ever After" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Frozen Ever After</div>
+          <div class="attraction-desc">Passeio de barco pelo reino de Arendelle com Elsa, Anna e Olaf. Favorito das crianças.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 50–80 min</span><span class="meta-tag tag-family">👨‍👩‍👧 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Frozen: Uma Aventura Congelante (2013)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Soarin' Around the World" alt="Soarin'" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Soarin' Around the World</div>
+          <div class="attraction-desc">Simulador de voo sobre maravilhas do mundo. Visão 180° com aromas e brisas reais.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–65 min</span><span class="meta-tag tag-family">👨‍👩‍👧 Família</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Remy's Ratatouille Adventure" alt="Remy's Ratatouille" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Remy's Ratatouille Adventure</div>
+          <div class="attraction-desc">Encolha até o tamanho de um rato e explore a cozinha do chef Gusteau em Paris.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–70 min</span><span class="meta-tag tag-family">👨‍👩‍👧 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Ratatouille (2007)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="World Showcase" alt="World Showcase" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">World Showcase</div>
+          <div class="attraction-desc">11 pavilhões de países ao redor de um lago: comida, cultura, shows e personagens temáticos.</div>
+          <div class="attraction-meta"><span class="meta-tag">🌎 Cultural</span><span class="meta-tag">🍽️ Gastronomia</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-title">💡 Dicas Importantes</div>
+    <ul class="tips-list">
+      <li>🍺 <strong>World Showcase:</strong> Abre só às 11h — manhã para as atrações tech.</li>
+      <li>🎆 <strong>EPCOT Forever:</strong> Show de fogos sobre o lago — chegue 45 min antes.</li>
+      <li>🌮 <strong>Gastronomia:</strong> México: melhor margarita. Japão: sushi excelente.</li>
+      <li>⚡ <strong>Guardians:</strong> Virtual Queue pelo app Disney às 7h ou 13h.</li>
+      <li>🎪 <strong>Festivais:</strong> Festivais gastronômicos e de arte ao longo do ano.</li>
+      <li>🌅 <strong>Roteiro ideal:</strong> Manhã em World Discovery, tarde em World Showcase.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- HOLLYWOOD STUDIOS -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-hs">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Disney's Hollywood Studios" alt="Hollywood Studios" />
+    <div class="park-header-content">
+      <span class="park-badge badge-disney">Walt Disney World</span>
+      <h2>🎬 Hollywood Studios</h2>
+      <p>Cinema, Star Wars e Marvel no parque mais cheio de adrenalina da Disney.</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="info-grid">
+      <div class="info-box"><div class="info-box-icon">🕗</div><div class="info-box-label">Horário típico</div><div class="info-box-val">9h às 21h</div></div>
+      <div class="info-box"><div class="info-box-icon">⭐</div><div class="info-box-label">Destaque</div><div class="info-box-val">Star Wars: Galaxy's Edge</div></div>
+      <div class="info-box"><div class="info-box-icon">🎢</div><div class="info-box-label">Nº de atrações</div><div class="info-box-val">18+ atrações e shows</div></div>
+      <div class="info-box"><div class="info-box-icon">⏱️</div><div class="info-box-label">Fila média geral</div><div class="info-box-val">50–80 minutos</div></div>
+    </div>
+    <div class="section-title">⭐ Principais Atrações</div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Star Wars: Rise of the Resistance" alt="Rise of the Resistance" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Star Wars: Rise of the Resistance</div>
+          <div class="attraction-desc">Encontro épico com a Primeira Ordem com efeitos práticos impressionantes. A melhor atração da Disney.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 60–120 min</span><span class="meta-tag tag-thrill">🚀 Épico</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Star Wars: Os Últimos Jedi (2017) e A Ascensão Skywalker (2019)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="The Twilight Zone Tower of Terror" alt="Tower of Terror" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">The Twilight Zone Tower of Terror</div>
+          <div class="attraction-desc">Elevador de queda livre de 13 andares com efeitos surpresa. Emoção pura para os corajosos.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–70 min</span><span class="meta-tag tag-thrill">😱 Terror</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Além da Imaginação (série, 1959–1964)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Slinky Dog Dash" alt="Slinky Dog Dash" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Slinky Dog Dash</div>
+          <div class="attraction-desc">Montanha-russa temática do Toy Story com lançamento e curvas divertidas. Ideal para famílias.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 55–85 min</span><span class="meta-tag tag-family">👨‍👩‍👧 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Toy Story (1995)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Rock 'n' Roller Coaster" alt="Rock n Roller Coaster Starring The Muppets" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Rock 'n' Roller Coaster Starring The Muppets</div>
+          <div class="attraction-desc">De 0 a 100 km/h em 2,8 segundos, agora com Dr. Teeth e a Electric Mayhem no comando da trilha sonora. Reaberta em maio de 2026 após retematização.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–65 min</span><span class="meta-tag tag-thrill">🎵 Adrenalina</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Os Muppets (2011)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Millennium Falcon: Smugglers Run" alt="Millennium Falcon" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Millennium Falcon: Smugglers Run</div>
+          <div class="attraction-desc">Pilote o Falcon de Han Solo! Cada passageiro tem um papel na missão interativa.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 35–60 min</span><span class="meta-tag tag-family">⚡ Interativo</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Star Wars: Uma Nova Esperança (1977)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Mickey &amp; Minnie's Runaway Railway" alt="Mickey Minnie Runaway Railway" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Mickey & Minnie's Runaway Railway</div>
+          <div class="attraction-desc">Passeio cartoon 2D que se torna 4D ao longo da jornada. Perfeito para crianças pequenas.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 35–60 min</span><span class="meta-tag tag-family">👧 Crianças</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Curtas clássicos do Mickey Mouse</strong></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-title">💡 Dicas Importantes</div>
+    <ul class="tips-list">
+      <li>⚡ <strong>Rise of the Resistance:</strong> Vá antes das 9h — atração mais disputada da Disney.</li>
+      <li>🍺 <strong>Oga's Cantina:</strong> Bar temático de Star Wars — reserve com antecedência.</li>
+      <li>🔵 <strong>Lightsaber:</strong> Savi's Workshop permite construir o seu por ~$280.</li>
+      <li>🎥 <strong>Indiana Jones Show:</strong> Espetáculo de acrobacias — início da tarde.</li>
+      <li>🌆 <strong>Fantasmic!:</strong> Show noturno com projeções — um dos melhores da Disney.</li>
+      <li>👶 <strong>Toy Story Land:</strong> Área perfeita para crianças pequenas.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ANIMAL KINGDOM -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-ak">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Disney's Animal Kingdom" alt="Animal Kingdom" />
+    <div class="park-header-content">
+      <span class="park-badge badge-disney">Walt Disney World</span>
+      <h2>🦁 Animal Kingdom</h2>
+      <p>Natureza, animais reais e o mundo de Avatar convivem neste parque único e imersivo.</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="info-grid">
+      <div class="info-box"><div class="info-box-icon">🕗</div><div class="info-box-label">Horário típico</div><div class="info-box-val">8h às 20h</div></div>
+      <div class="info-box"><div class="info-box-icon">🌳</div><div class="info-box-label">Destaque</div><div class="info-box-val">Pandora – World of Avatar</div></div>
+      <div class="info-box"><div class="info-box-icon">🦒</div><div class="info-box-label">Animais no parque</div><div class="info-box-val">1.700+ espécies</div></div>
+      <div class="info-box"><div class="info-box-icon">⏱️</div><div class="info-box-label">Fila média geral</div><div class="info-box-val">35–65 minutos</div></div>
+    </div>
+    <div class="section-title">⭐ Principais Atrações</div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Avatar Flight of Passage" alt="Avatar Flight of Passage" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Avatar Flight of Passage</div>
+          <div class="attraction-desc">Voe em um Banshee pela lua de Pandora. O simulador mais imersivo do mundo.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 60–120 min</span><span class="meta-tag tag-thrill">🌿 Épico</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Avatar (2009)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Kilimanjaro Safaris" alt="Kilimanjaro Safaris" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Kilimanjaro Safaris</div>
+          <div class="attraction-desc">Safari em jipe pelos campos africanos com girafas, elefantes, leões e rinocerontes reais.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 25–50 min</span><span class="meta-tag tag-family">🦁 Natureza</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Expedition Everest" alt="Expedition Everest" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Expedition Everest</div>
+          <div class="attraction-desc">Trem que sobe o Monte Everest e encontra o Yeti. Trecho de ré no escuro surpreende todos.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 30–60 min</span><span class="meta-tag tag-thrill">🏔️ Adrenalina</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Na'vi River Journey" alt="Na'vi River Journey" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Na'vi River Journey</div>
+          <div class="attraction-desc">Barco pela floresta bioluminescente de Pandora. Visual deslumbrante e relaxante à noite.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–70 min</span><span class="meta-tag tag-family">🌿 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Avatar (2009)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Festival of the Lion King" alt="Festival of the Lion King" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Festival of the Lion King</div>
+          <div class="attraction-desc">Show teatral com acrobacias, dançarinos e personagens ao vivo. Um dos melhores shows da Disney.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-show">🎭 Show</span><span class="meta-tag">⏰ 30 min</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>O Rei Leão (1994)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Gorilla Falls Exploration Trail" alt="Gorilla Falls" data-src-fallback="Disney's Animal Kingdom" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Gorilla Falls Exploration Trail</div>
+          <div class="attraction-desc">Trilha com gorilas, hipopótamos pigmeus, meerkats e aves exóticas africanas. Sem fila!</div>
+          <div class="attraction-meta"><span class="meta-tag">🦍 Sem fila</span><span class="meta-tag tag-family">🌿 Natureza</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-title">💡 Dicas Importantes</div>
+    <ul class="tips-list">
+      <li>🌅 <strong>Safári de manhã:</strong> Animais mais ativos nas primeiras horas.</li>
+      <li>🌿 <strong>Pandora à noite:</strong> Efeitos bioluminescentes aparecem após o pôr do sol.</li>
+      <li>⚡ <strong>Flight of Passage:</strong> Primeira prioridade — filas chegam a 3h nos dias cheios.</li>
+      <li>🎭 <strong>Festival of the Lion King:</strong> Reserve 20 min antes — teatro lota rápido.</li>
+      <li>🦕 <strong>Dinosaur:</strong> Atração intensa — melhor para adultos e maiores de 10 anos.</li>
+      <li>🌧️ <strong>Kali River Rapids:</strong> Leve roupa extra ou poncho — vai se molhar!</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- DISNEY SPRINGS -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-springs">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Disney Springs" alt="Disney Springs" />
+    <div class="park-header-content">
+      <span class="park-badge badge-springs">Disney Springs</span>
+      <h2>🛍️ Disney Springs</h2>
+      <p>Centro de compras, gastronomia e entretenimento. Entrada gratuita — sem necessidade de ingresso!</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="info-grid">
+      <div class="info-box"><div class="info-box-icon">🕗</div><div class="info-box-label">Horário típico</div><div class="info-box-val">10h às 23h</div></div>
+      <div class="info-box"><div class="info-box-icon">🎟️</div><div class="info-box-label">Entrada</div><div class="info-box-val">Gratuita!</div></div>
+      <div class="info-box"><div class="info-box-icon">🍽️</div><div class="info-box-label">Restaurantes</div><div class="info-box-val">50+ opções</div></div>
+      <div class="info-box"><div class="info-box-icon">🛍️</div><div class="info-box-label">Lojas</div><div class="info-box-val">100+ lojas</div></div>
+    </div>
+    <div class="section-title">🍽️ Gastronomia e Compras em Destaque</div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Disney Springs" alt="The BOATHOUSE" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">The BOATHOUSE</div>
+          <div class="attraction-desc">Frutos do mar premium à beira do lago com barcos vintage expostos. Um dos melhores de Orlando.</div>
+          <div class="attraction-meta"><span class="meta-tag">🦞 Frutos do mar</span><span class="meta-tag">💲💲💲</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="World of Disney" alt="World of Disney" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">World of Disney</div>
+          <div class="attraction-desc">A maior loja Disney do mundo! Camisetas, brinquedos, pelúcias e itens exclusivos.</div>
+          <div class="attraction-meta"><span class="meta-tag">🛍️ Loja principal</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="T-Rex Café" alt="T-REX Disney Springs" data-src-fallback="Disney Springs" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">T-REX Café</div>
+          <div class="attraction-desc">Restaurante temático de dinossauros com animatrônicos e ambiente pré-histórico. Crianças adoram!</div>
+          <div class="attraction-meta"><span class="meta-tag">🦕 Temático</span><span class="meta-tag">💲💲</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Lego Store" alt="LEGO Store Disney Springs" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">LEGO Store</div>
+          <div class="attraction-desc">Loja com esculturas gigantes em LEGO, área interativa e sets exclusivos. Crianças adoram!</div>
+          <div class="attraction-meta"><span class="meta-tag">🧱 Para toda a família</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-title">💡 Dicas Importantes</div>
+    <ul class="tips-list">
+      <li>🆓 <strong>Entrada gratuita:</strong> Não precisa de ingresso — só pague estacionamento.</li>
+      <li>🌆 <strong>Melhor horário:</strong> À noite tem mais atmosfera e luzes no lago.</li>
+      <li>🍦 <strong>Vivoli il Gelato:</strong> Gelateria italiana — o melhor sorvete de Orlando!</li>
+      <li>📷 <strong>Foto do lago:</strong> Visual noturno com barcos e luzes é espetacular.</li>
+      <li>🚌 <strong>Transporte Disney:</strong> Ônibus de cortesia saem de todos os hotéis Disney.</li>
+      <li>🎉 <strong>Shows gratuitos:</strong> Sextas e sábados à noite no palco central.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- EPIC UNIVERSE -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-eu">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Universal Epic Universe" alt="Epic Universe" />
+    <div class="park-header-content">
+      <span class="park-badge badge-universal">Universal Orlando</span>
+      <h2>🚀 Epic Universe</h2>
+      <p>O mais novo e ambicioso parque do mundo. Aberto em maio de 2025 com 5 mundos imersivos distintos.</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="info-grid">
+      <div class="info-box"><div class="info-box-icon">📅</div><div class="info-box-label">Abertura</div><div class="info-box-val">Maio 2025</div></div>
+      <div class="info-box"><div class="info-box-icon">🌍</div><div class="info-box-label">Mundos temáticos</div><div class="info-box-val">5 universos</div></div>
+      <div class="info-box"><div class="info-box-icon">🎢</div><div class="info-box-label">Nº de atrações</div><div class="info-box-val">20+ experiências</div></div>
+      <div class="info-box"><div class="info-box-icon">⏱️</div><div class="info-box-label">Fila média geral</div><div class="info-box-val">50–90 minutos</div></div>
+    </div>
+    <div class="section-title">🌍 Os 5 Mundos do Epic Universe</div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="The Wizarding World of Harry Potter" alt="Wizarding World Ministry of Magic" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">🧙 Wizarding World — Ministry of Magic</div>
+          <div class="attraction-desc">Paris dos anos 90 com o Ministério da Magia. Novas atrações e Hogsmeade expandida.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 60–100 min</span><span class="meta-tag tag-thrill">⚡ Harry Potter</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Isle of Berk (Universal Epic Universe)" alt="How to Train Your Dragon Isle of Berk" data-src-fallback="Universal Epic Universe" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">🐉 How to Train Your Dragon — Isle of Berk</div>
+          <div class="attraction-desc">A ilha viking de Soluço e Banguela com shows de dragões animatrônicos e atração de voo.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 45–80 min</span><span class="meta-tag tag-family">🐲 Família</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Super Nintendo World" alt="Super Nintendo World" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">🍄 Super Nintendo World</div>
+          <div class="attraction-desc">Mundo interativo de Mario com corrida de kart em realidade aumentada e Power-Up Bands!</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 55–90 min</span><span class="meta-tag tag-family">🎮 Jogos</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Dark Universe (Universal Epic Universe)" alt="Monsters Unchained" data-src-fallback="Universal Classic Monsters" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">🎃 Monsters Unchained</div>
+          <div class="attraction-desc">Drácula, Frankenstein e a Múmia habitam este mundo gótico com atrações de terror e passeios no escuro.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–70 min</span><span class="meta-tag tag-thrill">👻 Terror</span></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Universal Epic Universe" alt="Celestial Park" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">🌌 Celestial Park</div>
+          <div class="attraction-desc">Área central com jardins, lago, restaurantes e espetáculo de fontes e luzes à noite.</div>
+          <div class="attraction-meta"><span class="meta-tag">🌿 Área central</span><span class="meta-tag">🍽️ Gastronomia</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-title">💡 Dicas Importantes</div>
+    <ul class="tips-list">
+      <li>🆕 <strong>Parque novo:</strong> Filas longas em 2025-2026. Considere o Express Pass.</li>
+      <li>🍄 <strong>Super Nintendo World:</strong> Power-Up Band (~$40) adiciona missões interativas.</li>
+      <li>⚡ <strong>Harry Potter priority:</strong> Vá ao mundo HP logo na abertura.</li>
+      <li>🐉 <strong>Dragões animatrônicos:</strong> Show de dragões ao vivo é um dos grandes destaques.</li>
+      <li>🎃 <strong>Universal Monsters:</strong> Melhor à noite, quando a atmosfera gótica é mais intensa.</li>
+      <li>🍽️ <strong>Restaurantes:</strong> Reserve com antecedência — lotam dias antes.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ISLANDS OF ADVENTURE -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-ioa">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Universal's Islands of Adventure" alt="Islands of Adventure" />
+    <div class="park-header-content">
+      <span class="park-badge badge-universal">Universal Orlando</span>
+      <h2>⚡ Islands of Adventure</h2>
+      <p>As melhores montanhas-russas de Orlando e o lar original do Wizarding World of Harry Potter.</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="info-grid">
+      <div class="info-box"><div class="info-box-icon">🕗</div><div class="info-box-label">Horário típico</div><div class="info-box-val">9h às 21h</div></div>
+      <div class="info-box"><div class="info-box-icon">⭐</div><div class="info-box-label">Destaque</div><div class="info-box-val">VelociCoaster + Hagrid's</div></div>
+      <div class="info-box"><div class="info-box-icon">🎢</div><div class="info-box-label">Nº de atrações</div><div class="info-box-val">25+ atrações e shows</div></div>
+      <div class="info-box"><div class="info-box-icon">⏱️</div><div class="info-box-label">Fila média geral</div><div class="info-box-val">45–75 minutos</div></div>
+    </div>
+    <div class="section-title">⭐ Principais Atrações</div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Jurassic World VelociCoaster" alt="VelociCoaster" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Jurassic World VelociCoaster</div>
+          <div class="attraction-desc">A montanha-russa mais rápida da Flórida! Lançamento a 115 km/h com inversões sobre a lagoa.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 60–90 min</span><span class="meta-tag tag-thrill">🦕 Melhor montanha-russa</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Jurassic World (2015)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Hagrid's Magical Creatures Motorbike Adventure" alt="Hagrid's Motorbike" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Hagrid's Magical Creatures Motorbike Adventure</div>
+          <div class="attraction-desc">Talvez a melhor atração do mundo: moto encantada com hipogrifo, fluffle e criaturas mágicas.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 75–120 min</span><span class="meta-tag tag-thrill">⚡ Imperdível</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Harry Potter e o Prisioneiro de Azkaban (2004)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Harry Potter and the Forbidden Journey" alt="Forbidden Journey" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Harry Potter and the Forbidden Journey</div>
+          <div class="attraction-desc">Voe em vassoura por Hogwarts neste passeio no escuro revolucionário com Quidditch e Dementadores.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 45–75 min</span><span class="meta-tag tag-family">⚡ Harry Potter</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Harry Potter e a Pedra Filosofal (2001)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="The Incredible Hulk Coaster" alt="Incredible Hulk Coaster" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">The Incredible Hulk Coaster</div>
+          <div class="attraction-desc">Lançamento magnético com 7 inversões e 110 km/h. Uma das montanhas-russas mais icônicas do mundo.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 40–65 min</span><span class="meta-tag tag-thrill">💚 Adrenalina</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>O Incrível Hulk (2008)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Jurassic Park River Adventure" alt="Jurassic Park River Adventure" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Jurassic Park River Adventure</div>
+          <div class="attraction-desc">Barco entre dinossauros culminando em descida de 25 metros. Prepare-se para molhar!</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 35–55 min</span><span class="meta-tag">💧 Água</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Jurassic Park (1993)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Doctor Doom's Fearfall" alt="Doctor Doom's Fearfall" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Doctor Doom's Fearfall</div>
+          <div class="attraction-desc">Torre de queda livre de 60 metros com lançamento para cima. Vista incrível do parque.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 20–40 min</span><span class="meta-tag tag-thrill">😱 Torre</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-title">💡 Dicas Importantes</div>
+    <ul class="tips-list">
+      <li>🧙 <strong>Butterbeer:</strong> A cerveja de manteiga do Wizarding World é obrigatória!</li>
+      <li>🦕 <strong>VelociCoaster:</strong> Vá na primeira hora — filas explodem após as 10h.</li>
+      <li>🪄 <strong>Varinha interativa:</strong> Pontos de magia espalhados por todo Hogsmeade.</li>
+      <li>💧 <strong>Jurassic Park:</strong> Traga poncho — a descida final encharça todo mundo.</li>
+      <li>🍺 <strong>Three Broomsticks:</strong> Restaurante mais imersivo do parque.</li>
+      <li>🚂 <strong>Hogwarts Express:</strong> Requer ingresso dos 2 parques — vale cada centavo.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- UNIVERSAL STUDIOS FLORIDA -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-usf">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Universal Studios Florida" alt="Universal Studios Florida" />
+    <div class="park-header-content">
+      <span class="park-badge badge-universal">Universal Orlando</span>
+      <h2>🎥 Universal Studios Florida</h2>
+      <p>Minions, Simpsons, Illumination e o lendário Diagon Alley de Harry Potter.</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="info-grid">
+      <div class="info-box"><div class="info-box-icon">🕗</div><div class="info-box-label">Horário típico</div><div class="info-box-val">9h às 21h</div></div>
+      <div class="info-box"><div class="info-box-icon">⭐</div><div class="info-box-label">Destaque</div><div class="info-box-val">Diagon Alley + Simpsons</div></div>
+      <div class="info-box"><div class="info-box-icon">🎢</div><div class="info-box-label">Nº de atrações</div><div class="info-box-val">20+ atrações e shows</div></div>
+      <div class="info-box"><div class="info-box-icon">⏱️</div><div class="info-box-label">Fila média geral</div><div class="info-box-val">40–70 minutos</div></div>
+    </div>
+    <div class="section-title">⭐ Principais Atrações</div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Harry Potter and the Escape from Gringotts" alt="Escape from Gringotts" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Harry Potter and the Escape from Gringotts</div>
+          <div class="attraction-desc">Mine cart nos cofres de Gringotts com encontros com Voldemort, Bellatrix e o dragão.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 50–80 min</span><span class="meta-tag tag-thrill">⚡ Harry Potter</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Harry Potter e as Relíquias da Morte – Parte 2 (2011)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Villain-Con Minion Blast" alt="Minion Land" data-src-fallback="Universal Studios Florida" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Minion Land — Villain-Con Minion Blast</div>
+          <div class="attraction-desc">Área temática dos Minions com jogo interativo de pontos e foto com Gru. Diversão garantida!</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 35–60 min</span><span class="meta-tag tag-family">💛 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Meu Malvado Favorito (2010)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="The Simpsons Ride" alt="The Simpsons Ride" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">The Simpsons Ride</div>
+          <div class="attraction-desc">Montanha-russa virtual em Springfield com toda a família Simpson e Kwik-E-Mart real.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 30–55 min</span><span class="meta-tag tag-family">🍩 Família</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Os Simpsons (série animada)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Revenge of the Mummy" alt="Revenge of the Mummy" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Revenge of the Mummy</div>
+          <div class="attraction-desc">Montanha-russa indoor com lançamentos surpresa, escaravelhos e o maldito Imhotep em busca da sua alma. Um dos coasters indoor mais premiados do mundo.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 35–60 min</span><span class="meta-tag tag-thrill">🐫 Adrenalina</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>A Múmia (1999)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Men in Black: Alien Attack" alt="Men in Black Alien Attack" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Men in Black: Alien Attack</div>
+          <div class="attraction-desc">Atire em alienígenas para proteger Nova York. Sistema de pontuação competitivo entre os carros.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 25–45 min</span><span class="meta-tag tag-family">👽 Interativo</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Homens de Preto (1997)</strong></div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="card-img-wrap"><img data-wiki="Hogwarts Express" alt="Hogwarts Express" /></div>
+        <div class="attraction-info">
+          <div class="attraction-name">Hogwarts Express — King's Cross Station</div>
+          <div class="attraction-desc">Trem de Hogwarts pela plataforma 9¾ até Islands of Adventure. Cenas exclusivas e narração temática.</div>
+          <div class="attraction-meta"><span class="meta-tag tag-wait">⏱ Fila: 20–40 min</span><span class="meta-tag">🚂 Traslado entre parques</span></div>
+          <div class="attraction-movie">🎬 Assista antes: <strong>Harry Potter e a Pedra Filosofal (2001)</strong></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-title">💡 Dicas Importantes</div>
+    <ul class="tips-list">
+      <li>🧱 <strong>Diagon Alley:</strong> Área oculta — entre pela livraria Leaky Cauldron.</li>
+      <li>🍺 <strong>Butterbeer defumado:</strong> No USF tem versão defumada com fumaça. Deliciosa!</li>
+      <li>🍩 <strong>Kwik-E-Mart:</strong> Donuts cor-de-rosa do Homer vendidos de verdade!</li>
+      <li>🚂 <strong>Hogwarts Express:</strong> Obrigatório ter ingresso dos 2 parques.</li>
+      <li>🐫 <strong>Revenge of the Mummy:</strong> Peça para ir na primeira fileira — o lançamento reverso surpreende mais.</li>
+      <li>📷 <strong>Diagon Alley à noite:</strong> O dragão de Gringotts solta fogo a cada 15-20 min.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- OUTRAS ATRAÇÕES -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-outros">
+  <div class="park-header">
+    <img class="park-header-img loading" data-wiki="Orlando, Florida" alt="Orlando" />
+    <div class="park-header-content">
+      <span class="park-badge badge-outros">Orlando, FL</span>
+      <h2>🗺️ Outras Atrações de Orlando</h2>
+      <p>Muito além dos parques — Orlando oferece experiências únicas para todos os gostos.</p>
+    </div>
+  </div>
+  <div class="park-content">
+    <div class="section-title">🎡 Parques e Atrações Turísticas</div>
+    <div class="other-grid">
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="SeaWorld Orlando" alt="SeaWorld" /></div>
+        <div class="other-card-body"><h4>🐋 SeaWorld Orlando</h4><p>Shows e habitats de animais marinhos + atrações aquáticas. Ice Breaker e Mako são as melhores montanhas-russas.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Kennedy Space Center Visitor Complex" alt="Kennedy Space Center" /></div>
+        <div class="other-card-body"><h4>🚀 Kennedy Space Center</h4><p>A ~1h de Orlando — complexo da NASA com foguetes reais, cápsulas Apollo e o ônibus espacial Atlantis.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Legoland Florida" alt="Legoland Florida" /></div>
+        <div class="other-card-body"><h4>🧱 LEGOLAND Florida</h4><p>Ideal para crianças de 2 a 12 anos com cidades em LEGO, montanhas-russas suaves e área aquática.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Icon Park" alt="ICON Park" /></div>
+        <div class="other-card-body"><h4>🎡 ICON Park — International Drive</h4><p>Roda-gigante de 122 metros + Madame Tussauds, SEA LIFE Aquarium e diversas atrações no complexo.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Gatorland" alt="Gatorland" /></div>
+        <div class="other-card-body"><h4>🐊 Gatorland</h4><p>Capital Mundial do Jacaré — mais de 2.000 jacarés, zipline sobre os répteis e shows de luta com jacarés.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Airboat" alt="Airboat Florida" /></div>
+        <div class="other-card-body"><h4>🌿 Wild Florida Airboats</h4><p>Passeio de airboat pelos everglades com jacarés, aves e natureza selvagem. Imperdível!</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="International Drive, Orlando" alt="International Drive" /></div>
+        <div class="other-card-body"><h4>🛍️ International Drive (I-Drive)</h4><p>A rua mais movimentada de Orlando com restaurantes, outlets, atrações e entretenimento por 11 km.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Orlando Premium Outlets" alt="Premium Outlets" /></div>
+        <div class="other-card-body"><h4>🛒 Premium Outlets Orlando</h4><p>Marcas de luxo com desconto: Nike, Michael Kors, Coach, Kate Spade, Ralph Lauren e muito mais.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Busch Gardens Tampa Bay" alt="Busch Gardens" /></div>
+        <div class="other-card-body"><h4>🎢 Busch Gardens Tampa</h4><p>A ~1h30 de Orlando — o melhor parque de montanhas-russas da Flórida com safári africano incluso.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Cocoa Beach, Florida" alt="Cocoa Beach" /></div>
+        <div class="other-card-body"><h4>🏖️ Cocoa Beach</h4><p>Praia mais próxima de Orlando — ~1h de carro. Lar do famoso Ron Jon Surf Shop e mar tranquilo.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Old Town (Kissimmee)" alt="Old Town Kissimmee" /></div>
+        <div class="other-card-body"><h4>🎪 Old Town Kissimmee</h4><p>Parque de diversões retrô com carros antigos, shows e brinquedos clássicos. Ótimo para o final do dia.</p></div>
+      </div>
+
+      <div class="other-card">
+        <div class="card-img-wrap"><img data-wiki="Sand Lake Road" alt="Restaurant Row" data-src-fallback="International Drive, Orlando" /></div>
+        <div class="other-card-body"><h4>🍽️ Restaurant Row — Sand Lake Road</h4><p>A melhor área gastronômica de Orlando com restaurantes finos e culinária internacional.</p></div>
+      </div>
+
+    </div>
+    <div class="section-title">💡 Dicas Gerais de Orlando</div>
+    <ul class="tips-list">
+      <li>🌡️ <strong>Clima:</strong> Verão (jun–ago) com 35°C+ e chuvas à tarde. Inverno (dez–jan) com ~20°C.</li>
+      <li>🚗 <strong>Carro:</strong> Indispensável — as distâncias são grandes. Alugue um econômico.</li>
+      <li>💧 <strong>Água grátis:</strong> Peça "cup of water" (copo de água) nos balcões de fast food dos parques.</li>
+      <li>☀️ <strong>Protetor solar:</strong> Nível 50+ com reaplicação a cada 2h — sol da Flórida é intenso.</li>
+      <li>📱 <strong>Apps:</strong> My Disney Experience (Disney) e Universal Orlando (Universal).</li>
+      <li>🎟️ <strong>Compre online:</strong> Ingressos em pontos Azul com nossa equipe — preços imbatíveis!</li>
+      <li>🏨 <strong>Hotéis Universal:</strong> Acesso antecipado + Express Pass inclusos em alguns pacotes.</li>
+      <li>✈️ <strong>Aeroporto:</strong> MCO (Orlando International) é o principal. Uber/Lyft disponíveis.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== CTA FINAL ===== -->
+<section style="background:linear-gradient(135deg,#0d2050,#1a0d3e);padding:60px 24px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div style="font-size:.8rem;font-weight:800;letter-spacing:2px;color:#f8d57e;text-transform:uppercase;margin-bottom:12px;">🎟️ Pronto para ir a Orlando?</div>
+    <h2 style="font-size:2rem;font-weight:900;color:#fff;margin:0 0 12px;">Solicite sua cotação personalizada</h2>
+    <p style="color:#aab;font-size:1rem;margin:0 0 28px;">Com ingressos em pontos Azul, você economiza muito. Montamos o pacote ideal para você e sua família.</p>
+    <a href="index.html#cotacao" style="display:inline-block;background:#f8d57e;color:#1a1a2e;font-weight:900;font-size:1rem;padding:14px 36px;border-radius:30px;text-decoration:none;">📋 Solicitar cotação grátis →</a>
+  </div>
+</section>
+
+<footer style="background:#0a0c18;padding:24px;text-align:center;color:#555;font-size:.8rem;border-top:1px solid #1e2240;">
+  © 2026 Orlando Dream Viagens — Especialistas em Orlando
+</footer>
+
+<script>
+// ── Tab switcher ──────────────────────────────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panel-' + id).classList.add('active');
+  // Carrega imagens da nova aba
+  loadPanelImages(id);
+}
+
+// ── Wikipedia Image Loader ────────────────────────────────────
+// Usa a API pública do Wikipedia para buscar a imagem principal de cada artigo.
+// data-wiki="Article Title" → URL real da imagem via API.
+
+var wikiCache = {};
+
+function loadPanelImages(panelId) {
+  var panel = document.getElementById('panel-' + panelId);
+  if (!panel) return;
+  var imgs = Array.from(panel.querySelectorAll('img[data-wiki]:not([data-loaded])'));
+  if (!imgs.length) return;
+
+  // Processa em lotes de 10 (limite seguro da API)
+  for (var i = 0; i < imgs.length; i += 10) {
+    (function(batch) {
+      var uncached = batch.filter(function(img) { return !wikiCache[img.dataset.wiki]; });
+      var cached   = batch.filter(function(img) { return  wikiCache[img.dataset.wiki]; });
+
+      // Aplica imagens já em cache imediatamente
+      cached.forEach(function(img) { applyImage(img, wikiCache[img.dataset.wiki]); });
+
+      if (!uncached.length) return;
+
+      var titles = uncached.map(function(img) { return img.dataset.wiki; }).join('|');
+      var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json'
+              + '&redirects=1&pithumbsize=800&origin=*&titles=' + encodeURIComponent(titles);
+
+      fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var pages = data.query.pages;
+          // Mapa: título após redirecionamento → título antes do redirecionamento
+          var redir = {};
+          (data.query.redirects || []).forEach(function(n) { redir[n.to] = n.from; });
+          // Mapa: título normalizado → título original
+          var norm = {};
+          (data.query.normalized || []).forEach(function(n) { norm[n.to] = n.from; });
+
+          var matched = {};
+
+          Object.values(pages).forEach(function(page) {
+            if (!page.thumbnail) return;
+            var src = page.thumbnail.source;
+            // Desfaz a cadeia: página final → (redirect) → (normalização) → título original digitado
+            var preRedirectTitle = redir[page.title] || page.title;
+            var originalTitle = norm[preRedirectTitle] || preRedirectTitle;
+            // Guarda em cache
+            wikiCache[page.title] = src;
+            wikiCache[preRedirectTitle] = src;
+            wikiCache[originalTitle] = src;
+            matched[page.title] = true;
+            matched[preRedirectTitle] = true;
+            matched[originalTitle] = true;
+            // Aplica a TODAS as imagens que usam esse título (o mesmo título pode
+            // aparecer mais de uma vez no mesmo painel, ex.: card + cabeçalho)
+            uncached
+              .filter(function(i) { return i.dataset.wiki === page.title || i.dataset.wiki === preRedirectTitle || i.dataset.wiki === originalTitle; })
+              .forEach(function(img) { applyImage(img, src); });
+          });
+
+          // Sem foto disponível na Wikipedia: para o shimmer em vez de girar para sempre
+          uncached
+            .filter(function(img) { return !matched[img.dataset.wiki]; })
+            .forEach(function(img) { applyFallback(img); });
+        })
+        .catch(function(e) {
+          console.warn('Wikipedia API error:', e);
+          uncached.forEach(function(img) { applyFallback(img); });
+        });
+    })(imgs.slice(i, i + 10));
+  }
+}
+
+function applyImage(img, src) {
+  img.setAttribute('data-loaded', '1');
+  if (img.classList.contains('park-header-img')) {
+    // Para headers, faz fade-in quando carrega
+    img.onload = function() { img.classList.remove('loading'); };
+    img.src = src;
+  } else {
+    // Para cards, revela quando carrega
+    img.onload = function() { img.classList.add('loaded'); };
+    img.src = src;
+  }
+}
+
+function applyFallback(img) {
+  // Tenta artigo alternativo via data-src-fallback antes de mostrar no-photo
+  if (img.dataset.srcFallback && !img.dataset.triedFallback) {
+    img.dataset.triedFallback = '1';
+    img.setAttribute('data-loaded', 'fallback');
+    var altTitle = img.dataset.srcFallback;
+    var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json'
+            + '&redirects=1&pithumbsize=800&origin=*&titles=' + encodeURIComponent(altTitle);
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var pages = Object.values(data.query.pages);
+        if (pages[0] && pages[0].thumbnail) {
+          applyImage(img, pages[0].thumbnail.source);
+        } else {
+          showNoPhoto(img);
+        }
+      })
+      .catch(function() { showNoPhoto(img); });
+    return;
+  }
+  showNoPhoto(img);
+}
+
+function showNoPhoto(img) {
+  img.setAttribute('data-loaded', '1');
+  var wrap = img.closest('.card-img-wrap');
+  if (wrap) wrap.classList.add('no-photo');
+}
+
+// Carrega imagens da primeira aba ao inicializar
+document.addEventListener('DOMContentLoaded', function() {
+  loadPanelImages('mk');
+});
+</script>
+
+</body>
+</html>

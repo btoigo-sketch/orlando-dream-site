@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Orlando Dream</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #0F1B2D; min-height: 100vh; }
+
+    .admin-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+    }
+    .admin-header h1 { color: var(--white); font-size: 1.6rem; }
+    .admin-header a  { color: var(--gold); font-size: .9rem; font-weight: 700; }
+
+    .card-admin {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .card-admin h2 {
+      color: var(--gold);
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      color: rgba(255,255,255,.7);
+      font-size: .85rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .form-group input[type="number"],
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .form-group input:focus { border-color: var(--gold); }
+    .form-group .hint {
+      color: rgba(255,255,255,.4);
+      font-size: .78rem;
+      margin-top: 6px;
+    }
+
+    .preview-box {
+      background: rgba(245,166,35,.08);
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      color: var(--gold-l);
+      font-size: .95rem;
+    }
+    .preview-box strong { color: var(--gold); }
+
+    .save-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .save-ok {
+      color: #1DB954;
+      font-weight: 700;
+      font-size: .9rem;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .save-ok.visible { opacity: 1; }
+
+    /* Tabela de cotações */
+    .cotacao-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+    .cotacao-table th {
+      color: rgba(255,255,255,.5);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .cotacao-table td {
+      padding: 12px;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .cotacao-table tr:last-child td { border-bottom: none; }
+    .badge-disney    { background: rgba(30,58,95,.4); color: #7BB3F0; padding: 2px 10px; border-radius: 50px; font-size: .72rem; font-weight: 800; }
+    .badge-universal { background: rgba(107,47,160,.4); color: #C59BE8; padding: 2px 10px; border-radius: 50px; font-size: .72rem; font-weight: 800; }
+    .no-data { color: rgba(255,255,255,.3); font-style: italic; text-align: center; padding: 24px; }
+
+    .last-update { color: rgba(255,255,255,.3); font-size: .8rem; margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrap">
+    <div class="admin-header">
+      <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Orlando<strong>Dream</strong></span>
+        <span style="color:rgba(255,255,255,.4);font-size:.8rem;margin-left:8px;">ADMIN</span>
+      </div>
+      <a href="index.html">← Ver site</a>
+    </div>
+
+    <!-- ── Configuração de preços ── -->
+    <div class="card-admin">
+      <h2>⚙️ Configuração de precificação</h2>
+
+      <div class="form-group">
+        <label>Taxa de conversão (R$ por ponto Azul)</label>
+        <input type="number" id="taxa" step="0.0001" min="0.001" placeholder="0.0250" />
+        <p class="hint">Exemplo: 0.025 significa que 1 ponto Azul = R$ 0,025. Você define aqui o quanto está pagando por ponto.</p>
+      </div>
+
+      <div class="form-group">
+        <label>Markup de venda (%)</label>
+        <input type="number" id="markup" step="0.1" min="0" placeholder="20" />
+        <p class="hint">Percentual adicionado ao custo para compor o preço de venda. Ex: 20 = +20% sobre o custo.</p>
+      </div>
+    </div>
+
+    <!-- ── Gateway de pagamento ── -->
+    <div class="card-admin">
+      <h2>💳 Gateway de pagamento</h2>
+
+      <div class="form-group">
+        <label>Nome do gateway (exibido no checkout)</label>
+        <input type="text" id="gateway_nome" placeholder="Ex: Mercado Pago" />
+        <p class="hint">Será exibido no botão de pagamento do checkout. Ex: "Pagar com Mercado Pago".</p>
+      </div>
+
+      <div class="form-group">
+        <label>URL / Link de pagamento</label>
+        <input type="text" id="gateway_url" placeholder="https://www.mercadopago.com.br/..." />
+        <p class="hint">Link gerado no painel do Mercado Pago, PagSeguro ou outro gateway. O cliente é redirecionado para este link ao finalizar a compra.</p>
+      </div>
+
+      <div style="background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);border-radius:12px;padding:14px 16px;margin-bottom:20px;color:rgba(255,255,255,.7);font-size:.85rem;">
+        💡 <strong style="color:var(--gold)">Como criar o link:</strong> No Mercado Pago, acesse "Cobranças" → "Link de pagamento" e crie um link genérico. No PagSeguro, use "Cobranças" → "Links de Pagamento". Cole a URL aqui.
+      </div>
+
+      <div class="save-row">
+        <button class="btn btn-primary" onclick="salvarGateway()">💾 Salvar gateway</button>
+        <span class="save-ok" id="save-ok-gw">✅ Salvo!</span>
+      </div>
+    </div>
+
+    <!-- ── dummy div to close config ── -->
+    <div class="card-admin" style="display:none">
+
+      <div class="preview-box" id="preview-box">
+        Preencha os campos acima para ver a prévia de preço.
+      </div>
+
+      <div class="save-row">
+        <button class="btn btn-primary" onclick="salvarConfig()">💾 Salvar configuração</button>
+        <span class="save-ok" id="save-ok">✅ Salvo com sucesso!</span>
+      </div>
+    </div>
+
+    <!-- ── Cotações atuais ── -->
+    <div class="card-admin">
+      <h2>📊 Cotações atuais (cotacoes.json)</h2>
+      <div id="tabela-cotacoes"></div>
+      <p class="last-update" id="last-update"></p>
+      <p style="margin-top:16px;">
+        <button class="btn btn-ghost" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-size:.85rem;" onclick="carregarCotacoes()">🔄 Recarregar cotações</button>
+      </p>
+    </div>
+
+  </div><!-- /admin-wrap -->
+
+  <script src="precos.js"></script>
+  <script>
+    const CONFIG_KEY = 'od_config';
+
+    const NOMES = {
+      mk:           { nome: 'Magic Kingdom',                   parque: 'Disney' },
+      hs:           { nome: 'Hollywood Studios',               parque: 'Disney' },
+      epcot:        { nome: 'EPCOT',                           parque: 'Disney' },
+      ak:           { nome: 'Animal Kingdom',                  parque: 'Disney' },
+      disney_all:   { nome: 'Disney Park Hopper — 4 Parques', parque: 'Disney' },
+      eu:           { nome: 'Epic Universe',                   parque: 'Universal' },
+      ioa:          { nome: 'Islands of Adventure',            parque: 'Universal' },
+      usf:          { nome: 'Studios Florida',                 parque: 'Universal' },
+      universal_all:{ nome: 'Universal 3-Park',               parque: 'Universal' },
+    };
+
+    // ── Carrega config salva ──────────────────────────────────────────────────
+    function carregarConfig() {
+      const c = getConfig();
+      document.getElementById('taxa').value   = c.taxa_reais_por_ponto;
+      document.getElementById('markup').value = c.markup_percentual;
+      document.getElementById('gateway_nome').value = c.gateway_nome || '';
+      document.getElementById('gateway_url').value  = c.gateway_url  || '';
+      atualizarPreview();
+    }
+
+    // ── Atualiza preview ──────────────────────────────────────────────────────
+    function atualizarPreview() {
+      const taxa   = parseFloat(document.getElementById('taxa').value)   || 0;
+      const markup = parseFloat(document.getElementById('markup').value) || 0;
+      const box = document.getElementById('preview-box');
+
+      if (!taxa) { box.innerHTML = 'Preencha os campos acima para ver a prévia de preço.'; return; }
+
+      const exemploPontos = 24500;
+      const custo  = exemploPontos * taxa;
+      const venda  = custo * (1 + markup / 100);
+      box.innerHTML =
+        `Exemplo: ingresso com <strong>${exemploPontos.toLocaleString('pt-BR')} pts</strong> ` +
+        `→ custo R$ ${custo.toLocaleString('pt-BR', {minimumFractionDigits:2})} ` +
+        `→ <strong>preço de venda: R$ ${venda.toLocaleString('pt-BR', {minimumFractionDigits:2})}</strong> (markup ${markup}%)`;
+    }
+
+    // ── Salva config de preços ────────────────────────────────────────────────
+    function salvarConfig() {
+      const taxa   = parseFloat(document.getElementById('taxa').value);
+      const markup = parseFloat(document.getElementById('markup').value);
+      if (isNaN(taxa) || taxa <= 0) { alert('Informe uma taxa de conversão válida.'); return; }
+      const current = getConfig();
+      localStorage.setItem(CONFIG_KEY, JSON.stringify({
+        ...current,
+        taxa_reais_por_ponto: taxa,
+        markup_percentual: markup || 0,
+      }));
+      const ok = document.getElementById('save-ok');
+      ok.classList.add('visible');
+      setTimeout(() => ok.classList.remove('visible'), 3000);
+    }
+
+    // ── Salva gateway ─────────────────────────────────────────────────────────
+    function salvarGateway() {
+      const nome = document.getElementById('gateway_nome').value.trim();
+      const url  = document.getElementById('gateway_url').value.trim();
+      const current = getConfig();
+      localStorage.setItem(CONFIG_KEY, JSON.stringify({
+        ...current,
+        gateway_nome: nome || 'Mercado Pago',
+        gateway_url:  url,
+      }));
+      const ok = document.getElementById('save-ok-gw');
+      ok.classList.add('visible');
+      setTimeout(() => ok.classList.remove('visible'), 3000);
+    }
+
+    // ── Carrega tabela de cotações ────────────────────────────────────────────
+    async function carregarCotacoes() {
+      const el = document.getElementById('tabela-cotacoes');
+      const upd = document.getElementById('last-update');
+      try {
+        const resp = await fetch('https://raw.githubusercontent.com/btoigo-sketch/orlando-dream-cotacoes/main/cotacoes.json?t=' + Date.now());
+        if (!resp.ok) throw new Error('não encontrado');
+        const data = await resp.json();
+
+        const config = getConfig();
+        let html = '<table class="cotacao-table"><thead><tr><th>Parque</th><th>Ingresso</th><th>Pontos Azul</th><th>Preço de venda</th></tr></thead><tbody>';
+        for (const [chave, info] of Object.entries(data)) {
+          const meta = NOMES[chave] || { nome: chave, parque: '—' };
+          const badge = meta.parque === 'Disney'
+            ? `<span class="badge-disney">Disney</span>`
+            : `<span class="badge-universal">Universal</span>`;
+          const pts   = parseInt(info.pontos, 10) || 0;
+          const preco = pts ? calcularPreco(pts, config).toLocaleString('pt-BR', {style:'currency',currency:'BRL'}) : '—';
+          const ptsStr = pts ? pts.toLocaleString('pt-BR') : '—';
+          html += `<tr><td>${badge}</td><td>${meta.nome}</td><td>${ptsStr}</td><td><strong>${preco}</strong></td></tr>`;
+        }
+        html += '</tbody></table>';
+        el.innerHTML = html;
+        upd.textContent = data._atualizado ? 'Última atualização: ' + data._atualizado : '';
+      } catch {
+        el.innerHTML = '<p class="no-data">Nenhuma cotação encontrada. Execute o agente de busca para gerar cotacoes.json.</p>';
+        upd.textContent = '';
+      }
+    }
+
+    // ── Eventos ───────────────────────────────────────────────────────────────
+    document.getElementById('taxa').addEventListener('input', atualizarPreview);
+    document.getElementById('markup').addEventListener('input', atualizarPreview);
+
+    carregarConfig();
+    carregarCotacoes();
+  </script>
+</body>
+</html>

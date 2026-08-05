@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Orlando Dream</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #F0F2F8; min-height: 100vh; }
+
+    /* ── Topo ── */
+    .ck-header {
+      background: var(--blue);
+      padding: 16px 0;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .ck-header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ck-header a { color: rgba(255,255,255,.7); font-size: .9rem; font-weight: 700; }
+    .ck-header a:hover { color: var(--gold); }
+
+    /* ── Steps ── */
+    .ck-steps {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; background: var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      padding: 20px 24px;
+    }
+    .ck-step {
+      display: flex; align-items: center; gap: 10px;
+      color: #9CA3AF; font-weight: 700; font-size: .9rem;
+    }
+    .ck-step.active  { color: var(--blue); }
+    .ck-step.done    { color: var(--green); }
+    .ck-step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #E5E7EB; color: #6B7280;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: .85rem; flex-shrink: 0;
+    }
+    .ck-step.active .ck-step-num  { background: var(--blue); color: var(--white); }
+    .ck-step.done   .ck-step-num  { background: var(--green); color: var(--white); }
+    .ck-step-line { width: 48px; height: 2px; background: #E5E7EB; flex-shrink: 0; }
+    .ck-step-line.done { background: var(--green); }
+    @media (max-width: 600px) { .ck-step span { display: none; } }
+
+    /* ── Layout ── */
+    .ck-layout {
+      max-width: 1000px; margin: 0 auto;
+      padding: 32px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .ck-layout { grid-template-columns: 1fr; }
+      .ck-sidebar { order: -1; }
+    }
+
+    /* ── Painéis das etapas ── */
+    .ck-panel {
+      background: var(--white); border-radius: var(--radius);
+      padding: 32px; box-shadow: var(--shadow);
+    }
+    .ck-panel h2 { font-size: 1.3rem; font-weight: 900; margin-bottom: 24px; color: var(--blue); }
+    .hidden { display: none !important; }
+
+    /* ── Itens do carrinho na etapa 1 ── */
+    .ck-cart-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 0; border-bottom: 1px solid #F3F4F6;
+    }
+    .ck-cart-item:last-child { border-bottom: none; }
+    .ck-item-emoji { font-size: 1.8rem; flex-shrink: 0; }
+    .ck-item-info  { flex: 1; }
+    .ck-item-nome  { font-weight: 800; font-size: .95rem; }
+    .ck-item-sub   { font-size: .82rem; color: var(--muted); }
+    .ck-item-qty   { display: flex; align-items: center; gap: 8px; }
+    .qty-btn       { width:28px; height:28px; border-radius:50%; border:1.5px solid #D1D5DB; background:var(--white); font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; font-weight:700; transition:.15s; }
+    .qty-btn:hover { border-color: var(--blue-l); color: var(--blue); }
+    .ck-item-total { font-weight: 900; color: var(--blue); min-width: 90px; text-align: right; }
+    .ck-item-remove { background: none; border: none; color: #D1D5DB; cursor: pointer; font-size: 1rem; padding: 4px; }
+    .ck-item-remove:hover { color: #EF4444; }
+    .ck-empty { text-align:center; color:var(--muted); padding:40px 0; }
+
+    /* ── Formulário de visitantes ── */
+    .visitor-block {
+      background: #F8F9FC; border-radius: 12px; padding: 20px;
+      margin-bottom: 16px; border: 1.5px solid #E5E7EB;
+    }
+    .visitor-title { font-weight: 800; margin-bottom: 16px; font-size: .95rem; color: var(--blue); }
+    .fg { margin-bottom: 14px; }
+    .fg label { display: block; font-size: .8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .fg input {
+      width: 100%; padding: 10px 14px; border: 1.5px solid #E5E7EB; border-radius: 10px;
+      font-family: inherit; font-size: .95rem; outline: none; transition: border-color .2s;
+    }
+    .fg input:focus { border-color: var(--blue-l); }
+    .fg input.error { border-color: #EF4444; }
+    .field-error { color: #EF4444; font-size: .78rem; margin-top: 4px; }
+    .visitors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 500px) { .visitors-grid { grid-template-columns: 1fr; } }
+
+    /* ── Etapa 3: Pagamento ── */
+    .payment-info {
+      background: linear-gradient(135deg, #0B1F3A, #1E3A5F);
+      border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px;
+    }
+    .payment-info h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 12px; }
+    .payment-info p { color: rgba(255,255,255,.75); font-size: .95rem; margin-bottom: 24px; }
+    .gateway-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: var(--blue); border: none; border-radius: 50px;
+      padding: 16px 40px; font-family: inherit; font-weight: 900; font-size: 1.1rem;
+      cursor: pointer; transition: all .2s; text-decoration: none;
+    }
+    .gateway-btn:hover { background: var(--gold-l); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,.4); }
+    .secure-icons { display: flex; justify-content: center; gap: 16px; margin-top: 16px; }
+    .secure-icon { color: rgba(255,255,255,.5); font-size: .8rem; display: flex; align-items: center; gap: 4px; }
+
+    .order-summary-mini { background: #F8F9FC; border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+    .order-summary-mini h4 { font-size: .85rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 12px; }
+    .order-line { display: flex; justify-content: space-between; font-size: .9rem; padding: 4px 0; }
+    .order-line.total { font-weight: 900; font-size: 1.05rem; border-top: 1.5px solid #E5E7EB; padding-top: 10px; margin-top: 6px; color: var(--blue); }
+
+    /* ── Sidebar ── */
+    .ck-sidebar {}
+    .ck-summary {
+      background: var(--white); border-radius: var(--radius);
+      padding: 24px; box-shadow: var(--shadow); position: sticky; top: 120px;
+    }
+    .ck-summary h3 { font-size: 1rem; font-weight: 900; margin-bottom: 16px; color: var(--blue); }
+    .sum-item { display: flex; justify-content: space-between; font-size: .88rem; padding: 6px 0; border-bottom: 1px solid #F3F4F6; }
+    .sum-item:last-of-type { border-bottom: none; }
+    .sum-total { display: flex; justify-content: space-between; font-weight: 900; font-size: 1.1rem; padding-top: 14px; margin-top: 8px; border-top: 2px solid #E5E7EB; color: var(--blue); }
+    .sum-note { font-size: .75rem; color: var(--muted); margin-top: 12px; }
+
+    /* ── Navegação ── */
+    .ck-nav { display: flex; gap: 12px; margin-top: 24px; }
+    .ck-nav .btn { flex: 1; }
+
+    /* ── Confirmação ── */
+    .confirm-box { text-align: center; padding: 24px 0; }
+    .confirm-icon { font-size: 4rem; margin-bottom: 16px; }
+    .confirm-box h2 { color: var(--green); font-size: 1.6rem; margin-bottom: 12px; }
+    .confirm-box p { color: var(--muted); margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="ck-header">
+    <div class="container ck-header-inner">
+      <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Orlando<strong>Dream</strong></span>
+      </div>
+      <a href="index.html">← Continuar comprando</a>
+    </div>
+  </header>
+
+  <!-- Steps -->
+  <div class="ck-steps">
+    <div class="ck-step active" id="step-ind-1">
+      <div class="ck-step-num">1</div><span>Carrinho</span>
+    </div>
+    <div class="ck-step-line" id="line-1-2"></div>
+    <div class="ck-step" id="step-ind-2">
+      <div class="ck-step-num">2</div><span>Visitantes</span>
+    </div>
+    <div class="ck-step-line" id="line-2-3"></div>
+    <div class="ck-step" id="step-ind-3">
+      <div class="ck-step-num">3</div><span>Pagamento</span>
+    </div>
+  </div>
+
+  <div class="ck-layout">
+
+    <!-- ── MAIN ── -->
+    <main>
+
+      <!-- ETAPA 1: Carrinho -->
+      <div id="etapa-1" class="ck-panel">
+        <h2>🛒 Revise seu pedido</h2>
+        <div id="ck-cart-items"></div>
+        <div class="ck-nav">
+          <a href="index.html" class="btn btn-ghost-dark">← Voltar</a>
+          <button class="btn btn-primary" onclick="irEtapa(2)">Informar visitantes →</button>
+        </div>
+      </div>
+
+      <!-- ETAPA 2: Visitantes -->
+      <div id="etapa-2" class="ck-panel hidden">
+        <h2>👤 Dados dos visitantes</h2>
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:24px;">Informe nome completo e data de nascimento de cada visitante. Necessário para emissão dos ingressos.</p>
+        <div id="visitor-forms"></div>
+        <div class="ck-nav">
+          <button class="btn btn-ghost-dark" onclick="irEtapa(1)">← Voltar</button>
+          <button class="btn btn-primary" onclick="validarEIrEtapa3()">Ir para pagamento →</button>
+        </div>
+      </div>
+
+      <!-- ETAPA 3: Pagamento -->
+      <div id="etapa-3" class="ck-panel hidden">
+        <h2>💳 Pagamento</h2>
+
+        <div class="order-summary-mini" id="order-summary-mini"></div>
+
+        <div class="payment-info">
+          <h3>🔒 Pagamento 100% seguro</h3>
+          <p>Você será redirecionado para nosso gateway de pagamento certificado. Seus dados financeiros são protegidos com criptografia e <strong>nunca passam pelo nosso servidor</strong>.</p>
+          <a id="gateway-btn" href="#" target="_blank" class="gateway-btn" onclick="handleGatewayClick(event)">
+            💳 Pagar agora
+          </a>
+          <div class="secure-icons">
+            <span class="secure-icon">🔒 SSL</span>
+            <span class="secure-icon">🛡️ PCI DSS</span>
+            <span class="secure-icon">✅ Dados protegidos</span>
+          </div>
+        </div>
+
+        <div class="ck-nav">
+          <button class="btn btn-ghost-dark" onclick="irEtapa(2)">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- ETAPA 4: Confirmação -->
+      <div id="etapa-4" class="ck-panel hidden">
+        <div class="confirm-box">
+          <div class="confirm-icon">🎉</div>
+          <h2>Pedido realizado!</h2>
+          <p>Recebemos seu pagamento. Em breve você receberá os ingressos e instruções por e-mail ou WhatsApp. Qualquer dúvida, entre em contato com a gente.</p>
+          <a href="index.html" class="btn btn-primary btn-lg">← Voltar ao início</a>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ── SIDEBAR: Resumo ── -->
+    <aside class="ck-sidebar">
+      <div class="ck-summary">
+        <h3>📋 Resumo do pedido</h3>
+        <div id="sum-items"></div>
+        <div class="sum-total">
+          <span>Total</span>
+          <span id="sum-total-val">R$ 0,00</span>
+        </div>
+        <p class="sum-note">* Preços em reais calculados com base nos pontos Azul. Valor final confirmado no gateway.</p>
+      </div>
+    </aside>
+
+  </div><!-- /ck-layout -->
+
+  <script src="precos.js"></script>
+  <script>
+    let currentStep = 1;
+    let visitorsData = [];
+
+    // ── Renderiza itens do carrinho ───────────────────────────────────────────
+    function renderCkCart() {
+      const cart  = getCart();
+      const body  = document.getElementById('ck-cart-items');
+      if (!body) return;
+
+      if (cart.length === 0) {
+        body.innerHTML = '<div class="ck-empty">Carrinho vazio. <a href="index.html">← Adicionar ingressos</a></div>';
+        return;
+      }
+      body.innerHTML = cart.map(item => `
+        <div class="ck-cart-item">
+          <div class="ck-item-emoji">${item.emoji}</div>
+          <div class="ck-item-info">
+            <div class="ck-item-nome">${item.nome}</div>
+            <div class="ck-item-sub">
+              ${item.data_visita_fmt ? `<span style="color:#0096B7;font-weight:800;">📅 ${item.data_visita_fmt}</span> · ` : ''}${formatBRL(item.preco)} / ingresso
+            </div>
+          </div>
+          <div class="ck-item-qty">
+            <button class="qty-btn" onclick="ckChangeQty('${item.id}', -1)">−</button>
+            <span>${item.quantidade}</span>
+            <button class="qty-btn" onclick="ckChangeQty('${item.id}', +1)">+</button>
+          </div>
+          <div class="ck-item-total">${formatBRL(item.preco * item.quantidade)}</div>
+          <button class="ck-item-remove" onclick="ckRemove('${item.id}')" title="Remover">✕</button>
+        </div>
+      `).join('');
+
+      renderSidebar();
+    }
+
+    function ckChangeQty(id, delta) { changeQty(id, delta); renderCkCart(); buildVisitorForms(); }
+    function ckRemove(id)           { removeFromCart(id);    renderCkCart(); buildVisitorForms(); }
+
+    // ── Sidebar ───────────────────────────────────────────────────────────────
+    function renderSidebar() {
+      const cart = getCart();
+      const el   = document.getElementById('sum-items');
+      const tot  = document.getElementById('sum-total-val');
+      if (!el) return;
+      el.innerHTML = cart.map(i =>
+        `<div class="sum-item">
+          <span>${i.emoji} ${i.nome} ×${i.quantidade}${i.data_visita_fmt ? '<br/><small style="color:#0096B7;font-size:.75rem;">📅 ' + i.data_visita_fmt + '</small>' : ''}</span>
+          <span>${formatBRL(i.preco * i.quantidade)}</span>
+        </div>`
+      ).join('');
+      if (tot) tot.textContent = formatBRL(cartTotal());
+    }
+
+    // ── Formulários de visitantes ─────────────────────────────────────────────
+    function buildVisitorForms() {
+      const cart = getCart();
+      const container = document.getElementById('visitor-forms');
+      if (!container) return;
+
+      // Total de visitantes = soma das quantidades
+      const totalVisitantes = cart.reduce((s, i) => s + i.quantidade, 0);
+      let html = '';
+      let idx = 0;
+      for (const item of cart) {
+        for (let q = 0; q < item.quantidade; q++) {
+          idx++;
+          html += `
+            <div class="visitor-block">
+              <div class="visitor-title">Visitante ${idx} — ${item.emoji} ${item.nome}${item.data_visita_fmt ? ' · 📅 ' + item.data_visita_fmt : ''}</div>
+              <div class="visitors-grid">
+                <div class="fg">
+                  <label>Nome completo *</label>
+                  <input type="text" id="v-nome-${idx}" placeholder="Nome como no documento" />
+                  <div class="field-error" id="err-nome-${idx}"></div>
+                </div>
+                <div class="fg">
+                  <label>Data de nascimento *</label>
+                  <input type="date" id="v-nasc-${idx}" max="${new Date().toISOString().split('T')[0]}" />
+                  <div class="field-error" id="err-nasc-${idx}"></div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+      container.innerHTML = html || '<p class="ck-empty">Nenhum ingresso no carrinho.</p>';
+    }
+
+    // ── Validação ─────────────────────────────────────────────────────────────
+    function validarEIrEtapa3() {
+      const cart = getCart();
+      const total = cart.reduce((s, i) => s + i.quantidade, 0);
+      let valid = true;
+      visitorsData = [];
+
+      for (let idx = 1; idx <= total; idx++) {
+        const nome = document.getElementById('v-nome-' + idx)?.value.trim() || '';
+        const nasc = document.getElementById('v-nasc-' + idx)?.value || '';
+
+        const errNome = document.getElementById('err-nome-' + idx);
+        const errNasc = document.getElementById('err-nasc-' + idx);
+        const inNome  = document.getElementById('v-nome-' + idx);
+        const inNasc  = document.getElementById('v-nasc-' + idx);
+
+        if (!nome || nome.length < 3) {
+          if (errNome) errNome.textContent = 'Informe o nome completo.';
+          if (inNome)  inNome.classList.add('error');
+          valid = false;
+        } else {
+          if (errNome) errNome.textContent = '';
+          if (inNome)  inNome.classList.remove('error');
+        }
+
+        if (!nasc) {
+          if (errNasc) errNasc.textContent = 'Informe a data de nascimento.';
+          if (inNasc)  inNasc.classList.add('error');
+          valid = false;
+        } else {
+          if (errNasc) errNasc.textContent = '';
+          if (inNasc)  inNasc.classList.remove('error');
+        }
+
+        if (nome && nasc) visitorsData.push({ nome, nascimento: nasc });
+      }
+
+      if (valid) irEtapa(3);
+      else {
+        const first = document.querySelector('.fg input.error');
+        first?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    // ── Etapa 3: monta resumo e link do gateway ───────────────────────────────
+    function prepararEtapa3() {
+      const cart = getCart();
+      const mini = document.getElementById('order-summary-mini');
+      if (mini) {
+        let html = '<h4>Resumo do pedido</h4>';
+        cart.forEach(i => {
+          const dataLabel = i.data_visita_fmt ? ` <span style="font-size:.78rem;color:#0096B7;">📅 ${i.data_visita_fmt}</span>` : '';
+          html += `<div class="order-line"><span>${i.emoji} ${i.nome} ×${i.quantidade}${dataLabel}</span><span>${formatBRL(i.preco * i.quantidade)}</span></div>`;
+        });
+        html += `<div class="order-line total"><span>Total</span><span>${formatBRL(cartTotal())}</span></div>`;
+        mini.innerHTML = html;
+      }
+
+      // Configura botão do gateway
+      const config = getConfig();
+      const btn    = document.getElementById('gateway-btn');
+      if (btn) {
+        if (config.gateway_nome) btn.textContent = '💳 Pagar com ' + config.gateway_nome;
+        btn.href = config.gateway_url || '#';
+        // Atualiza texto
+        btn.innerHTML = `💳 Pagar com ${config.gateway_nome || 'Gateway de Pagamento'}`;
+      }
+    }
+
+    function handleGatewayClick(e) {
+      const config = getConfig();
+      if (!config.gateway_url) {
+        e.preventDefault();
+        alert('⚙️ Link de pagamento ainda não configurado. Configure o gateway no painel admin.');
+      } else {
+        // Simula confirmação após retorno do gateway
+        setTimeout(() => {
+          if (confirm('Pagamento realizado com sucesso? (confirme após retornar do gateway)')) {
+            clearCart();
+            irEtapa(4);
+          }
+        }, 1500);
+      }
+    }
+
+    // ── Navegação entre etapas ────────────────────────────────────────────────
+    function irEtapa(n) {
+      if (n === 1 && getCart().length === 0) {
+        window.location.href = 'index.html'; return;
+      }
+
+      [1,2,3,4].forEach(i => {
+        document.getElementById('etapa-' + i)?.classList.toggle('hidden', i !== n);
+      });
+
+      // Atualiza indicadores
+      [1,2,3].forEach(i => {
+        const ind  = document.getElementById('step-ind-' + i);
+        const line = document.getElementById('line-' + i + '-' + (i+1));
+        if (ind) {
+          ind.classList.toggle('active', i === n);
+          ind.classList.toggle('done', i < n);
+        }
+        if (line) line.classList.toggle('done', i < n);
+      });
+
+      currentStep = n;
+      if (n === 2) buildVisitorForms();
+      if (n === 3) prepararEtapa3();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      if (getCart().length === 0) {
+        window.location.href = 'index.html'; return;
+      }
+      renderCkCart();
+    });
+  </script>
+</body>
+</html>

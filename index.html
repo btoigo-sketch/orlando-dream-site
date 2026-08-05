@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orlando Dream Viagens — Cotação de Ingressos Disney e Universal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== UTILITY BAR ===== -->
+  <div class="util-bar">
+    <div class="container util-bar-inner">
+      <div class="util-left">
+        <a href="https://wa.me/5500000000000" target="_blank" class="util-whatsapp">📱 WhatsApp: (00) 00000-0000</a>
+        <span>✉️ contato@orlandodream.com.br</span>
+      </div>
+      <div class="util-right">
+        <a href="#como-funciona">Como funciona?</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#cotacao" class="util-cta-link">Solicitar cotação</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">✨</span>
+        <div>
+          <div class="logo-text">Orlando<strong>Dream</strong></div>
+          <div class="logo-sub">Especialistas em Orlando</div>
+        </div>
+      </a>
+
+      <nav class="header-nav" style="display:flex;gap:20px;margin-left:32px;">
+        <a href="#ingressos"                       style="font-weight:800;font-size:.9rem;color:var(--navy);">🎟️ Combos</a>
+        <a href="#ingressos-individuais"           style="font-weight:800;font-size:.9rem;color:var(--navy);">🏰 Disney</a>
+        <a href="#ingressos-individuais-universal" style="font-weight:800;font-size:.9rem;color:var(--navy);">🎢 Universal</a>
+        <a href="sobre-orlando.html"               style="font-weight:800;font-size:.9rem;color:var(--navy);">🌴 Sobre Orlando</a>
+        <a href="#como-funciona"                   style="font-weight:800;font-size:.9rem;color:var(--navy);">❓ Como funciona</a>
+        <a href="#contato"                         style="font-weight:800;font-size:.9rem;color:var(--navy);">💬 Contato</a>
+      </nav>
+
+      <div class="header-right">
+        <a href="#cotacao" class="btn btn-gold">📋 Solicitar cotação</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-tag">🎢 Especialistas em Orlando</div>
+      <h1>Disney &amp; Universal Orlando<br/><span>cotação personalizada</span></h1>
+      <p>Trabalhamos com os combos completos Disney e Universal — os melhores ingressos para a sua viagem a Orlando, com atendimento via WhatsApp e preços atualizados diariamente.</p>
+      <div class="hero-actions">
+        <a href="#cotacao" class="btn btn-gold btn-lg">📋 Solicitar cotação grátis</a>
+        <a href="#ingressos" class="btn btn-ghost btn-lg">Ver preços de referência</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">2</span><span class="stat-label">combos exclusivos</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">500+</span><span class="stat-label">clientes</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">5★</span><span class="stat-label">avaliação</span></div>
+      </div>
+    </div>
+    <!-- Mosaico visual dos parques -->
+    <div class="hero-visual">
+      <div class="hero-park-grid">
+        <div class="hero-park-thumb">
+          <img data-wiki="Magic Kingdom" alt="Magic Kingdom" class="hero-thumb-img" />
+          <span class="hero-park-thumb-badge badge-d">Disney</span>
+          <div class="hero-park-thumb-label">Magic Kingdom</div>
+        </div>
+        <div class="hero-park-thumb">
+          <img data-wiki="Universal Epic Universe" alt="Epic Universe" class="hero-thumb-img" />
+          <span class="hero-park-thumb-badge badge-u">Universal</span>
+          <div class="hero-park-thumb-label">Epic Universe</div>
+        </div>
+        <div class="hero-park-thumb">
+          <img data-wiki="Harry Potter and the Forbidden Journey" alt="Islands of Adventure" class="hero-thumb-img" />
+          <span class="hero-park-thumb-badge badge-u">Universal</span>
+          <div class="hero-park-thumb-label">Islands of Adventure</div>
+        </div>
+        <div class="hero-park-thumb">
+          <img data-wiki="Epcot" alt="EPCOT" class="hero-thumb-img" />
+          <span class="hero-park-thumb-badge badge-d">Disney</span>
+          <div class="hero-park-thumb-label">EPCOT</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST BAR ===== -->
+  <div class="trust-bar">
+    <div class="container trust-items">
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);font-weight:700">Agência</div>
+          <div>Especializada em Orlando</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💬</div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);font-weight:700">Atendimento</div>
+          <div>Personalizado via WhatsApp</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);font-weight:700">Parcelamento</div>
+          <div>Em até 12x</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">⚡</div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);font-weight:700">Resposta</div>
+          <div>Em até 2 horas</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔄</div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);font-weight:700">Preços</div>
+          <div>Atualizados diariamente</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== INGRESSOS (2 combos) ===== -->
+  <section id="ingressos" class="section section-white">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-tag section-tag-gold">🎟️ Ingressos Combo</div>
+        <h2>Combos Disney &amp; Universal</h2>
+        <p>Trabalhamos com os passes completos — acesso a todos os parques de cada resort em um único ingresso. Clique para ver os preços estimados por data e solicitar sua cotação.</p>
+      </div>
+
+      <div class="cards-grid cards-grid-2">
+
+        <!-- Disney Park Hopper COMBO -->
+        <div class="product-card product-card-featured" data-parque="disney">
+          <div class="card-photo-wrap card-bg-disney-all">
+            <img class="card-photo-img" data-wiki="Magic Kingdom" alt="Magic Kingdom" />
+            <span class="card-photo-icon">✨</span>
+            <span class="card-park-badge badge-disney">Disney</span>
+            <span class="combo-flag">✨ COMBO</span>
+          </div>
+          <div class="card-body">
+            <h3>Disney Park Hopper — 4 Parques</h3>
+            <p class="card-desc"><strong>Acesso a todos os 4 parques Disney</strong> em um único ingresso: Magic Kingdom, Hollywood Studios, EPCOT e Animal Kingdom. A experiência Disney completa em Orlando.</p>
+            <div class="card-parques-incluidos">
+              <span class="parque-chip">🏰 Magic Kingdom</span>
+              <span class="parque-chip">🎬 Hollywood Studios</span>
+              <span class="parque-chip">🌍 EPCOT</span>
+              <span class="parque-chip">🦁 Animal Kingdom</span>
+            </div>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-disney" id="preco-disney_all">…</div>
+                <div class="price-pts" id="pontos-disney_all"></div>
+              </div>
+            </div>
+            <button class="btn btn-disney btn-block card-add-btn" id="btn-disney_all">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+        <!-- Universal 3-Park COMBO -->
+        <div class="product-card product-card-featured" data-parque="universal">
+          <div class="card-photo-wrap card-bg-universal-all">
+            <img class="card-photo-img" data-wiki="Universal Epic Universe" alt="Universal Epic Universe" />
+            <span class="card-photo-icon">🎢</span>
+            <span class="card-park-badge badge-universal">Universal</span>
+            <span class="combo-flag" style="background:var(--purple);color:white;">🎢 COMBO</span>
+          </div>
+          <div class="card-body">
+            <h3>Universal All Parks — 4 Parques</h3>
+            <p class="card-desc"><strong>Os 4 parques Universal em 1 ingresso:</strong> Epic Universe, Islands of Adventure, Studios Florida e Volcano Bay. A aventura Universal completa em Orlando.</p>
+            <div class="card-parques-incluidos">
+              <span class="parque-chip parque-chip-universal">🚀 Epic Universe</span>
+              <span class="parque-chip parque-chip-universal">⚡ Islands of Adventure</span>
+              <span class="parque-chip parque-chip-universal">🎥 Studios Florida</span>
+              <span class="parque-chip parque-chip-universal">🌊 Volcano Bay</span>
+            </div>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-universal" id="preco-universal_all">…</div>
+                <div class="price-pts" id="pontos-universal_all"></div>
+              </div>
+            </div>
+            <button class="btn btn-universal btn-block card-add-btn" id="btn-universal_all">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+      </div>
+      <p class="price-note">* Preços estimados de referência. Os valores reais são confirmados pela agência no momento da cotação, podendo variar conforme disponibilidade e data.</p>
+    </div>
+  </section>
+
+  <!-- ===== INGRESSOS INDIVIDUAIS DISNEY ===== -->
+  <section id="ingressos-individuais" class="section section-light">
+    <div class="container">
+      <div class="section-header center">
+        <div class="section-tag section-tag-cyan">🏰 Parques individuais</div>
+        <h2>Ingressos Disney — 1 Dia</h2>
+        <p>Prefere escolher apenas um parque? Veja os preços estimados por data de cada parque Disney e solicite sua cotação personalizada.</p>
+      </div>
+
+      <div class="cards-grid cards-grid-4">
+
+        <!-- Magic Kingdom -->
+        <div class="product-card product-card-featured" data-parque="disney">
+          <div class="card-photo-wrap" style="background:linear-gradient(to bottom,rgba(10,20,50,.3),rgba(10,20,80,.7))">
+            <img data-wiki="Magic Kingdom" alt="Magic Kingdom" class="card-photo-img" />
+            <span class="card-park-badge badge-disney">Disney</span>
+            <span class="combo-flag" style="background:#c2185b;color:white;">1 DIA</span>
+          </div>
+          <div class="card-body">
+            <h3>Magic Kingdom</h3>
+            <p class="card-desc">O parque mais icônico da Disney: Castelo da Cinderela, atrações clássicas e fogos de artifício.</p>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-mk" id="preco-mk">…</div>
+                <div class="price-pts" id="pontos-mk"></div>
+              </div>
+            </div>
+            <button class="btn btn-disney btn-block card-add-btn" id="btn-mk">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+        <!-- EPCOT -->
+        <div class="product-card product-card-featured" data-parque="disney">
+          <div class="card-photo-wrap" style="background:linear-gradient(to bottom,rgba(0,20,60,.3),rgba(0,40,100,.7))">
+            <img data-wiki="Epcot" alt="EPCOT" class="card-photo-img" />
+            <span class="card-park-badge badge-disney">Disney</span>
+            <span class="combo-flag" style="background:#0077aa;color:white;">1 DIA</span>
+          </div>
+          <div class="card-body">
+            <h3>EPCOT</h3>
+            <p class="card-desc">Tecnologia, cultura e gastronomia mundial. O parque mais sofisticado da Disney em Orlando.</p>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-epcot" id="preco-epcot">…</div>
+                <div class="price-pts" id="pontos-epcot"></div>
+              </div>
+            </div>
+            <button class="btn btn-disney btn-block card-add-btn" id="btn-epcot">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+        <!-- Hollywood Studios -->
+        <div class="product-card product-card-featured" data-parque="disney">
+          <div class="card-photo-wrap" style="background:linear-gradient(to bottom,rgba(60,10,10,.35),rgba(80,20,0,.75))">
+            <img data-wiki="Disney's Hollywood Studios" alt="Hollywood Studios" class="card-photo-img" />
+            <span class="card-park-badge badge-disney">Disney</span>
+            <span class="combo-flag" style="background:#bf360c;color:white;">1 DIA</span>
+          </div>
+          <div class="card-body">
+            <h3>Hollywood Studios</h3>
+            <p class="card-desc">Star Wars, Toy Story e aventuras cinematográficas. O parque mais cinematográfico da Disney.</p>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-hs" id="preco-hs">…</div>
+                <div class="price-pts" id="pontos-hs"></div>
+              </div>
+            </div>
+            <button class="btn btn-disney btn-block card-add-btn" id="btn-hs">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+        <!-- Animal Kingdom -->
+        <div class="product-card product-card-featured" data-parque="disney">
+          <div class="card-photo-wrap" style="background:linear-gradient(to bottom,rgba(10,40,10,.2),rgba(10,40,10,.7))">
+            <img data-wiki="Disney's Animal Kingdom" alt="Animal Kingdom" class="card-photo-img" />
+            <span class="card-park-badge badge-disney">Disney</span>
+            <span class="combo-flag" style="background:#2e7d32;color:white;">1 DIA</span>
+          </div>
+          <div class="card-body">
+            <h3>Animal Kingdom</h3>
+            <p class="card-desc">Safáris, o mundo de Pandora e a magia da natureza. A maior área temática dos parques Disney.</p>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-ak" id="preco-ak">…</div>
+                <div class="price-pts" id="pontos-ak"></div>
+              </div>
+            </div>
+            <button class="btn btn-disney btn-block card-add-btn" id="btn-ak">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+      </div>
+      <p class="price-note">* Preços estimados de referência. Os valores reais são confirmados pela agência no momento da cotação, podendo variar conforme disponibilidade e data.</p>
+    </div>
+  </section>
+
+  <!-- ===== INGRESSOS INDIVIDUAIS UNIVERSAL ===== -->
+  <section id="ingressos-individuais-universal" class="section section-navy">
+    <div class="container">
+      <div class="section-header center light">
+        <div class="section-tag section-tag-purple">🎢 Parques individuais</div>
+        <h2>Ingressos Universal — 1 Dia</h2>
+        <p>Prefere um parque específico da Universal? Veja os preços estimados por data e solicite sua cotação personalizada.</p>
+      </div>
+
+      <div class="cards-grid cards-grid-4">
+
+        <!-- Epic Universe -->
+        <div class="product-card product-card-featured" data-parque="universal">
+          <div class="card-photo-wrap card-bg-eu">
+            <img class="card-photo-img" data-wiki="Universal Epic Universe" alt="Epic Universe" />
+            <span class="card-park-badge badge-universal">Universal</span>
+            <span class="combo-flag" style="background:var(--purple);color:white;">1 DIA</span>
+          </div>
+          <div class="card-body">
+            <h3>Epic Universe</h3>
+            <p class="card-desc">O mais novo parque do mundo com 5 mundos imersivos: Super Nintendo World, Harry Potter, Dragões, Monstros e Celestial Park.</p>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-universal" id="preco-eu">…</div>
+                <div class="price-pts" id="pontos-eu"></div>
+              </div>
+            </div>
+            <button class="btn btn-universal btn-block card-add-btn" id="btn-eu">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+        <!-- Islands of Adventure -->
+        <div class="product-card product-card-featured" data-parque="universal">
+          <div class="card-photo-wrap card-bg-ioa">
+            <img class="card-photo-img" data-wiki="Harry Potter and the Forbidden Journey" alt="Islands of Adventure" />
+            <span class="card-park-badge badge-universal">Universal</span>
+            <span class="combo-flag" style="background:var(--purple);color:white;">1 DIA</span>
+          </div>
+          <div class="card-body">
+            <h3>Islands of Adventure</h3>
+            <p class="card-desc">VelociCoaster, Hagrid's Motorbike e o Wizarding World of Harry Potter original. As melhores montanhas-russas de Orlando.</p>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-universal" id="preco-ioa">…</div>
+                <div class="price-pts" id="pontos-ioa"></div>
+              </div>
+            </div>
+            <button class="btn btn-universal btn-block card-add-btn" id="btn-ioa">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+        <!-- Universal Studios Florida -->
+        <div class="product-card product-card-featured" data-parque="universal">
+          <div class="card-photo-wrap card-bg-usf">
+            <img class="card-photo-img" data-wiki="Universal Studios Florida" alt="Universal Studios Florida" />
+            <span class="card-park-badge badge-universal">Universal</span>
+            <span class="combo-flag" style="background:var(--purple);color:white;">1 DIA</span>
+          </div>
+          <div class="card-body">
+            <h3>Universal Studios Florida</h3>
+            <p class="card-desc">Minions, Simpsons, Diagon Alley de Harry Potter e o Hollywood Rip Ride Rockit. Clássicos e novidades da Universal.</p>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-universal" id="preco-usf">…</div>
+                <div class="price-pts" id="pontos-usf"></div>
+              </div>
+            </div>
+            <button class="btn btn-universal btn-block card-add-btn" id="btn-usf">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+        <!-- Universal 2 Parques Parque a Parque -->
+        <div class="product-card product-card-featured" data-parque="universal">
+          <div class="card-photo-wrap card-bg-universal-2park">
+            <img class="card-photo-img" data-wiki="Hogwarts Express (Universal Orlando Resort)" alt="Universal 2 Parques" />
+            <span class="card-park-badge badge-universal">Universal</span>
+            <span class="combo-flag" style="background:#6a1b9a;color:white;">2 PARQUES</span>
+          </div>
+          <div class="card-body">
+            <h3>Universal 2 Parques</h3>
+            <p class="card-desc">Acesso a 2 parques em 1 dia com direito a Parque a Parque. Combine Epic Universe, Islands of Adventure ou Universal Studios Florida.</p>
+            <div class="card-price-row">
+              <div class="price-block">
+                <div class="price-from">Estimativa a partir de</div>
+                <div class="price-val price-val-universal" id="preco-u2park">…</div>
+                <div class="price-pts" id="pontos-u2park"></div>
+              </div>
+            </div>
+            <button class="btn btn-universal btn-block card-add-btn" id="btn-u2park">📅 Ver preços por data</button>
+          </div>
+        </div>
+
+      </div>
+      <p class="price-note">* Preços estimados de referência. Os valores reais são confirmados pela agência no momento da cotação, podendo variar conforme disponibilidade e data.</p>
+    </div>
+  </section>
+
+  <!-- ===== FORMULÁRIO DE COTAÇÃO ===== -->
+  <section id="cotacao" class="section section-cotacao">
+    <div class="container">
+      <div class="cotacao-grid">
+
+        <!-- Coluna esquerda: texto -->
+        <div class="cotacao-info">
+          <div class="section-tag section-tag-gold" style="margin-bottom:14px;">📋 Cotação gratuita</div>
+          <h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;margin-bottom:14px;line-height:1.2;">Solicite sua cotação<br/>sem compromisso</h2>
+          <p style="color:rgba(255,255,255,.75);font-size:.98rem;line-height:1.7;margin-bottom:28px;">
+            Preencha o formulário ao lado ou nos chame direto no WhatsApp. Nossa equipe responde em até 2 horas com os melhores preços e condições para a sua viagem a Orlando.
+          </p>
+          <ul class="cotacao-vantagens">
+            <li>✅ Atendimento personalizado por especialistas</li>
+            <li>✅ Preços atualizados diariamente</li>
+            <li>✅ Parcelamento em até 12x</li>
+            <li>✅ Suporte completo antes e durante a viagem</li>
+            <li>✅ Sem taxas de consulta — 100% gratuito</li>
+          </ul>
+          <a href="https://wa.me/5500000000000" target="_blank" class="btn btn-green btn-lg" style="margin-top:28px;">
+            📱 Ir direto ao WhatsApp
+          </a>
+        </div>
+
+        <!-- Coluna direita: formulário -->
+        <div class="cotacao-form-wrap">
+          <form id="cotacao-form" novalidate>
+            <h3 style="font-weight:900;font-size:1.1rem;color:var(--navy);margin-bottom:20px;">Preencha os dados da sua viagem</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="form-nome">Nome completo *</label>
+                <input type="text" id="form-nome" name="nome" placeholder="Seu nome" required />
+              </div>
+              <div class="form-group">
+                <label for="form-email">E-mail *</label>
+                <input type="email" id="form-email" name="email" placeholder="seu@email.com" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="form-parque">Ingresso de interesse</label>
+              <select id="form-parque" name="parque">
+                <option value="">Selecione um ingresso…</option>
+                <optgroup label="Combos">
+                  <option value="Disney Park Hopper — 4 Parques">✨ Disney Park Hopper — 4 Parques</option>
+                  <option value="Universal All Parks — 4 Parques">🎢 Universal All Parks — 4 Parques</option>
+                  <option value="Disney + Universal (ambos)">✨🎢 Disney + Universal (ambos)</option>
+                </optgroup>
+                <optgroup label="Disney — 1 dia">
+                  <option value="Magic Kingdom — 1 dia">🏰 Magic Kingdom — 1 dia</option>
+                  <option value="EPCOT — 1 dia">🌍 EPCOT — 1 dia</option>
+                  <option value="Hollywood Studios — 1 dia">🎬 Hollywood Studios — 1 dia</option>
+                  <option value="Animal Kingdom — 1 dia">🦁 Animal Kingdom — 1 dia</option>
+                </optgroup>
+                <optgroup label="Universal — 1 dia">
+                  <option value="Epic Universe — 1 dia">🚀 Epic Universe — 1 dia</option>
+                  <option value="Islands of Adventure — 1 dia">⚡ Islands of Adventure — 1 dia</option>
+                  <option value="Universal Studios Florida — 1 dia">🎥 Universal Studios Florida — 1 dia</option>
+                  <option value="Universal 2 Parques — Parque a Parque">🎡 Universal 2 Parques — Parque a Parque</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="form-data">Data de visita</label>
+                <input type="date" id="form-data" name="data" />
+              </div>
+              <div class="form-group">
+                <label for="form-qtd">Nº de visitantes</label>
+                <select id="form-qtd" name="qtd">
+                  <option value="1">1 pessoa</option>
+                  <option value="2" selected>2 pessoas</option>
+                  <option value="3">3 pessoas</option>
+                  <option value="4">4 pessoas</option>
+                  <option value="5+">5 ou mais</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="form-obs">Observações</label>
+              <textarea id="form-obs" name="obs" rows="3" placeholder="Dúvidas, necessidades especiais, preferências de parcelamento…"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-lg btn-block" style="margin-top:4px;">
+              📋 Enviar solicitação de cotação
+            </button>
+            <p style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:10px;">
+              Ao enviar, você será direcionado ao WhatsApp com as informações preenchidas.
+            </p>
+          </form>
+
+          <div id="cotacao-confirm" style="display:none;text-align:center;padding:40px 20px;">
+            <div style="font-size:3rem;margin-bottom:16px;">🎉</div>
+            <h3 style="font-weight:900;color:var(--navy);margin-bottom:8px;">Solicitação enviada!</h3>
+            <p style="color:var(--muted);margin-bottom:24px;">Continue a conversa no WhatsApp para confirmar os detalhes. Respondemos em até 2 horas.</p>
+            <button onclick="novaCotacao()" class="btn btn-ghost-dark">Fazer nova cotação</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMO FUNCIONA ===== -->
+  <section id="como-funciona" class="section section-navy">
+    <div class="container">
+      <div class="section-header center light">
+        <div class="section-tag section-tag-white">🔍 Processo</div>
+        <h2>Como funciona a cotação?</h2>
+        <p>Do interesse ao ingresso em mãos — simples e sem burocracia.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Escolha o combo</h4>
+          <p>Veja o calendário de preços por data e escolha entre o Disney Park Hopper ou o Universal All Parks.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Solicite cotação</h4>
+          <p>Preencha o formulário ou nos chame no WhatsApp. Confirmamos preço e disponibilidade em até 2h.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Pagamento seguro</h4>
+          <p>Após confirmar a cotação, finalize o pagamento em até 12x. 100% seguro e protegido.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Aproveite Orlando!</h4>
+          <p>Receba seus ingressos e viva momentos inesquecíveis com quem você ama.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DEPOIMENTOS ===== -->
+  <section id="depoimentos" class="section section-teal">
+    <div class="container">
+      <div class="section-header center light">
+        <div class="section-tag section-tag-white">⭐ Avaliações</div>
+        <h2>O que nossos clientes dizem</h2>
+        <p>Mais de 500 famílias já foram para Orlando com a gente.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Pedi cotação do Disney Park Hopper e em menos de 1 hora já tinha todas as informações. Atendimento pelo WhatsApp incrível e preços muito melhores do que eu encontrava sozinha!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AC</div>
+            <div><div class="testi-name">Ana Carolina M.</div><div class="testi-city">São Paulo, SP</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Melhor custo-benefício que encontrei. A equipe da Orlando Dream tirou todas as minhas dúvidas e o preço foi muito vantajoso. Fui com minha família e foi a viagem dos sonhos!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">RB</div>
+            <div><div class="testi-name">Ricardo B.</div><div class="testi-city">Curitiba, PR</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Pedi cotação do combo Universal All Parks, recebi resposta rapidíssimo e o processo foi super simples. Ingressos chegaram antes da viagem sem nenhum problema. Já estou planejando a próxima!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">MF</div>
+            <div><div class="testi-name">Mariana F.</div><div class="testi-city">Rio de Janeiro, RJ</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTATO ===== -->
+  <section id="contato" class="section section-navy">
+    <div class="container">
+      <div class="section-header center light">
+        <div class="section-tag section-tag-white">💬 Atendimento</div>
+        <h2>Prefere falar diretamente?</h2>
+        <p>Nossa equipe de especialistas em Orlando está pronta para ajudar.</p>
+      </div>
+      <div class="contact-box">
+        <a href="https://wa.me/5500000000000" target="_blank" class="btn btn-green btn-lg">
+          📱 Chamar no WhatsApp agora
+        </a>
+        <p class="contact-note">Atendimento de segunda a sábado, das 9h às 20h (horário de Brasília)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <span class="logo-icon">✨</span>
+            <div>
+              <div class="logo-text" style="color:white">Orlando<strong style="color:var(--cyan)">Dream</strong></div>
+              <div class="logo-sub">Especialistas em Orlando</div>
+            </div>
+          </div>
+          <p>Agência especializada em cotação de ingressos combo para Disney e Universal em Orlando. Atendimento personalizado e preços atualizados diariamente.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Ingressos</h4>
+          <a href="#ingressos">Disney Park Hopper — 4 Parques</a>
+          <a href="#ingressos">Universal All Parks — 4 Parques</a>
+          <a href="#cotacao">Solicitar cotação</a>
+        </div>
+        <div class="footer-col">
+          <h4>Informações</h4>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#depoimentos">Depoimentos</a>
+          <a href="#contato">Fale conosco</a>
+          <a href="admin.html">Admin</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Orlando Dream Viagens. Todos os direitos reservados. Não somos afiliados à The Walt Disney Company ou NBCUniversal.</span>
+        <a href="admin.html" class="footer-admin">⚙️ Painel admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CALENDAR MODAL ===== -->
+  <div id="cal-overlay" class="cal-overlay" onclick="fecharCalendario()"></div>
+  <div id="cal-modal" class="cal-modal">
+
+    <div class="cal-header">
+      <div class="cal-prod-info">
+        <span id="cal-emoji" class="cal-emoji-lg"></span>
+        <div>
+          <div id="cal-nome" class="cal-nome"></div>
+          <div class="cal-instrucao">Selecione a data da visita para ver o preço estimado</div>
+        </div>
+      </div>
+      <button class="cal-close-btn" onclick="fecharCalendario()" title="Fechar">✕</button>
+    </div>
+
+    <div class="cal-legenda">
+      <span class="cal-leg cal-leg-baixa">● Baixa temporada</span>
+      <span class="cal-leg cal-leg-media">● Média temporada</span>
+      <span class="cal-leg cal-leg-alta">● Alta temporada</span>
+    </div>
+
+    <div class="cal-nav-row">
+      <button class="cal-nav-btn" id="cal-prev-btn" onclick="navegarMes(-1)">‹</button>
+      <span id="cal-mes-label" class="cal-mes-label"></span>
+      <button class="cal-nav-btn" id="cal-next-btn" onclick="navegarMes(1)">›</button>
+    </div>
+
+    <div class="cal-weekdays">
+      <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+    </div>
+
+    <div id="cal-grid" class="cal-grid"></div>
+
+    <div class="cal-footer-modal">
+      <div class="cal-footer-info">
+        <div id="cal-sel-date-text" class="cal-sel-date-text">Selecione uma data acima</div>
+        <div id="cal-sel-preco-text" class="cal-sel-preco-text"></div>
+      </div>
+      <button id="cal-add-btn" class="btn btn-gold" disabled onclick="confirmarDataEAdicionar()">
+        📋 Solicitar cotação para esta data
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Wikipedia image loader para fotos dos parques -->
+  <script>
+  (function() {
+    var wikiImgCache = {};
+
+    function loadWikiImages() {
+      var imgs = Array.from(document.querySelectorAll('img[data-wiki]:not([data-loaded])'));
+      if (!imgs.length) return;
+      for (var i = 0; i < imgs.length; i += 10) {
+        (function(batch) {
+          var titles = batch.map(function(img) { return img.dataset.wiki; }).join('|');
+          var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json'
+                  + '&pithumbsize=900&origin=*&titles=' + encodeURIComponent(titles);
+          fetch(url)
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+              var pages = data.query.pages;
+              var norm = {};
+              (data.query.normalized || []).forEach(function(n) { norm[n.to] = n.from; });
+              (data.query.redirects  || []).forEach(function(r) { norm[r.to]  = r.from;  });
+              var matched = {};
+              Object.values(pages).forEach(function(page) {
+                if (!page.thumbnail) return;
+                var src = page.thumbnail.source;
+                var orig = norm[page.title] || page.title;
+                wikiImgCache[page.title] = src;
+                wikiImgCache[orig] = src;
+                matched[page.title] = true;
+                matched[orig] = true;
+                batch.filter(function(img) {
+                  return img.dataset.wiki === page.title || img.dataset.wiki === orig;
+                }).forEach(function(img) { applyWikiImg(img, src); });
+              });
+              // Sem foto: não faz nada — o gradiente CSS serve de fundo
+              batch.filter(function(img) { return !matched[img.dataset.wiki]; })
+                   .forEach(function(img) { img.setAttribute('data-loaded', 'fallback'); });
+            })
+            .catch(function() {});
+        })(imgs.slice(i, i + 10));
+      }
+    }
+
+    function applyWikiImg(img, src) {
+      img.setAttribute('data-loaded', '1');
+      img.onload = function() { img.classList.add('loaded'); };
+      img.src = src;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadWikiImages);
+  })();
+  </script>
+
+  <script src="precos.js"></script>
+  <script>
+    // Atualiza preços nos cards
+    async function updateDestaques() {
+      const cotacoes = await getCotacoes();
+      const config   = getConfig();
+      ['disney_all','universal_all'].forEach(id => {
+        const el = document.getElementById('dest-price-' + id);
+        if (el) {
+          const info = getPrecoById(id, cotacoes, config);
+          el.textContent = info ? formatBRL(info.preco) : 'Consulte';
+        }
+      });
+    }
+    updateDestaques();
+
+    // Define data mínima no formulário
+    const inp = document.getElementById('form-data');
+    if (inp) inp.min = new Date().toISOString().split('T')[0];
+  </script>
+</body>
+</html>
