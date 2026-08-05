@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visitor Toll Pass: a melhor opção para pedágios em Orlando — Orlando Dream Viagens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --accent-gold: #f8d57e;
+      --bg-dark:     #0d0f1a;
+      --bg-card:     #161829;
+      --bg-card2:    #1a1d30;
+      --text-main:   #e8eaf0;
+      --text-sub:    #9098b8;
+    }
+    body { background: var(--bg-dark); color: var(--text-main); font-family: 'Nunito', sans-serif; margin: 0; }
+    .header { background: #10121f !important; border-bottom: 1px solid #1e2240; }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { max-width: 780px; margin: 24px auto 0; padding: 0 24px; font-size: .82rem; color: var(--text-sub); }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent-gold); }
+
+    /* ── ARTIGO ── */
+    .article { max-width: 780px; margin: 0 auto; padding: 20px 24px 80px; }
+    .article-tag {
+      display: inline-block; font-size: .75rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      color: #1a1a2e; background: var(--accent-gold); padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
+    }
+    .article h1 { font-size: 2.1rem; font-weight: 900; color: #fff; line-height: 1.25; margin: 0 0 14px; }
+    .article-lead { font-size: 1.05rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 28px; }
+
+    .article-img-wrap { border-radius: 14px; overflow: hidden; margin: 24px 0 8px; border: 1px solid #1e2240; }
+    .article-img-wrap img { width: 100%; display: block; }
+    .article-img-caption { font-size: .78rem; color: var(--text-sub); text-align: center; margin: 0 0 28px; font-style: italic; }
+
+    .article-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0 8px; }
+    .article-img-pair .article-img-wrap { margin: 0; height: 100%; }
+    .article-img-pair img { height: 100%; object-fit: cover; }
+
+    .article h2 {
+      font-size: 1.35rem; font-weight: 900; color: var(--accent-gold);
+      margin: 40px 0 16px; padding-top: 8px; border-top: 1px solid #1e2240;
+    }
+    .article p { font-size: .98rem; line-height: 1.75; color: #d5d8e8; margin: 0 0 16px; }
+    .article ul { margin: 0 0 20px; padding-left: 22px; }
+    .article li { font-size: .95rem; line-height: 1.7; color: #d5d8e8; margin-bottom: 6px; }
+
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0 8px; }
+    .pros-cons-box { background: var(--bg-card2); border-radius: 12px; padding: 18px 20px; border: 1px solid #1e2240; }
+    .pros-cons-box h3 { font-size: .95rem; margin: 0 0 10px; }
+    .pros-cons-box.pros h3 { color: #81c784; }
+    .pros-cons-box.cons h3 { color: #ef9a9a; }
+    .pros-cons-box ul { margin: 0; padding-left: 18px; }
+    .pros-cons-box li { font-size: .85rem; color: #ccd; margin-bottom: 6px; line-height: 1.5; }
+
+    .info-box-list { list-style: none; padding: 0; margin: 0 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .info-box-list li {
+      background: var(--bg-card2); border-radius: 10px; padding: 10px 14px; font-size: .85rem;
+      color: #ccd; border-left: 3px solid var(--accent-gold);
+    }
+
+    .source-note {
+      margin-top: 40px; padding: 16px 20px; background: var(--bg-card2); border-radius: 12px;
+      font-size: .8rem; color: var(--text-sub); border: 1px solid #1e2240;
+    }
+    .source-note a { color: var(--accent-gold); }
+
+    @media(max-width:640px) {
+      .article h1 { font-size: 1.6rem; }
+      .article-img-pair, .pros-cons, .info-box-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== UTILITY BAR ===== -->
+<div class="util-bar">
+  <div class="container util-bar-inner">
+    <div class="util-left">
+      <a href="https://wa.me/5551980585594" target="_blank" class="util-whatsapp">📱 WhatsApp: (51) 98058-5594</a>
+      <span>✉️ b.toigo@gmail.com</span>
+    </div>
+    <div class="util-right">
+      <a href="index.html#como-funciona">Como funciona?</a>
+      <a href="index.html#depoimentos">Depoimentos</a>
+      <a href="index.html#cotacao" class="util-cta-link">Solicitar cotação</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">✨</span>
+      <div>
+        <div class="logo-text">Orlando<strong>Dream</strong></div>
+        <div class="logo-sub">Especialistas em Orlando</div>
+      </div>
+    </a>
+    <nav class="header-nav" style="display:flex;gap:20px;margin-left:32px;">
+      <a href="index.html#ingressos"  style="font-weight:800;font-size:.9rem;color:#90a0c0;">🎟️ Ingressos</a>
+      <a href="index.html#parques"    style="font-weight:800;font-size:.9rem;color:#90a0c0;">🏰 Os Parques</a>
+      <a href="sobre-orlando.html"    style="font-weight:800;font-size:.9rem;color:#90a0c0;">🌴 Sobre Orlando</a>
+      <a href="dicas-viagem.html"     style="font-weight:800;font-size:.9rem;color:var(--accent-gold);">🧳 Dicas para sua Viagem</a>
+      <a href="index.html#contato"    style="font-weight:800;font-size:.9rem;color:#90a0c0;">💬 Contato</a>
+    </nav>
+    <div class="header-right">
+      <a href="index.html#cotacao" class="btn btn-gold">📋 Solicitar cotação</a>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Início</a> › <a href="dicas-viagem.html">Dicas para sua Viagem</a> › Visitor Toll Pass
+</div>
+
+<article class="article">
+  <div class="article-tag">🚧 Pedágios em Orlando</div>
+  <h1>Visitor Toll Pass: a melhor opção para pagar pedágios em Orlando</h1>
+  <p class="article-lead">Se você vai alugar carro na Flórida, o Visitor Toll Pass é hoje a forma mais simples e barata de rodar pelas estradas com pedágio da região — sem pagar nada pelo dispositivo e ainda com desconto nas tarifas.</p>
+
+  <div class="article-img-wrap">
+    <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/Visitor-Pass-2-780x585.jpg" alt="Mão segurando o dispositivo Visitor Toll Pass" loading="lazy" />
+  </div>
+  <p class="article-img-caption">O dispositivo do Visitor Toll Pass, entregue gratuitamente no aeroporto de Orlando.</p>
+
+  <h2>O que é o Visitor Toll Pass</h2>
+  <p>O Visitor Toll Pass é um sistema automatizado de cobrança de pedágios criado pela Central Florida Expressway Authority — a autarquia responsável pelas rodovias com pedágio da região de Orlando — voltado especificamente para turistas com carro alugado.</p>
+  <p>O grande diferencial é que <strong>não existe nenhuma taxa para usar o dispositivo</strong>: você só paga os pedágios normalmente, e ainda com desconto. Na prática, funciona como um SunPass sem custo de adesão e com desconto adicional nas tarifas.</p>
+  <p>Segundo a experiência relatada pelo blog Vai pra Disney, a economia gira em torno de 80% comparado aos pacotes de pedágio cobrados pelas locadoras de veículos, além de um desconto médio de 23% no valor de cada pedágio — um pedágio de US$ 2, por exemplo, sai por cerca de US$ 1,54.</p>
+
+  <h2>Pré-requisitos para usar</h2>
+  <p>A retirada e a devolução do dispositivo precisam obrigatoriamente ser feitas no Aeroporto Internacional de Orlando (MCO) — mesmo que o carro seja alugado em outra cidade, como Miami ou Fort Lauderdale. Quem optar por retirar o carro fora de Orlando também precisa:</p>
+  <ul>
+    <li>Recusar o programa de pedágio automático oferecido pela locadora do veículo</li>
+    <li>Cadastrar a placa do carro alugado no aplicativo antes de pegar qualquer estrada com pedágio</li>
+    <li>Pendurar o dispositivo no espelho retrovisor antes de sair</li>
+    <li>Retirar o dispositivo ao final da viagem e devolvê-lo no aeroporto de Orlando</li>
+    <li>Encerrar a viagem no aplicativo para evitar cobranças indevidas de usos futuros</li>
+  </ul>
+  <p>O Visitor Toll Pass funciona em toda a Flórida (Miami, Tampa, Porto Canaveral etc.), mas não em outros estados. Não há um mínimo de dias de uso, e o prazo máximo por dispositivo é de 90 dias.</p>
+
+  <ul class="info-box-list">
+    <li>💳 Requer cartão de crédito internacional (IOF de 3,5%)</li>
+    <li>💰 Caução inicial de US$ 10, devolvido se não for todo usado em pedágios</li>
+    <li>🕐 Retirada e devolução disponíveis 24 horas</li>
+    <li>📅 Uso máximo de 90 dias por dispositivo</li>
+  </ul>
+
+  <div class="pros-cons">
+    <div class="pros-cons-box pros">
+      <h3>✅ Pontos positivos</h3>
+      <ul>
+        <li>Zero custo para usar o dispositivo</li>
+        <li>Desconto real no valor dos pedágios</li>
+        <li>Cadastro e retirada simples, direto pelo app</li>
+        <li>Retirada e devolução disponíveis a qualquer hora</li>
+        <li>Comunicação clara antes, durante e depois da viagem</li>
+      </ul>
+    </div>
+    <div class="pros-cons-box cons">
+      <h3>⚠️ Pontos de atenção</h3>
+      <ul>
+        <li>Só aceita pagamento em cartão de crédito internacional</li>
+        <li>Incide IOF de 3,5% por ser cobrança internacional</li>
+        <li>Retirada e devolução só no aeroporto de Orlando</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Como retirar o dispositivo</h2>
+  <p>O cadastro é feito direto pelo aplicativo do Visitor Toll Pass, com dados pessoais e um cartão de crédito habilitado para uso internacional. Vale fazer esse cadastro ainda no Brasil, com internet e telefone à mão, para evitar contratempos — inclusive já aproveitando para avisar o banco sobre a viagem.</p>
+
+  <div class="article-img-pair">
+    <div class="article-img-wrap">
+      <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/visitor-toll-pass-aplicativo-2-385x800.jpg" alt="Tela de cadastro do aplicativo Visitor Toll Pass" loading="lazy" />
+    </div>
+    <div class="article-img-wrap">
+      <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/visitor-toll-pass-aplicativo-1-400x800.jpg" alt="Tela do aplicativo com data de retirada e devolução" loading="lazy" />
+    </div>
+  </div>
+  <p class="article-img-caption">O cadastro e o acompanhamento das cobranças são feitos direto pelo aplicativo.</p>
+
+  <p>A retirada pode ser feita em totens disponíveis 24 horas nos terminais A, B e C do aeroporto de Orlando (Level 1 nos terminais A e B, Level 4 no terminal C), bastando escanear o QR Code gerado no app. As locadoras oficialmente parceiras são Alamo, Avis, Budget, Dollar, Enterprise, Hertz, National, Payless, Sixt e Thrifty — mas quem alugar com outra locadora ou fora do aeroporto de Orlando também pode usar o serviço, apenas selecionando uma dessas opções no cadastro.</p>
+
+  <div class="article-img-pair">
+    <div class="article-img-wrap">
+      <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/Visitor-Pass-1-600x800.jpg" alt="Totem de retirada do Visitor Toll Pass" loading="lazy" />
+    </div>
+    <div class="article-img-wrap">
+      <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/Visitor-Pass-3-600x800.jpg" alt="Outro totem de retirada do dispositivo" loading="lazy" />
+    </div>
+  </div>
+  <p class="article-img-caption">Totens de retirada, disponíveis 24 horas nos terminais do aeroporto.</p>
+
+  <p>É importante lembrar de recusar o pacote de pedágio automático oferecido no balcão da locadora, para não haver cobrança duplicada. Depois de pegar o carro, o dispositivo precisa ficar pendurado no retrovisor <strong>o tempo todo</strong> — se ficar guardado no porta-luvas ou na bolsa, ele não é ativado e o pedágio não é cobrado corretamente.</p>
+
+  <div class="article-img-wrap">
+    <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/Visitor-Pass-10.jpg" alt="Dispositivo Visitor Toll Pass pendurado no retrovisor do carro" loading="lazy" />
+  </div>
+  <p class="article-img-caption">O dispositivo precisa ficar sempre pendurado no retrovisor.</p>
+
+  <p>Com o dispositivo ativo, é só seguir pelas faixas de cobrança automática (SunPass, E-Pass, LeeWay) normalmente encontradas nos pedágios da região.</p>
+
+  <div class="article-img-wrap">
+    <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/Visitor-Pass-7.jpg" alt="Pedágio na rodovia em Orlando" loading="lazy" />
+  </div>
+  <p class="article-img-caption">Praça de pedágio com cobrança automática nas estradas de Orlando.</p>
+
+  <h2>Como devolver o dispositivo</h2>
+  <p>A devolução também funciona 24 horas, sem hora marcada: basta depositar o dispositivo nas caixas de devolução espalhadas nos terminais A, B e C, no caminho entre a garagem de devolução dos carros e o check-in das companhias aéreas.</p>
+
+  <div class="article-img-wrap">
+    <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/Visitor-Pass-9.jpg" alt="Caixa de devolução do Visitor Toll Pass" loading="lazy" />
+  </div>
+  <p class="article-img-caption">Caixas de devolução: disponíveis a qualquer hora do dia ou da noite.</p>
+
+  <p>Esquecer de devolver o dispositivo gera uma cobrança de US$ 10 no cartão cadastrado — por isso vale combinar com alguém do grupo para lembrar disso na hora de entregar o carro. Após a devolução, o app envia uma notificação confirmando a desativação, e em poucos dias chega por e-mail um PDF com o detalhamento de todos os pedágios cobrados, incluindo datas, horários e valores.</p>
+
+  <div class="article-img-wrap">
+    <img src="https://www.vaipradisney.com/blog/wp-content/uploads/2019/10/VTP-dropbox-map-web_page-0001-780x505.jpg" alt="Mapa com a localização das caixas de devolução nos terminais A e B" loading="lazy" />
+  </div>
+  <p class="article-img-caption">Localização das caixas de devolução nos terminais A e B do aeroporto de Orlando.</p>
+
+  <h2>Vale a pena?</h2>
+  <p>Para quem vai alugar carro no aeroporto de Orlando, o Visitor Toll Pass é hoje uma das formas mais vantajosas de lidar com os pedágios da Flórida: sem custo de adesão, com desconto nas tarifas e processo simples do início ao fim. O maior cuidado fica por conta do cartão de crédito internacional exigido e do IOF cobrado sobre as transações — mas, considerando a economia nos pedágios, costuma valer a pena mesmo assim.</p>
+
+  <div class="source-note">
+    Conteúdo resumido e adaptado com base no artigo original
+    <a href="https://www.vaipradisney.com/blog/visitor-toll-pass-pedagios-florida/" target="_blank" rel="noopener">"Visitor Toll Pass: nova alternativa para economizar nos pedágios"</a>,
+    publicado no blog Vai pra Disney (vaipradisney.com). Fotos e informações de referência: Vai pra Disney.
+  </div>
+
+  <div style="margin-top:36px;">
+    <a href="dicas-viagem.html" style="color:var(--accent-gold);font-weight:800;text-decoration:none;font-size:.9rem;">← Voltar para Dicas para sua Viagem</a>
+  </div>
+</article>
+
+<!-- ===== CTA FINAL ===== -->
+<section style="background:linear-gradient(135deg,#0d2050,#1a0d3e);padding:60px 24px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div style="font-size:.8rem;font-weight:800;letter-spacing:2px;color:#f8d57e;text-transform:uppercase;margin-bottom:12px;">🎟️ Pronto para ir a Orlando?</div>
+    <h2 style="font-size:2rem;font-weight:900;color:#fff;margin:0 0 12px;">Solicite sua cotação personalizada</h2>
+    <p style="color:#aab;font-size:1rem;margin:0 0 28px;">Com ingressos em pontos Azul, você economiza muito. Montamos o pacote ideal para você e sua família.</p>
+    <a href="index.html#cotacao" style="display:inline-block;background:#f8d57e;color:#1a1a2e;font-weight:900;font-size:1rem;padding:14px 36px;border-radius:30px;text-decoration:none;">📋 Solicitar cotação grátis →</a>
+  </div>
+</section>
+
+<footer style="background:#0a0c18;padding:24px;text-align:center;color:#555;font-size:.8rem;border-top:1px solid #1e2240;">
+  © 2026 Orlando Dream Viagens — Especialistas em Orlando
+</footer>
+
+</body>
+</html>
