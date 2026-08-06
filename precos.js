@@ -23,7 +23,7 @@ const DEFAULT_CONFIG = {
 // ── Catálogo de produtos ───────────────────────────────────────────────────────
 const PRODUTOS = [
   // Combos
-  { id: 'disney_all',   nome: 'Disney Park Hopper — 4 Parques',      parque: 'disney',    emoji: '✨', pontos_key: 'disney_all',    form_value: 'Disney Park Hopper — 4 Parques'   },
+  { id: 'disney_all',   nome: 'Disney 4-Park Magic',      parque: 'disney',    emoji: '✨', pontos_key: 'disney_all',    form_value: 'Disney 4-Park Magic'   },
   { id: 'universal_all',nome: 'Universal All Parks — 4 Parques',     parque: 'universal', emoji: '🎢', pontos_key: 'universal_all', form_value: 'Universal All Parks — 4 Parques' },
   // Parques individuais Disney
   { id: 'mk',   nome: 'Magic Kingdom — 1 dia',       parque: 'disney', emoji: '🏰', pontos_key: 'mk',   form_value: 'Magic Kingdom — 1 dia'       },
