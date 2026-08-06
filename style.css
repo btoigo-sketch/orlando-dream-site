@@ -182,13 +182,13 @@ img { display: block; }
 }
 
 /* ===== SECTION ===== */
-.section { padding: 64px 0; }
+.section { padding: 40px 0; }
 .section-white  { background: var(--white); }
 .section-light  { background: var(--bg); }
 .section-navy   { background: var(--navy); }
 .section-teal   { background: linear-gradient(135deg, #0D3B55, #005F73); }
 
-.section-header { margin-bottom: 36px; }
+.section-header { margin-bottom: 24px; }
 .section-header.center { text-align: center; }
 .section-tag {
   display: inline-block;
@@ -508,7 +508,7 @@ img { display: block; }
 /* ===== SEÇÃO DE COTAÇÃO ===== */
 .section-cotacao {
   background: linear-gradient(135deg, #050E1C 0%, #0D1F3C 40%, #1A1040 100%);
-  padding: 80px 0;
+  padding: 48px 0;
   position: relative; overflow: hidden;
 }
 .section-cotacao::before {
