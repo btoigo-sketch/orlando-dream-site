@@ -876,11 +876,11 @@ img { display: block; }
   /* ===== MENU MOBILE (hambúrguer) ===== */
   .header-inner { flex-wrap: wrap; }
   .logo { order: 1; }
-  .mobile-menu-btn { display: flex; order: 2; }
+  .mobile-menu-btn { display: flex !important; order: 2; }
   .header-right { order: 3; margin-left: 0; }
   .header-right .btn { padding: 10px 16px; font-size: .82rem; }
   .header-nav {
-    display: none;
+    display: none !important;
     order: 4;
     width: 100%;
     flex-direction: column !important;
