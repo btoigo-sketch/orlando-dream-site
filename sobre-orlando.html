@@ -143,6 +143,11 @@
     .header .logo-text { color: #fff; }
     .header .logo-text strong { color: var(--accent-gold); }
     .header .logo-sub { color: #90a0c0; }
+    .header .mobile-menu-btn { color: #fff; border-color: rgba(255,255,255,.25); }
+    @media (max-width: 640px) {
+      .header .header-nav { border-top-color: rgba(255,255,255,.1); }
+      .header .header-nav a:hover { background: rgba(255,255,255,.06); }
+    }
 
     @media(max-width:600px) {
       .orlando-hero h1 { font-size: 2rem; }
@@ -180,6 +185,7 @@
         <div class="logo-sub">Especialistas em Orlando</div>
       </div>
     </a>
+    <button class="mobile-menu-btn" onclick="document.querySelector('.header-nav').classList.toggle('mobile-open')" aria-label="Abrir menu">☰</button>
     <nav class="header-nav" style="display:flex;gap:16px;margin-left:24px;flex-wrap:nowrap;">
       <a href="index.html#ingressos"  style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">🎟️ Ingressos</a>
       <a href="index.html#parques"    style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">🏰 Os Parques</a>
