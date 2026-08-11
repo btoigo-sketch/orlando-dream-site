@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aluguel de carro nos Estados Unidos: como funciona a Rentcars — Orlando Dream Viagens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --accent-gold: #f8d57e;
+      --bg-dark:     #0d0f1a;
+      --bg-card:     #161829;
+      --bg-card2:    #1a1d30;
+      --text-main:   #e8eaf0;
+      --text-sub:    #9098b8;
+    }
+    body { background: var(--bg-dark); color: var(--text-main); font-family: 'Nunito', sans-serif; margin: 0; }
+    .header { background: #10121f !important; border-bottom: 1px solid #1e2240; }
+    .header .logo-text { color: #fff; }
+    .header .logo-text strong { color: var(--accent-gold); }
+    .header .logo-sub { color: #90a0c0; }
+    .header .mobile-menu-btn { color: #fff; border-color: rgba(255,255,255,.25); }
+    @media (max-width: 640px) {
+      .header .header-nav { border-top-color: rgba(255,255,255,.1); }
+      .header .header-nav a:hover { background: rgba(255,255,255,.06); }
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { max-width: 780px; margin: 24px auto 0; padding: 0 24px; font-size: .82rem; color: var(--text-sub); }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent-gold); }
+
+    /* ── ARTIGO ── */
+    .article { max-width: 780px; margin: 0 auto; padding: 20px 24px 80px; }
+    .article-tag {
+      display: inline-block; font-size: .75rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      color: #1a1a2e; background: var(--accent-gold); padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
+    }
+    .article h1 { font-size: 2.1rem; font-weight: 900; color: #fff; line-height: 1.25; margin: 0 0 14px; }
+    .article-lead { font-size: 1.05rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 28px; }
+
+    .article-img-wrap { border-radius: 14px; overflow: hidden; margin: 24px 0 8px; border: 1px solid #1e2240; }
+    .article-img-wrap img { width: 100%; display: block; }
+    .article-img-caption { font-size: .78rem; color: var(--text-sub); text-align: center; margin: 0 0 28px; font-style: italic; }
+
+    .article-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0 8px; }
+    .article-img-pair .article-img-wrap { margin: 0; height: 100%; }
+    .article-img-pair img { height: 100%; object-fit: cover; }
+
+    .article h2 {
+      font-size: 1.35rem; font-weight: 900; color: var(--accent-gold);
+      margin: 40px 0 16px; padding-top: 8px; border-top: 1px solid #1e2240;
+    }
+    .article p { font-size: .98rem; line-height: 1.75; color: #d5d8e8; margin: 0 0 16px; }
+    .article ul, .article ol { margin: 0 0 20px; padding-left: 22px; }
+    .article li { font-size: .95rem; line-height: 1.7; color: #d5d8e8; margin-bottom: 6px; }
+
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0 8px; }
+    .pros-cons-box { background: var(--bg-card2); border-radius: 12px; padding: 18px 20px; border: 1px solid #1e2240; }
+    .pros-cons-box h3 { font-size: .95rem; margin: 0 0 10px; }
+    .pros-cons-box.pros h3 { color: #81c784; }
+    .pros-cons-box.cons h3 { color: #ef9a9a; }
+    .pros-cons-box ul { margin: 0; padding-left: 18px; }
+    .pros-cons-box li { font-size: .85rem; color: #ccd; margin-bottom: 6px; line-height: 1.5; }
+
+    .info-box-list { list-style: none; padding: 0; margin: 0 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .info-box-list li {
+      background: var(--bg-card2); border-radius: 10px; padding: 10px 14px; font-size: .85rem;
+      color: #ccd; border-left: 3px solid var(--accent-gold);
+    }
+
+    .update-box {
+      margin: 24px 0 32px; padding: 20px 22px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(248,213,126,.14), rgba(248,213,126,.04));
+      border: 1px solid rgba(248,213,126,.4);
+    }
+    .update-box-tag {
+      display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .6px; color: #1a1a2e; background: var(--accent-gold);
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
+    }
+    .update-box p { margin: 0; font-size: .95rem; color: #f0eee0; line-height: 1.65; }
+    .update-box p + p { margin-top: 10px; }
+    .update-box strong { color: var(--accent-gold); }
+
+    .source-note {
+      margin-top: 40px; padding: 16px 20px; background: var(--bg-card2); border-radius: 12px;
+      font-size: .8rem; color: var(--text-sub); border: 1px solid #1e2240;
+    }
+    .source-note a { color: var(--accent-gold); }
+
+    .steps-numbered { list-style: none; padding: 0; margin: 0 0 28px; counter-reset: step; }
+    .steps-numbered li {
+      position: relative; padding: 4px 0 4px 46px; margin-bottom: 22px;
+      font-size: .96rem; line-height: 1.7; color: #d5d8e8;
+    }
+    .steps-numbered li::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 0; top: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--accent-gold); color: #1a1a2e;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: .95rem;
+    }
+    .steps-numbered strong { color: #fff; }
+
+    @media(max-width:640px) {
+      .article h1 { font-size: 1.6rem; }
+      .article-img-pair, .pros-cons, .info-box-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== UTILITY BAR ===== -->
+<div class="util-bar">
+  <div class="container util-bar-inner">
+    <div class="util-left">
+      <a href="https://wa.me/5551980585594" target="_blank" class="util-whatsapp">📱 WhatsApp: (51) 98058-5594</a>
+      <span>✉️ b.toigo@gmail.com</span>
+    </div>
+    <div class="util-right">
+      <a href="index.html#como-funciona">Como funciona?</a>
+      <a href="index.html#cotacao" class="util-cta-link">Solicitar cotação</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">✨</span>
+      <div>
+        <div class="logo-text">Orlando<strong>Dream</strong></div>
+        <div class="logo-sub">Especialistas em Orlando</div>
+      </div>
+    </a>
+    <button class="mobile-menu-btn" onclick="document.querySelector('.header-nav').classList.toggle('mobile-open')" aria-label="Abrir menu">☰</button>
+    <nav class="header-nav" style="display:flex;gap:16px;flex:1;justify-content:center;flex-wrap:nowrap;">
+      <a href="index.html#ingressos"  style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">🎟️ Ingressos</a>
+      <a href="index.html#parques"    style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">🏰 Os Parques</a>
+      <a href="sobre-orlando.html"    style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">🌴 Sobre Orlando</a>
+      <a href="dicas-viagem.html"     style="font-weight:800;font-size:.88rem;color:var(--accent-gold);white-space:nowrap;">🧳 Dicas de Viagem</a>
+      <a href="index.html#contato"    style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">💬 Contato</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Início</a> › <a href="dicas-viagem.html">Dicas para sua Viagem</a> › Aluguel de carro nos EUA
+</div>
+
+<article class="article">
+  <div class="article-tag">🚗 Aluguel de Carro</div>
+  <h1>Aluguel de carro nos Estados Unidos: como alugar com desconto pela Rentcars</h1>
+  <p class="article-lead">Ter um carro alugado facilita muito a vida em Orlando — do trajeto do aeroporto ao hotel até idas aos parques e outlets. Veja como funciona a Rentcars, o maior comparador de locadoras da América Latina, e o que é preciso para alugar um carro nos EUA.</p>
+
+  <div class="article-img-wrap">
+    <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2024/01/rentcars-confiavel-aluguel-carro-capa-820x430.jpg" alt="Aluguel de carro nos Estados Unidos" loading="lazy" />
+  </div>
+  <p class="article-img-caption">Ter carro próprio facilita muito o roteiro em Orlando.</p>
+
+  <h2>O que é a Rentcars</h2>
+  <p>A Rentcars é o maior site de locação de carros do Brasil e da América Latina, com mais de 16 anos de mercado. Em vez de ser uma locadora própria, ela funciona como um comparador: pesquisa preços em mais de 350 locadoras espalhadas por mais de 160 países — incluindo, claro, os Estados Unidos e a região de Orlando — e mostra tudo lado a lado para você escolher a melhor opção.</p>
+
+  <div class="article-img-wrap">
+    <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2024/04/rentcars-350-locadoras.png" alt="Locadoras parceiras da Rentcars" loading="lazy" />
+  </div>
+  <p class="article-img-caption">A Rentcars compara preços entre mais de 350 locadoras ao redor do mundo.</p>
+
+  <p>Por ter escritório no Brasil, a cobrança da locação é feita em reais, o que evita o IOF mais alto e o ágio do cartão de crédito na cotação do dólar aplicados em compras internacionais. Também é possível parcelar em até 3 vezes sem juros (ou mais vezes com juros, dependendo da locadora), e o preço mostrado já inclui a franquia de seguro padrão — sem pegadinha de tarifa baixa com seguro caro escondido depois.</p>
+
+  <h2>Passo a passo: como reservar o carro</h2>
+  <ol class="steps-numbered">
+    <li><strong>Acesse o site ou app da Rentcars</strong> e informe onde o carro será retirado — pode ser uma cidade, um bairro ou direto o aeroporto (em Orlando, o aeroporto MCO costuma ser a opção mais prática).</li>
+    <li><strong>Escolha as datas</strong> de retirada e devolução. Se for devolver em outra cidade, já marque essa opção na busca.</li>
+    <li><strong>Compare os carros e as locadoras</strong> disponíveis: dá para filtrar por categoria (compacto, SUV, automático, com ar-condicionado etc.) e ver o preço final de cada combinação.</li>
+    <li><strong>Escolha a proteção do veículo</strong> — a cobertura básica já vem inclusa no preço, mas dá para contratar proteções extras e itens como cadeirinha para criança.</li>
+    <li><strong>Preencha os dados do condutor</strong> e finalize o pagamento (cartão de crédito, carteira digital ou Pix, com desconto adicional em alguns casos).</li>
+    <li><strong>Guarde o voucher</strong> recebido por e-mail — é ele que você apresenta no balcão da locadora, no dia e horário marcados para a retirada.</li>
+  </ol>
+
+  <div class="article-img-pair">
+    <div class="article-img-wrap">
+      <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2024/04/rentcars-confiavel-inicio-1.png" alt="Busca inicial de aluguel de carro na Rentcars" loading="lazy" />
+    </div>
+    <div class="article-img-wrap">
+      <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2024/04/rentcars-confiavel-locacao.png" alt="Comparação de carros e locadoras na Rentcars" loading="lazy" />
+    </div>
+  </div>
+  <p class="article-img-caption">Busca por local/data e comparação de carros e locadoras disponíveis.</p>
+
+  <div class="article-img-pair">
+    <div class="article-img-wrap">
+      <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2024/04/rentcars-confiavel-opcionais.png" alt="Opcionais de proteção e itens extras na Rentcars" loading="lazy" />
+    </div>
+    <div class="article-img-wrap">
+      <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2024/04/rentcars-confiavel-pagamento.png" alt="Tela de pagamento da reserva na Rentcars" loading="lazy" />
+    </div>
+  </div>
+  <p class="article-img-caption">Escolha de proteção/itens extras e finalização do pagamento.</p>
+
+  <h2>🇺🇸 O que é preciso para alugar carro nos Estados Unidos</h2>
+  <p>Para dirigir e retirar um carro alugado nos EUA, o viajante brasileiro geralmente precisa apresentar:</p>
+  <ul class="info-box-list">
+    <li>🪪 CNH válida, emitida há pelo menos 2 anos</li>
+    <li>🌍 Permissão Internacional para Dirigir (PID)</li>
+    <li>💳 Cartão de crédito internacional com limite para o bloqueio caução</li>
+    <li>📄 Passaporte e voucher da reserva</li>
+  </ul>
+  <p>A idade mínima costuma ser 21 anos — algumas locadoras aceitam a partir de 18, mas cobram uma taxa extra de "condutor jovem". Vale sempre checar as regras específicas da locadora escolhida antes de fechar a reserva.</p>
+
+  <div class="article-img-wrap">
+    <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2022/07/aluguel-de-carro-2022-capa-02.jpg" alt="Documentos necessários para alugar carro nos Estados Unidos" loading="lazy" />
+  </div>
+  <p class="article-img-caption">CNH, PID, passaporte e cartão de crédito internacional são os documentos básicos.</p>
+
+  <h2>A Rentcars é confiável?</h2>
+  <p>A empresa tem mais de 16 anos de mercado e nota 8,8 no Reclame Aqui, com mais de 99% das reclamações respondidas. Um dos maiores diferenciais para quem viaja aos EUA é o suporte em português, disponível todos os dias da semana — bem útil se surgir qualquer imprevisto durante a viagem, já que você é atendido por alguém que fala o seu idioma, mesmo estando no exterior.</p>
+  <p>Os valores mostrados no site são transparentes, sem surpresas no preço final, e é possível cancelar ou alterar a reserva pelo site. Vale só ficar atento: cancelamentos com 48h ou menos de antecedência da retirada podem ter retenção de valores por parte de algumas locadoras.</p>
+
+  <h2>Quanto custa alugar um carro nos EUA</h2>
+  <p>O valor da diária varia bastante conforme o modelo do carro, a época da viagem e o tempo total de locação — quanto mais dias, geralmente menor o valor da diária. No Brasil a Rentcars lista diárias a partir de R$ 90 para carros compactos, chegando a mais de R$ 500 em modelos de luxo; nos EUA a faixa de preço segue lógica parecida, variando por cidade, temporada e categoria do veículo. O ideal é sempre pesquisar direto no site com as datas e o local exatos da sua viagem para ter o valor atualizado.</p>
+
+  <h2>🎟️ Cupom de desconto</h2>
+  <div class="update-box">
+    <div class="update-box-tag">💸 Economize na locação</div>
+    <p>A Rentcars costuma oferecer descontos ao longo do ano, e o pagamento via Pix já garante 5% de desconto adicional. Segundo o próprio site, o código promocional <strong>MELHORESDESTINOS5</strong> também pode ser aplicado na tela de pagamento para ativar desconto na locação — vale conferir se o cupom ainda está disponível no momento da sua reserva, já que cupons promocionais costumam ter prazo de validade.</p>
+  </div>
+
+  <h2>Vale a pena?</h2>
+  <div class="pros-cons">
+    <div class="pros-cons-box pros">
+      <h3>✅ Pontos positivos</h3>
+      <ul>
+        <li>Compara preços de dezenas de locadoras de uma vez só</li>
+        <li>Cobrança em reais, sem ágio de cartão internacional</li>
+        <li>Preço já inclui seguro básico, sem pegadinha</li>
+        <li>Suporte em português todos os dias da semana</li>
+        <li>Possibilidade de parcelamento</li>
+      </ul>
+    </div>
+    <div class="pros-cons-box cons">
+      <h3>⚠️ Pontos de atenção</h3>
+      <ul>
+        <li>Exige CNH + PID + cartão de crédito internacional</li>
+        <li>Idade mínima de 21 anos (taxa extra para menores de 25 em algumas locadoras)</li>
+        <li>Cancelamento de última hora pode gerar retenção de valores</li>
+        <li>Preço final ainda depende de taxas cobradas direto no balcão da locadora</li>
+      </ul>
+    </div>
+  </div>
+  <p>Para quem vai a Orlando, ter carro alugado costuma valer muito a pena — facilita ir e voltar dos parques, fazer compras nos outlets e explorar a região no seu próprio ritmo. Reservar com antecedência pela Rentcars, comparando preços e já deixando todos os documentos organizados, deixa esse processo bem mais simples.</p>
+
+  <div class="source-note">
+    Conteúdo resumido e adaptado com base no artigo original
+    <a href="https://www.melhoresdestinos.com.br/rentcars-confiavel-alugar-carro.html" target="_blank" rel="noopener">"Rentcars é confiável? Dicas e informações para você alugar um carro com desconto em todo o mundo!"</a>,
+    publicado no blog Melhores Destinos (melhoresdestinos.com.br), por Daniel Akstein Batista. Fotos e informações de referência: Melhores Destinos.
+  </div>
+
+  <div style="margin-top:36px;">
+    <a href="dicas-viagem.html" style="color:var(--accent-gold);font-weight:800;text-decoration:none;font-size:.9rem;">← Voltar para Dicas para sua Viagem</a>
+  </div>
+</article>
+
+<!-- ===== CTA FINAL ===== -->
+<section style="background:linear-gradient(135deg,#0d2050,#1a0d3e);padding:60px 24px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div style="font-size:.8rem;font-weight:800;letter-spacing:2px;color:#f8d57e;text-transform:uppercase;margin-bottom:12px;">🎟️ Pronto para ir a Orlando?</div>
+    <h2 style="font-size:2rem;font-weight:900;color:#fff;margin:0 0 12px;">Solicite sua cotação personalizada</h2>
+    <p style="color:#aab;font-size:1rem;margin:0 0 28px;">Com ingressos em pontos Azul, você economiza muito. Montamos o pacote ideal para você e sua família.</p>
+    <a href="index.html#cotacao" style="display:inline-block;background:#f8d57e;color:#1a1a2e;font-weight:900;font-size:1rem;padding:14px 36px;border-radius:30px;text-decoration:none;">📋 Solicitar cotação grátis →</a>
+  </div>
+</section>
+
+<footer style="background:#0a0c18;padding:24px;text-align:center;color:#555;font-size:.8rem;border-top:1px solid #1e2240;">
+  © 2026 Orlando Dream Viagens — Especialistas em Orlando
+</footer>
+
+</body>
+</html>

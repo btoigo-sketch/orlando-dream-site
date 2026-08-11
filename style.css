@@ -61,8 +61,14 @@ img { display: block; }
   padding: 14px 0;
 }
 /* Header precisa de mais espaço horizontal do que o container padrão do site
-   para caber o menu inteiro numa linha só. */
-.header .container { max-width: 1400px; }
+   para caber o menu inteiro numa linha só. A borda esquerda, porém, fica alinhada
+   com a mesma margem do container de 1200px (mesma linha vertical do "balão"
+   Especialistas em Orlando no hero), estendendo o espaço extra só para a direita. */
+.header .container {
+  max-width: 1400px;
+  margin-left: max(20px, calc((100% - 1200px) / 2));
+  margin-right: auto;
+}
 .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .logo-icon { font-size: 1.8rem; }
 .logo-text { font-size: 1.35rem; font-weight: 900; color: var(--navy); letter-spacing: -.5px; line-height: 1; }

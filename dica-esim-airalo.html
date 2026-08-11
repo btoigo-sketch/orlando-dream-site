@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chip virtual (eSIM) para viagem: como instalar o Airalo — Orlando Dream Viagens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --accent-gold: #f8d57e;
+      --bg-dark:     #0d0f1a;
+      --bg-card:     #161829;
+      --bg-card2:    #1a1d30;
+      --text-main:   #e8eaf0;
+      --text-sub:    #9098b8;
+    }
+    body { background: var(--bg-dark); color: var(--text-main); font-family: 'Nunito', sans-serif; margin: 0; }
+    .header { background: #10121f !important; border-bottom: 1px solid #1e2240; }
+    .header .logo-text { color: #fff; }
+    .header .logo-text strong { color: var(--accent-gold); }
+    .header .logo-sub { color: #90a0c0; }
+    .header .mobile-menu-btn { color: #fff; border-color: rgba(255,255,255,.25); }
+    @media (max-width: 640px) {
+      .header .header-nav { border-top-color: rgba(255,255,255,.1); }
+      .header .header-nav a:hover { background: rgba(255,255,255,.06); }
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { max-width: 780px; margin: 24px auto 0; padding: 0 24px; font-size: .82rem; color: var(--text-sub); }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent-gold); }
+
+    /* ── ARTIGO ── */
+    .article { max-width: 780px; margin: 0 auto; padding: 20px 24px 80px; }
+    .article-tag {
+      display: inline-block; font-size: .75rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      color: #1a1a2e; background: var(--accent-gold); padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
+    }
+    .article h1 { font-size: 2.1rem; font-weight: 900; color: #fff; line-height: 1.25; margin: 0 0 14px; }
+    .article-lead { font-size: 1.05rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 28px; }
+
+    .article-img-wrap { border-radius: 14px; overflow: hidden; margin: 24px 0 8px; border: 1px solid #1e2240; }
+    .article-img-wrap img { width: 100%; display: block; }
+    .article-img-caption { font-size: .78rem; color: var(--text-sub); text-align: center; margin: 0 0 28px; font-style: italic; }
+
+    .article-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0 8px; }
+    .article-img-pair .article-img-wrap { margin: 0; height: 100%; }
+    .article-img-pair img { height: 100%; object-fit: cover; }
+
+    .article h2 {
+      font-size: 1.35rem; font-weight: 900; color: var(--accent-gold);
+      margin: 40px 0 16px; padding-top: 8px; border-top: 1px solid #1e2240;
+    }
+    .article p { font-size: .98rem; line-height: 1.75; color: #d5d8e8; margin: 0 0 16px; }
+    .article ul { margin: 0 0 20px; padding-left: 22px; }
+    .article li { font-size: .95rem; line-height: 1.7; color: #d5d8e8; margin-bottom: 6px; }
+
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0 8px; }
+    .pros-cons-box { background: var(--bg-card2); border-radius: 12px; padding: 18px 20px; border: 1px solid #1e2240; }
+    .pros-cons-box h3 { font-size: .95rem; margin: 0 0 10px; }
+    .pros-cons-box.pros h3 { color: #81c784; }
+    .pros-cons-box.cons h3 { color: #ef9a9a; }
+    .pros-cons-box ul { margin: 0; padding-left: 18px; }
+    .pros-cons-box li { font-size: .85rem; color: #ccd; margin-bottom: 6px; line-height: 1.5; }
+
+    .info-box-list { list-style: none; padding: 0; margin: 0 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .info-box-list li {
+      background: var(--bg-card2); border-radius: 10px; padding: 10px 14px; font-size: .85rem;
+      color: #ccd; border-left: 3px solid var(--accent-gold);
+    }
+
+    .update-box {
+      margin: 24px 0 32px; padding: 20px 22px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(248,213,126,.14), rgba(248,213,126,.04));
+      border: 1px solid rgba(248,213,126,.4);
+    }
+    .update-box-tag {
+      display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .6px; color: #1a1a2e; background: var(--accent-gold);
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
+    }
+    .update-box p { margin: 0; font-size: .95rem; color: #f0eee0; line-height: 1.65; }
+    .update-box p + p { margin-top: 10px; }
+    .update-box strong { color: var(--accent-gold); }
+
+    .source-note {
+      margin-top: 40px; padding: 16px 20px; background: var(--bg-card2); border-radius: 12px;
+      font-size: .8rem; color: var(--text-sub); border: 1px solid #1e2240;
+    }
+    .source-note a { color: var(--accent-gold); }
+
+    /* ── PASSO A PASSO ── */
+    .steps-numbered { list-style: none; padding: 0; margin: 0 0 28px; counter-reset: step; }
+    .steps-numbered li {
+      position: relative; padding: 4px 0 4px 46px; margin-bottom: 22px;
+      font-size: .96rem; line-height: 1.7; color: #d5d8e8;
+    }
+    .steps-numbered li::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 0; top: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--accent-gold); color: #1a1a2e;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: .95rem;
+    }
+    .steps-numbered strong { color: #fff; }
+
+    @media(max-width:640px) {
+      .article h1 { font-size: 1.6rem; }
+      .article-img-pair, .pros-cons, .info-box-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== UTILITY BAR ===== -->
+<div class="util-bar">
+  <div class="container util-bar-inner">
+    <div class="util-left">
+      <a href="https://wa.me/5551980585594" target="_blank" class="util-whatsapp">📱 WhatsApp: (51) 98058-5594</a>
+      <span>✉️ b.toigo@gmail.com</span>
+    </div>
+    <div class="util-right">
+      <a href="index.html#como-funciona">Como funciona?</a>
+      <a href="index.html#cotacao" class="util-cta-link">Solicitar cotação</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">✨</span>
+      <div>
+        <div class="logo-text">Orlando<strong>Dream</strong></div>
+        <div class="logo-sub">Especialistas em Orlando</div>
+      </div>
+    </a>
+    <button class="mobile-menu-btn" onclick="document.querySelector('.header-nav').classList.toggle('mobile-open')" aria-label="Abrir menu">☰</button>
+    <nav class="header-nav" style="display:flex;gap:16px;flex:1;justify-content:center;flex-wrap:nowrap;">
+      <a href="index.html#ingressos"  style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">🎟️ Ingressos</a>
+      <a href="index.html#parques"    style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">🏰 Os Parques</a>
+      <a href="sobre-orlando.html"    style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">🌴 Sobre Orlando</a>
+      <a href="dicas-viagem.html"     style="font-weight:800;font-size:.88rem;color:var(--accent-gold);white-space:nowrap;">🧳 Dicas de Viagem</a>
+      <a href="index.html#contato"    style="font-weight:800;font-size:.88rem;color:#90a0c0;white-space:nowrap;">💬 Contato</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Início</a> › <a href="dicas-viagem.html">Dicas para sua Viagem</a> › Chip virtual (eSIM) Airalo
+</div>
+
+<article class="article">
+  <div class="article-tag">📶 Internet na viagem</div>
+  <h1>Chip virtual (eSIM) para viagem: como instalar e usar o Airalo</h1>
+  <p class="article-lead">Nada de procurar loja de chip no destino ou depender do wi-fi do hotel: com o eSIM da Airalo você compra a internet ainda no Brasil e chega já conectado. Preparamos um passo a passo bem simples para quem nunca usou um chip virtual.</p>
+
+  <div class="article-img-wrap" style="max-width:70%;margin-left:auto;margin-right:auto;">
+    <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2022/02/chip-virtual-viagem-eSIM-Airalo-capa-2019-820x430.jpg" alt="Chip virtual eSIM Airalo para viagem" loading="lazy" />
+  </div>
+  <p class="article-img-caption">O eSIM permite usar internet no exterior sem trocar o chip físico do celular.</p>
+
+  <h2>O que é um eSIM</h2>
+  <p>O eSIM é um chip de celular igual a qualquer outro: guarda um plano de dados e conecta seu aparelho à rede local. A diferença é que ele não é um cartão físico — ele já vem embutido no telefone e é ativado digitalmente, lendo um QR Code ou instalando por um aplicativo.</p>
+  <p>Isso significa que dá para manter seu chip brasileiro normal (para receber SMS e ligações) e usar o eSIM só para internet, como se fossem duas linhas ao mesmo tempo no mesmo aparelho.</p>
+
+  <div class="article-img-wrap" style="max-width:70%;margin-left:auto;margin-right:auto;">
+    <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2022/02/chip-celular-SIM-card-viagem.jpeg" alt="Comparação entre chip físico e chip virtual eSIM" loading="lazy" />
+  </div>
+  <p class="article-img-caption">O eSIM tende a substituir o chip físico nos próximos anos.</p>
+
+  <h2>Meu celular é compatível?</h2>
+  <p>A tecnologia só existe em aparelhos mais recentes. Antes de comprar, confira:</p>
+  <ul class="info-box-list">
+    <li>📱 iPhone: a partir do iPhone XS (11, 12, 13, 14, 15, 16...)</li>
+    <li>🤖 Samsung: a partir da linha Galaxy S20</li>
+    <li>🤖 Google Pixel: a partir do Pixel 3</li>
+    <li>🤖 Motorola/Huawei: modelos topo de linha mais recentes</li>
+  </ul>
+  <p>Se estiver na dúvida, vale checar nas configurações de rede do celular se existe uma opção chamada "Adicionar eSIM" ou "Plano de dados eSIM" — se ela aparecer, o aparelho é compatível.</p>
+
+  <h2>O que é o Airalo e como funciona</h2>
+  <p>O Airalo é um dos serviços mais conhecidos de venda de eSIM para viagem, com cobertura em mais de 190 países. Os planos são só de dados — não vêm com número de telefone nem permitem ligação ou SMS tradicional — mas isso raramente é um problema, já que dá para usar WhatsApp, FaceTime e outros apps de mensagem e chamada por internet normalmente.</p>
+  <p>Existem três tipos de plano:</p>
+  <ul>
+    <li><strong>Local:</strong> mais barato, funciona em um único país</li>
+    <li><strong>Regional:</strong> cobre um grupo de países (ex.: toda a Europa)</li>
+    <li><strong>Global:</strong> cobertura em cerca de 87 países, ideal para quem visita vários destinos na mesma viagem</li>
+  </ul>
+  <p>Os planos são pré-pagos e não renovam automaticamente — ou seja, não tem risco de cobrança surpresa depois que a viagem acabar. Como exemplo de preço, um plano de 1 GB por 7 dias nos Estados Unidos custa em torno de US$ 4,50 a US$ 5.</p>
+
+  <div class="article-img-pair">
+    <div class="article-img-wrap">
+      <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2022/02/Airalo-planos-locais-chip-viagem.png" alt="Tela de planos locais do Airalo" loading="lazy" />
+    </div>
+    <div class="article-img-wrap">
+      <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2022/02/Airalo-planos-regionais-chip-viagem.png" alt="Tela de planos regionais do Airalo" loading="lazy" />
+    </div>
+  </div>
+  <p class="article-img-caption">Exemplos de planos locais e regionais disponíveis no app do Airalo.</p>
+
+  <h2>📲 Passo a passo: como instalar o eSIM Airalo</h2>
+  <p>Esta é a parte que mais gera dúvida em quem nunca usou — mas o processo é bem mais simples do que parece. Faça tudo ainda no Brasil, com wi-fi, antes de embarcar:</p>
+  <ol class="steps-numbered">
+    <li><strong>Baixe o app Airalo</strong> (gratuito, disponível para iPhone e Android) e crie uma conta com seu e-mail.</li>
+    <li><strong>Escolha o destino</strong> e compare os planos local, regional e global disponíveis para a viagem — veja quantos GB e quantos dias de validade cada um oferece.</li>
+    <li><strong>Compre o plano</strong> com cartão de crédito, débito, Apple Pay, Google Pay ou PayPal. O eSIM aparece na hora na aba "Meus eSIMs" do app.</li>
+    <li><strong>Toque em "Instalar"</strong> dentro dos detalhes do eSIM comprado. O app vai oferecer instalação direta (o mais simples, funciona automaticamente se você estiver comprando pelo próprio celular que vai usar na viagem) ou por QR Code (caso esteja configurando por outro aparelho).</li>
+    <li><strong>Siga as instruções na tela</strong> — o próprio celular guia o processo passo a passo, é só confirmar cada etapa. Leva menos de 2 minutos.</li>
+    <li><strong>Dê um nome para a linha</strong> (ex.: "Chip EUA") para não confundir com sua linha brasileira nas configurações do celular.</li>
+    <li><strong>Deixe tudo pronto antes de viajar.</strong> A instalação pode — e deve — ser feita ainda em casa. O eSIM só precisa ser <em>ativado</em> quando você chegar ao destino.</li>
+  </ol>
+
+  <div class="article-img-pair">
+    <div class="article-img-wrap">
+      <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2022/02/Airalo-planos-locais-EUA-chip-viagem.png" alt="Tela de compra de plano local dos EUA no Airalo" loading="lazy" />
+    </div>
+    <div class="article-img-wrap">
+      <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2022/02/Airalo-chip-viagem-eSIM.png" alt="eSIM instalado com sucesso no aplicativo Airalo" loading="lazy" />
+    </div>
+  </div>
+  <p class="article-img-caption">Tela de compra do plano e confirmação do eSIM já instalado no aparelho.</p>
+
+  <h2>✈️ Como ativar ao chegar no destino</h2>
+  <ol class="steps-numbered">
+    <li><strong>Desligue o modo avião</strong> assim que o avião pousar (ou o quanto antes).</li>
+    <li><strong>Vá em Ajustes/Configurações → Dados móveis</strong> e selecione a linha do eSIM Airalo como a linha de dados principal, mantendo sua linha brasileira apenas para chamadas e SMS.</li>
+    <li><strong>Ative o roaming de dados</strong> especificamente para a linha do eSIM (esse detalhe costuma passar despercebido e é o motivo mais comum de "não estar funcionando").</li>
+    <li><strong>Aguarde alguns segundos</strong> até o ícone de sinal aparecer — pronto, você já está conectado.</li>
+  </ol>
+  <p>Se o sinal não aparecer, o próprio app do Airalo tem um botão de suporte por chat, disponível 24 horas, além de um guia rápido de solução de problemas para cada tipo de aparelho.</p>
+
+  <div class="article-img-wrap" style="max-width:70%;margin-left:auto;margin-right:auto;">
+    <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2022/02/Airalo-chip-viagem-recarga.png" alt="Tela de recarga de dados do eSIM no aplicativo Airalo" loading="lazy" />
+  </div>
+  <p class="article-img-caption">Se os dados acabarem antes do fim da viagem, é só recarregar pelo próprio app.</p>
+
+  <h2>🎟️ Cupom de desconto</h2>
+  <div class="update-box">
+    <div class="update-box-tag">💸 Economize na compra</div>
+    <p>É possível conseguir desconto usando um código promocional na hora da compra. Use o código <strong>BRUNO4472</strong> para ganhar crédito na sua primeira compra no Airalo.</p>
+    <p>Para aplicar, na tela de pagamento do app ou site do Airalo, toque em "Aplicar código/usar Airmoney" e digite o cupom antes de finalizar.</p>
+    <p><a href="https://airalo.go.link/lMJE0" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;background:var(--accent-gold);color:#1a1a2e;font-weight:900;font-size:.9rem;padding:10px 22px;border-radius:30px;text-decoration:none;">📲 Cadastre-se no Airalo e ganhe crédito →</a></p>
+  </div>
+
+  <h2>Vale a pena?</h2>
+  <div class="pros-cons">
+    <div class="pros-cons-box pros">
+      <h3>✅ Pontos positivos</h3>
+      <ul>
+        <li>Compra e instalação 100% remotas, ainda no Brasil</li>
+        <li>Preço geralmente mais barato que roaming da operadora ou chip físico</li>
+        <li>Mantém sua linha brasileira ativa ao mesmo tempo</li>
+        <li>Cobertura em mais de 190 países</li>
+        <li>Não precisa devolver nem descartar nada ao fim da viagem</li>
+      </ul>
+    </div>
+    <div class="pros-cons-box cons">
+      <h3>⚠️ Pontos de atenção</h3>
+      <ul>
+        <li>Só funciona em celulares mais recentes</li>
+        <li>Planos não incluem ligação/SMS tradicional (só dados)</li>
+        <li>Cobertura de sinal pode variar em áreas mais afastadas dos grandes centros</li>
+        <li>Vale ter um plano B (wi-fi do hotel, por exemplo) como reserva</li>
+      </ul>
+    </div>
+  </div>
+  <p>Para quem vai a Orlando, o eSIM Airalo é uma mão na roda: resolve mapa, Uber, redes sociais e contato com a família assim que você desembarca, sem precisar procurar loja de chip ou depender de wi-fi público. Vale comprar um plano básico, testar, e recarregar se precisar de mais dados durante a viagem.</p>
+
+  <div class="source-note">
+    Conteúdo resumido e adaptado com base no artigo original
+    <a href="https://www.melhoresdestinos.com.br/chip-virtual-internet-viagem-internacional.html" target="_blank" rel="noopener">"Chip virtual de internet para viagens internacionais vale a pena? Saiba como funciona o eSIM da Airalo"</a>,
+    publicado no blog Melhores Destinos (melhoresdestinos.com.br), por Sandro Kurovski. Fotos e informações de referência: Melhores Destinos.
+  </div>
+
+  <div style="margin-top:36px;">
+    <a href="dicas-viagem.html" style="color:var(--accent-gold);font-weight:800;text-decoration:none;font-size:.9rem;">← Voltar para Dicas para sua Viagem</a>
+  </div>
+</article>
+
+<!-- ===== CTA FINAL ===== -->
+<section style="background:linear-gradient(135deg,#0d2050,#1a0d3e);padding:60px 24px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div style="font-size:.8rem;font-weight:800;letter-spacing:2px;color:#f8d57e;text-transform:uppercase;margin-bottom:12px;">🎟️ Pronto para ir a Orlando?</div>
+    <h2 style="font-size:2rem;font-weight:900;color:#fff;margin:0 0 12px;">Solicite sua cotação personalizada</h2>
+    <p style="color:#aab;font-size:1rem;margin:0 0 28px;">Com ingressos em pontos Azul, você economiza muito. Montamos o pacote ideal para você e sua família.</p>
+    <a href="index.html#cotacao" style="display:inline-block;background:#f8d57e;color:#1a1a2e;font-weight:900;font-size:1rem;padding:14px 36px;border-radius:30px;text-decoration:none;">📋 Solicitar cotação grátis →</a>
+  </div>
+</section>
+
+<footer style="background:#0a0c18;padding:24px;text-align:center;color:#555;font-size:.8rem;border-top:1px solid #1e2240;">
+  © 2026 Orlando Dream Viagens — Especialistas em Orlando
+</footer>
+
+</body>
+</html>
