@@ -13,12 +13,22 @@ const CAL_MAX_MESES = 6;
 // Número de WhatsApp da agência (somente dígitos, com DDI)
 const WHATSAPP_NUM = '5551980585594';
 
-// Fator de conversão: R$ 15,75 a cada 1.000 milhas Azul
-// = R$ 0,01575 por milha/ponto
+// Fator de conversão PADRÃO (plano B): R$ 15,75 a cada 1.000 milhas Azul = R$ 0,01575 por ponto.
+// O valor em vigor vem do config.json no GitHub (ver carregarConfigRemota). Este só é usado
+// se o GitHub estiver fora do ar e não houver nenhum valor lido antes neste navegador.
 const DEFAULT_CONFIG = {
   taxa_reais_por_ponto: 0.01575,  // R$ 15,75 / 1.000 pts
   markup_percentual: 0,           // margem aplicada internamente pela agência
 };
+
+// config.json fica no mesmo repositório do cotacoes.json. Formato:
+//   { "taxa_reais_por_ponto": 0.01575, "markup_percentual": 0 }
+const CONFIG_REMOTO_URL   = 'https://raw.githubusercontent.com/btoigo-sketch/orlando-dream-cotacoes/main/config.json';
+const CONFIG_REMOTO_CACHE = 'od_config_remoto';  // último valor válido lido do GitHub
+// Faixas aceitas: barram erro de digitação (ex.: 15.75 no lugar de 0.01575 multiplicaria os preços por 1000)
+const TAXA_MIN   = 0.001;  // R$ 1 por milheiro
+const TAXA_MAX   = 0.2;    // R$ 200 por milheiro
+const MARKUP_MAX = 300;    // %
 
 // ── Catálogo de produtos ───────────────────────────────────────────────────────
 const PRODUTOS = [
@@ -38,11 +48,61 @@ const PRODUTOS = [
 ];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-function getConfig() {
+function lerJSONLocal(chave) {
   try {
-    const raw = localStorage.getItem(CONFIG_KEY);
-    return raw ? { ...DEFAULT_CONFIG, ...JSON.parse(raw) } : { ...DEFAULT_CONFIG };
-  } catch { return { ...DEFAULT_CONFIG }; }
+    const raw = localStorage.getItem(chave);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+/**
+ * Valida o config.json: tudo ou nada. A taxa é obrigatória e precisa estar na faixa; o markup é opcional
+ * (ausente = padrão), mas se vier fora da faixa o arquivo inteiro é recusado. Assim um erro de digitação
+ * não zera nem multiplica os preços, e nunca se aplica só metade de uma configuração.
+ */
+function extrairConfigPreco(o) {
+  if (!o || typeof o !== 'object') return null;
+  const t = Number(o.taxa_reais_por_ponto);
+  if (!(Number.isFinite(t) && t >= TAXA_MIN && t <= TAXA_MAX)) return null;
+  let m = DEFAULT_CONFIG.markup_percentual;
+  if (o.markup_percentual !== undefined && o.markup_percentual !== null && o.markup_percentual !== '') {
+    m = Number(o.markup_percentual);
+    if (!(Number.isFinite(m) && m >= 0 && m <= MARKUP_MAX)) return null;
+  }
+  return { taxa_reais_por_ponto: t, markup_percentual: m };
+}
+
+let _configRemoto = null;      // valores de preço lidos do GitHub nesta sessão
+let _fonteConfig  = 'padrao';  // 'github' | 'cache' | 'padrao'
+
+/** Lê o config.json do GitHub. Se falhar, usa o último valor válido guardado no navegador. */
+async function carregarConfigRemota() {
+  try {
+    const r = await fetch(CONFIG_REMOTO_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error('config.json não encontrado');
+    const cfg = extrairConfigPreco(await r.json());
+    if (!cfg) throw new Error('config.json com valores inválidos');
+    _configRemoto = cfg;
+    _fonteConfig  = 'github';
+    try { localStorage.setItem(CONFIG_REMOTO_CACHE, JSON.stringify(cfg)); } catch {}
+    return true;
+  } catch (e) {
+    console.warn('[precos] config.json remoto indisponível:', e.message);
+    _configRemoto = extrairConfigPreco(lerJSONLocal(CONFIG_REMOTO_CACHE));
+    _fonteConfig  = _configRemoto ? 'cache' : 'padrao';
+    return false;
+  }
+}
+
+function getFonteConfig() { return _fonteConfig; }
+
+/** Taxa e markup vêm SEMPRE do GitHub (ou do último valor lido); gateway etc. ficam no navegador. */
+function getConfig() {
+  const local = { ...(lerJSONLocal(CONFIG_KEY) || {}) };
+  delete local.taxa_reais_por_ponto;
+  delete local.markup_percentual;
+  const remoto = _configRemoto || extrairConfigPreco(lerJSONLocal(CONFIG_REMOTO_CACHE)) || {};
+  return { ...DEFAULT_CONFIG, ...local, ...remoto };
 }
 
 function formatBRL(valor) {
@@ -119,8 +179,8 @@ function filtrarParque(parque) {
 
 // ── Inicialização dos cards ────────────────────────────────────────────────────
 async function initIngressos() {
-  const cotacoes = await getCotacoes();
-  const config   = getConfig();
+  const [cotacoes] = await Promise.all([getCotacoes(), carregarConfigRemota()]);
+  const config     = getConfig();
   _calCotacoes = cotacoes;
   _calConfig   = config;
 
