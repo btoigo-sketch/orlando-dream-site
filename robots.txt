@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://orlando-dream.netlify.app/sitemap.xml

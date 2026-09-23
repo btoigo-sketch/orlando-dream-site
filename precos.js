@@ -305,13 +305,18 @@ function renderizarCalendario() {
   if (btnPrev) btnPrev.disabled = (mesAtual <= mesInicio);
   if (btnNext) btnNext.disabled = (mesAtual >= mesFim);
 
-  const chave      = PRODUTOS.find(p => p.id === _calProdId)?.pontos_key;
+  const prodAtual  = PRODUTOS.find(p => p.id === _calProdId);
+  const chave      = prodAtual?.pontos_key;
   const pontosBase = parseInt(_calCotacoes?.[chave]?.pontos_base || _calCotacoes?.[chave]?.pontos || 0);
+  const nomeParque = prodAtual?.parque === 'universal' ? 'a Universal' : 'a Disney';
 
   const primeiroDia = new Date(ano, mes, 1).getDay();
   const diasNoMes   = new Date(ano, mes + 1, 0).getDate();
   let html = '';
   for (let i = 0; i < primeiroDia; i++) html += '<div class="cal-day vazio"></div>';
+
+  let temDiaFuturo  = false;
+  let diasComPreco  = 0;
 
   for (let d = 1; d <= diasNoMes; d++) {
     const pad     = n => String(n).padStart(2,'0');
@@ -323,6 +328,7 @@ function renderizarCalendario() {
       continue;
     }
 
+    temDiaFuturo = true;
     const pontosData = getPontosParaData(_calProdId, dateStr);
     const tier = pontosData ? getTemporadaTier(pontosData, pontosBase) : 'sem-preco';
     const preco = pontosData ? calcularPreco(pontosData, _calConfig) : null;
@@ -332,6 +338,7 @@ function renderizarCalendario() {
       // Dia sem cotação disponível — exibe apagado, não clicável
       html += `<div class="cal-day passado"><span class="cal-day-num" style="opacity:.4">${d}</span></div>`;
     } else {
+      diasComPreco++;
       html += `<div class="cal-day ${tier}${sel}" onclick="selecionarDataCal('${dateStr}')">
         <span class="cal-day-num">${d}</span>
         <span class="cal-day-preco">${formatarPrecoMin(preco)}</span>
@@ -340,7 +347,19 @@ function renderizarCalendario() {
   }
 
   const grid = document.getElementById('cal-grid');
-  if (grid) grid.innerHTML = html;
+  if (grid) {
+    if (temDiaFuturo && diasComPreco === 0) {
+      // Mês inteiro sem disponibilidade cadastrada — explica em vez de mostrar grade vazia
+      grid.innerHTML = `
+        <div class="cal-mes-vazio">
+          <span class="cal-mes-vazio-icon">📅</span>
+          <p class="cal-mes-vazio-titulo">${nomeParque} ainda não liberou ingressos para ${label.charAt(0).toUpperCase()}${label.slice(1)}</p>
+          <p class="cal-mes-vazio-texto">Os parques costumam abrir a venda de ingressos com alguns meses de antecedência. Fale com a gente pelo WhatsApp para saber quando essas datas forem liberadas.</p>
+        </div>`;
+    } else {
+      grid.innerHTML = html;
+    }
+  }
   _atualizarFooterCalendario();
 }
 
@@ -370,17 +389,27 @@ function _atualizarFooterCalendario() {
 
 /**
  * Ao confirmar data no calendário:
- * Preenche o formulário de cotação e rola até ele (ou abre WhatsApp diretamente).
+ * Preenche uma linha do formulário de cotação (a primeira vazia, ou uma nova)
+ * e rola até ele.
  */
 function confirmarDataEAdicionar() {
   if (!_calDataSel || !_calProdId) return;
-  const prod  = PRODUTOS.find(p => p.id === _calProdId);
-  const dataBR = formatarDataBR(_calDataSel);
+  const prod = PRODUTOS.find(p => p.id === _calProdId);
   fecharCalendario();
 
-  // Preenche o formulário de cotação
-  const fParque = document.getElementById('form-parque');
-  const fData   = document.getElementById('form-data');
+  // Procura uma linha de item ainda vazia (parque e data em branco)
+  const linhas = Array.from(document.querySelectorAll('#itens-ingresso-wrap .item-ingresso'));
+  let alvo = linhas.find(li => {
+    const p = li.querySelector('.item-parque')?.value;
+    const d = li.querySelector('.item-data')?.value;
+    return !p && !d;
+  });
+
+  // Nenhuma linha vazia disponível: cria uma nova
+  if (!alvo) alvo = adicionarItemIngresso();
+
+  const fParque = alvo?.querySelector('.item-parque');
+  const fData   = alvo?.querySelector('.item-data');
   if (fParque) fParque.value = prod?.form_value || '';
   if (fData)   fData.value  = _calDataSel;
 
@@ -399,29 +428,102 @@ function abrirWhatsApp(parqueNome, dataStr) {
   window.open(url, '_blank');
 }
 
+// ── Itens repetíveis do formulário (múltiplos ingressos/datas) ────────────────
+let _itemIngressoSeq = 0;
+
+function adicionarItemIngresso() {
+  const wrap    = document.getElementById('itens-ingresso-wrap');
+  const primeira = wrap?.querySelector('.item-ingresso');
+  if (!wrap || !primeira) return null;
+
+  _itemIngressoSeq++;
+  const nova = primeira.cloneNode(true);
+  nova.querySelectorAll('select, input').forEach(el => { el.value = ''; });
+  const novaData = nova.querySelector('.item-data');
+  if (novaData) novaData.min = new Date().toISOString().split('T')[0];
+  wrap.appendChild(nova);
+
+  _atualizarBotoesRemoverItem();
+  return nova;
+}
+
+function removerItemIngresso(btn) {
+  const linha = btn.closest('.item-ingresso');
+  const wrap  = document.getElementById('itens-ingresso-wrap');
+  if (!linha || !wrap) return;
+  // Nunca remove a última linha restante
+  if (wrap.querySelectorAll('.item-ingresso').length <= 1) return;
+  linha.remove();
+  _atualizarBotoesRemoverItem();
+}
+
+function _atualizarBotoesRemoverItem() {
+  const linhas = document.querySelectorAll('#itens-ingresso-wrap .item-ingresso');
+  linhas.forEach(li => {
+    const btn = li.querySelector('.item-remove-btn');
+    if (btn) btn.style.visibility = linhas.length > 1 ? 'visible' : 'hidden';
+  });
+}
+
+function _resetItensIngresso() {
+  const wrap = document.getElementById('itens-ingresso-wrap');
+  if (!wrap) return;
+  const linhas = wrap.querySelectorAll('.item-ingresso');
+  // Remove todas menos a primeira, e limpa os valores dela
+  linhas.forEach((li, i) => { if (i > 0) li.remove(); });
+  const primeira = wrap.querySelector('.item-ingresso');
+  primeira?.querySelectorAll('select, input').forEach(el => { el.value = ''; });
+  _atualizarBotoesRemoverItem();
+}
+
 // ── Formulário de cotação ──────────────────────────────────────────────────────
 function enviarFormularioCotacao(evt) {
   evt.preventDefault();
-  const nome   = document.getElementById('form-nome')?.value.trim();
-  const email  = document.getElementById('form-email')?.value.trim();
-  const parque = document.getElementById('form-parque')?.value.trim();
-  const data   = document.getElementById('form-data')?.value;
-  const qtd    = document.getElementById('form-qtd')?.value || '1';
-  const obs    = document.getElementById('form-obs')?.value.trim();
+
+  // Bloqueia envio se campos obrigatórios (nome, e-mail) não estiverem preenchidos/válidos
+  const form = evt.target || document.getElementById('cotacao-form');
+  if (form && typeof form.reportValidity === 'function' && !form.reportValidity()) {
+    return;
+  }
+
+  const nome  = document.getElementById('form-nome')?.value.trim();
+  const email = document.getElementById('form-email')?.value.trim();
+  const qtd   = document.getElementById('form-qtd')?.value || '1';
+  const obs   = document.getElementById('form-obs')?.value.trim();
+
+  // Coleta todos os itens de ingresso preenchidos (parque e/ou data)
+  const itens = Array.from(document.querySelectorAll('#itens-ingresso-wrap .item-ingresso'))
+    .map(li => ({
+      parque: li.querySelector('.item-parque')?.value.trim(),
+      data:   li.querySelector('.item-data')?.value,
+    }))
+    .filter(it => it.parque || it.data);
 
   let msg = `Olá! Gostaria de solicitar uma cotação de ingresso.\n\n`;
   msg += `*Nome:* ${nome}\n`;
   msg += `*E-mail:* ${email}\n`;
-  if (parque) msg += `*Parque:* ${parque}\n`;
-  if (data)   msg += `*Data de visita:* ${formatarDataBR(data)}\n`;
+
+  if (itens.length === 1) {
+    const it = itens[0];
+    if (it.parque) msg += `*Parque:* ${it.parque}\n`;
+    if (it.data)   msg += `*Data de visita:* ${formatarDataBR(it.data)}\n`;
+  } else if (itens.length > 1) {
+    msg += `*Ingressos de interesse:*\n`;
+    itens.forEach((it, i) => {
+      const partes = [];
+      if (it.parque) partes.push(it.parque);
+      if (it.data)   partes.push(formatarDataBR(it.data));
+      msg += `${i + 1}. ${partes.join(' — ') || 'A definir'}\n`;
+    });
+  }
+
   msg += `*Qtd. visitantes:* ${qtd}\n`;
-  if (obs)    msg += `*Observações:* ${obs}\n`;
+  if (obs) msg += `*Observações:* ${obs}\n`;
 
   const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
   window.open(url, '_blank');
 
   // Mostra confirmação
-  const form = document.getElementById('cotacao-form');
   const conf = document.getElementById('cotacao-confirm');
   if (form) form.style.display = 'none';
   if (conf) conf.style.display = 'block';
@@ -432,6 +534,7 @@ function novaCotacao() {
   const conf = document.getElementById('cotacao-confirm');
   if (form) { form.reset(); form.style.display = ''; }
   if (conf) conf.style.display = 'none';
+  _resetItensIngresso();
 }
 
 // ── Inicialização ─────────────────────────────────────────────────────────────

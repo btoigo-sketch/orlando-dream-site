@@ -579,6 +579,23 @@ img { display: block; }
 }
 .form-group textarea { resize: vertical; min-height: 80px; }
 
+.item-ingresso { margin-bottom: 4px; }
+.form-row-item {
+  grid-template-columns: 1fr 150px 30px;
+  align-items: start;
+}
+@media (max-width: 540px) { .form-row-item { grid-template-columns: 1fr; } }
+.item-remove-btn {
+  align-self: center; margin-top: 22px;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: #FAFBFC; color: var(--muted);
+  font-size: .8rem; font-weight: 800; cursor: pointer; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, color .2s;
+}
+.item-remove-btn:hover { border-color: var(--red); color: var(--red); }
+@media (max-width: 540px) { .item-remove-btn { margin-top: 0; justify-self: end; } }
+
 /* ══════════════════════════════════════════════════════════════
    CALENDÁRIO DE PREÇOS
    ══════════════════════════════════════════════════════════════ */
@@ -697,6 +714,19 @@ img { display: block; }
 .cal-day.baixa .cal-day-preco { color: rgba(7,232,175,.8); }
 .cal-day.media .cal-day-preco { color: rgba(245,166,35,.8); }
 .cal-day.alta  .cal-day-preco { color: rgba(255,75,107,.8); }
+
+.cal-mes-vazio {
+  grid-column: 1 / -1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 28px 16px; gap: 8px;
+  background: rgba(255,255,255,.04); border-radius: 12px;
+}
+.cal-mes-vazio-icon { font-size: 1.8rem; opacity: .8; }
+.cal-mes-vazio-titulo { font-size: .95rem; font-weight: 800; margin: 0; color: #fff; }
+.cal-mes-vazio-texto {
+  font-size: .8rem; font-weight: 500; line-height: 1.5; margin: 0;
+  max-width: 340px; color: #fff; opacity: .75;
+}
 
 /* Rodapé do modal */
 .cal-footer-modal {
