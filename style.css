@@ -1,5 +1,5 @@
 /* ============================================
-   Orlando Dream — Stylesheet v2
+   Orlando Happy — Stylesheet v2
    Inspirado em VPD Travel + Tio Orlando
    ============================================ */
 
@@ -597,6 +597,33 @@ img { display: block; }
 .item-remove-btn:hover { border-color: var(--red); color: var(--red); }
 @media (max-width: 540px) { .item-remove-btn { margin-top: 0; justify-self: end; } }
 
+.item-preco {
+  font-size: .78rem; font-weight: 800; min-height: 1.2em;
+  margin: -8px 0 14px 2px;
+}
+.item-preco:empty { margin: 0; min-height: 0; }
+.item-preco.item-preco-ok          { color: var(--green-d); }
+.item-preco.item-preco-indisponivel { color: var(--red); font-weight: 800; }
+.item-preco.item-preco-consulta     { color: var(--muted); font-weight: 600; }
+
+.item-data.item-data-invalida {
+  border-color: var(--red) !important;
+  background: rgba(239,35,60,.06) !important;
+}
+
+.cotacao-total-wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: rgba(6,214,160,.1); border: 1.5px dashed var(--green);
+  border-radius: var(--radius-sm); padding: 14px 18px; margin: 4px 0 8px;
+}
+.cotacao-total-info { display: flex; flex-direction: column; gap: 2px; }
+.cotacao-total-label {
+  font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .4px;
+  color: var(--navy);
+}
+.cotacao-total-count { font-size: .76rem; color: var(--muted); font-weight: 600; }
+.cotacao-total-valor { font-size: 1.4rem; font-weight: 900; color: var(--green-d); white-space: nowrap; }
+
 /* ══════════════════════════════════════════════════════════════
    CALENDÁRIO DE PREÇOS
    ══════════════════════════════════════════════════════════════ */
@@ -744,43 +771,36 @@ img { display: block; }
   position: absolute; right: 0; top: 0; bottom: 0; width: 46%;
   pointer-events: none; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
+  padding-right: 56px;
 }
 .hero-park-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  padding: 30px; transform: perspective(800px) rotateY(-8deg) rotateX(4deg);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  padding: 18px; transform: perspective(800px) rotateY(-8deg) rotateX(4deg);
   transform-origin: center center;
+  width: 100%;
 }
 .hero-park-thumb {
   border-radius: 14px; overflow: hidden; position: relative;
-  box-shadow: 0 8px 32px rgba(0,0,0,.55);
+  box-shadow: 0 8px 26px rgba(0,0,0,.55);
   transition: transform .3s;
+  background: linear-gradient(135deg,#0d1a3a,#1a0d3e);
 }
-.hero-park-thumb:nth-child(odd)  { margin-top: 18px; }
-.hero-park-thumb { background: linear-gradient(135deg,#0d1a3a,#1a0d3e); }
-.hero-park-grid > .hero-park-thumb:nth-child(3) {
-  background:
-    linear-gradient(135deg, rgba(10,0,40,.55), rgba(40,0,80,.75)),
-    url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80&auto=format&fit=crop') center/cover no-repeat;
-}
+.hero-park-thumb:nth-child(3n+2) { margin-top: 16px; }
+.hero-park-thumb:last-child { grid-column: 2; }
 .hero-park-thumb img {
-  display: block; width: 100%; height: 130px; object-fit: cover;
+  display: block; width: 100%; height: 128px; object-fit: cover;
   filter: brightness(.88) saturate(1.1);
   opacity: 0; transition: opacity .5s;
 }
 .hero-park-thumb img.loaded { opacity: 1; }
-.hero-park-thumb-label {
+.hero-park-thumb-tag {
   position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,.75));
-  color: #fff; font-size: .68rem; font-weight: 800;
-  padding: 14px 10px 7px; text-align: center; letter-spacing: .4px;
+  background: linear-gradient(transparent, rgba(0,0,0,.82));
+  color: #fff; font-size: .66rem; font-weight: 900; text-transform: uppercase;
+  padding: 16px 6px 8px; text-align: center; letter-spacing: .3px; line-height: 1.2;
 }
-.hero-park-thumb-badge {
-  position: absolute; top: 7px; left: 7px;
-  font-size: .6rem; font-weight: 900; text-transform: uppercase;
-  padding: 2px 8px; border-radius: 50px; letter-spacing: .5px;
-}
-.badge-d { background: rgba(0,180,216,.9); color: #fff; }
-.badge-u { background: rgba(123,47,190,.9); color: #fff; }
+.hero-park-thumb.badge-d .hero-park-thumb-tag { color: #7FE7F7; }
+.hero-park-thumb.badge-u .hero-park-thumb-tag { color: #D2AEF7; }
 @media (max-width: 900px) { .hero-visual { display: none; } }
 
 /* ===== GRID 2 COLUNAS PARA COMBOS ===== */

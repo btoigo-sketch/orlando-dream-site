@@ -1,6 +1,7 @@
 /**
  * precos.js — Motor de preços + cotação Orlando Dream
- * Sem carrinho. Fluxo: ver preço → escolher data → solicitar cotação (WhatsApp ou formulário).
+ * Fluxo: ver preço → escolher data → adicionar ingressos ao formulário de cotação
+ * (múltiplas linhas de parque+data, cada uma com preço estimado e um total somado) → WhatsApp.
  */
 
 // ── Configuração ──────────────────────────────────────────────────────────────
@@ -412,6 +413,7 @@ function confirmarDataEAdicionar() {
   const fData   = alvo?.querySelector('.item-data');
   if (fParque) fParque.value = prod?.form_value || '';
   if (fData)   fData.value  = _calDataSel;
+  if (alvo) atualizarPrecoItem(alvo);
 
   // Rola até o formulário
   setTimeout(() => {
@@ -440,7 +442,13 @@ function adicionarItemIngresso() {
   const nova = primeira.cloneNode(true);
   nova.querySelectorAll('select, input').forEach(el => { el.value = ''; });
   const novaData = nova.querySelector('.item-data');
-  if (novaData) novaData.min = new Date().toISOString().split('T')[0];
+  if (novaData) {
+    novaData.min = new Date().toISOString().split('T')[0];
+    novaData.classList.remove('item-data-invalida');
+    novaData.setCustomValidity('');
+  }
+  const novoPreco = nova.querySelector('.item-preco');
+  if (novoPreco) { novoPreco.textContent = ''; novoPreco.className = 'item-preco'; }
   wrap.appendChild(nova);
 
   _atualizarBotoesRemoverItem();
@@ -455,6 +463,7 @@ function removerItemIngresso(btn) {
   if (wrap.querySelectorAll('.item-ingresso').length <= 1) return;
   linha.remove();
   _atualizarBotoesRemoverItem();
+  atualizarTotalCotacao();
 }
 
 function _atualizarBotoesRemoverItem() {
@@ -473,7 +482,99 @@ function _resetItensIngresso() {
   linhas.forEach((li, i) => { if (i > 0) li.remove(); });
   const primeira = wrap.querySelector('.item-ingresso');
   primeira?.querySelectorAll('select, input').forEach(el => { el.value = ''; });
+  const dataEl = primeira?.querySelector('.item-data');
+  if (dataEl) { dataEl.classList.remove('item-data-invalida'); dataEl.setCustomValidity(''); }
+  const precoEl = primeira?.querySelector('.item-preco');
+  if (precoEl) { precoEl.textContent = ''; precoEl.className = 'item-preco'; }
   _atualizarBotoesRemoverItem();
+  atualizarTotalCotacao();
+}
+
+// ── Preço estimado por item + total somado ─────────────────────────────────────
+/** Recalcula e exibe o preço estimado de uma linha (parque + data) e atualiza o total. */
+function atualizarPrecoItem(linha) {
+  const selParque = linha?.querySelector('.item-parque');
+  const selData   = linha?.querySelector('.item-data');
+  const elPreco   = linha?.querySelector('.item-preco');
+  if (!selParque || !selData || !elPreco) return;
+
+  const formValue = selParque.value;
+  const dataStr    = selData.value;
+
+  elPreco.className = 'item-preco';
+  delete elPreco.dataset.valor;
+  selData.classList.remove('item-data-invalida');
+  selData.setCustomValidity('');
+
+  if (!formValue || !dataStr) {
+    elPreco.textContent = '';
+    atualizarTotalCotacao();
+    return;
+  }
+
+  const prod = PRODUTOS.find(p => p.form_value === formValue);
+  if (!prod) {
+    // Ex.: combo "Disney + Universal (ambos)", sem preço por data no catálogo
+    elPreco.textContent = 'Preço sob consulta';
+    elPreco.classList.add('item-preco-consulta');
+    atualizarTotalCotacao();
+    return;
+  }
+
+  const pontos = getPontosParaData(prod.id, dataStr);
+  if (pontos) {
+    const preco = calcularPreco(pontos, _calConfig || getConfig());
+    elPreco.textContent = '≈ ' + formatBRL(preco);
+    elPreco.classList.add('item-preco-ok');
+    elPreco.dataset.valor = String(preco);
+  } else {
+    // Sem cotação cadastrada para essa combinação parque+data: avisa com destaque
+    // e impede o envio do formulário (via setCustomValidity + reportValidity)
+    elPreco.textContent = `⚠️ Sem disponibilidade cadastrada para ${prod.nome} nesta data — escolha outra data`;
+    elPreco.classList.add('item-preco-indisponivel');
+    selData.classList.add('item-data-invalida');
+    selData.setCustomValidity(`Não há cotação disponível para ${prod.nome} nesta data. Escolha outra data.`);
+  }
+  atualizarTotalCotacao();
+}
+
+/** Lê o nº de visitantes do formulário. "5+" conta como 5 para fins de cálculo. */
+function _qtdVisitantesNumero() {
+  const raw = document.getElementById('form-qtd')?.value || '1';
+  const n = parseInt(raw, 10);
+  return Number.isFinite(n) && n > 0 ? n : 1;
+}
+
+/** Soma os preços de todas as linhas preenchidas, multiplica pelo nº de visitantes e mostra (ou esconde) o total. */
+function atualizarTotalCotacao() {
+  const elWrap  = document.getElementById('cotacao-total-wrap');
+  const elValor = document.getElementById('cotacao-total-valor');
+  const elCount = document.getElementById('cotacao-total-count');
+  const elNota  = document.getElementById('cotacao-total-nota');
+  if (!elWrap || !elValor) return;
+
+  const valores = Array.from(document.querySelectorAll('#itens-ingresso-wrap .item-preco[data-valor]'))
+    .map(el => parseFloat(el.dataset.valor))
+    .filter(v => Number.isFinite(v));
+
+  if (valores.length === 0) {
+    elWrap.style.display = 'none';
+    if (elNota) elNota.style.display = 'none';
+    return;
+  }
+
+  const qtd    = _qtdVisitantesNumero();
+  const somaUn = valores.reduce((a, b) => a + b, 0);
+  const total  = somaUn * qtd;
+
+  elValor.textContent = formatBRL(total);
+  if (elCount) {
+    const txtItens = valores.length + (valores.length === 1 ? ' ingresso' : ' ingressos');
+    const txtQtd   = qtd + (qtd === 1 ? ' visitante' : ' visitantes');
+    elCount.textContent = `${txtItens} × ${txtQtd}`;
+  }
+  elWrap.style.display = 'flex';
+  if (elNota) elNota.style.display = 'block';
 }
 
 // ── Formulário de cotação ──────────────────────────────────────────────────────
@@ -517,6 +618,16 @@ function enviarFormularioCotacao(evt) {
     });
   }
 
+  // Soma os preços de referência já calculados nas linhas (quando houver), x nº de visitantes
+  const totalValores = Array.from(document.querySelectorAll('#itens-ingresso-wrap .item-preco[data-valor]'))
+    .map(el => parseFloat(el.dataset.valor))
+    .filter(v => Number.isFinite(v));
+  if (totalValores.length > 0) {
+    const somaUn = totalValores.reduce((a, b) => a + b, 0);
+    const total  = somaUn * _qtdVisitantesNumero();
+    msg += `*Total estimado (referência):* ${formatBRL(total)}\n`;
+  }
+
   msg += `*Qtd. visitantes:* ${qtd}\n`;
   if (obs) msg += `*Observações:* ${obs}\n`;
 
@@ -546,4 +657,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Formulário de cotação
   document.getElementById('cotacao-form')?.addEventListener('submit', enviarFormularioCotacao);
+
+  // Preço por item + total, recalculado a cada mudança de parque/data em qualquer linha
+  document.getElementById('itens-ingresso-wrap')?.addEventListener('change', (evt) => {
+    if (evt.target.matches?.('.item-parque, .item-data')) {
+      const linha = evt.target.closest('.item-ingresso');
+      if (linha) atualizarPrecoItem(linha);
+    }
+  });
+
+  // Total recalculado também ao mudar o nº de visitantes
+  document.getElementById('form-qtd')?.addEventListener('change', atualizarTotalCotacao);
 });

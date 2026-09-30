@@ -103,28 +103,36 @@
         <a href="#ingressos" class="btn btn-ghost btn-lg">Ver preços de referência</a>
       </div>
     </div>
-    <!-- Mosaico visual dos parques -->
+    <!-- Mosaico visual dos parques (os 7 parques de Orlando) -->
     <div class="hero-visual">
       <div class="hero-park-grid">
-        <div class="hero-park-thumb">
+        <div class="hero-park-thumb badge-d">
           <img data-wiki="Magic Kingdom" alt="Magic Kingdom" class="hero-thumb-img" />
-          <span class="hero-park-thumb-badge badge-d">Disney</span>
-          <div class="hero-park-thumb-label">Magic Kingdom</div>
+          <div class="hero-park-thumb-tag">Magic Kingdom</div>
         </div>
-        <div class="hero-park-thumb">
-          <img data-wiki="Universal Epic Universe" alt="Epic Universe" class="hero-thumb-img" />
-          <span class="hero-park-thumb-badge badge-u">Universal</span>
-          <div class="hero-park-thumb-label">Epic Universe</div>
-        </div>
-        <div class="hero-park-thumb">
-          <img data-wiki="Harry Potter and the Forbidden Journey" alt="Islands of Adventure" class="hero-thumb-img" />
-          <span class="hero-park-thumb-badge badge-u">Universal</span>
-          <div class="hero-park-thumb-label">Islands of Adventure</div>
-        </div>
-        <div class="hero-park-thumb">
+        <div class="hero-park-thumb badge-d">
           <img data-wiki="Epcot" alt="EPCOT" class="hero-thumb-img" />
-          <span class="hero-park-thumb-badge badge-d">Disney</span>
-          <div class="hero-park-thumb-label">EPCOT</div>
+          <div class="hero-park-thumb-tag">EPCOT</div>
+        </div>
+        <div class="hero-park-thumb badge-d">
+          <img data-wiki="Disney's Hollywood Studios" alt="Hollywood Studios" class="hero-thumb-img" />
+          <div class="hero-park-thumb-tag">Hollywood Studios</div>
+        </div>
+        <div class="hero-park-thumb badge-d">
+          <img data-wiki="Disney's Animal Kingdom" alt="Animal Kingdom" class="hero-thumb-img" />
+          <div class="hero-park-thumb-tag">Animal Kingdom</div>
+        </div>
+        <div class="hero-park-thumb badge-u">
+          <img data-wiki="Universal Epic Universe" alt="Epic Universe" class="hero-thumb-img" />
+          <div class="hero-park-thumb-tag">Epic Universe</div>
+        </div>
+        <div class="hero-park-thumb badge-u">
+          <img data-wiki="Harry Potter and the Forbidden Journey" alt="Islands of Adventure" class="hero-thumb-img" />
+          <div class="hero-park-thumb-tag">Islands of Adventure</div>
+        </div>
+        <div class="hero-park-thumb badge-u">
+          <img data-wiki="Universal Studios Florida" alt="Universal Studios Florida" class="hero-thumb-img" />
+          <div class="hero-park-thumb-tag">Universal Studios Florida</div>
         </div>
       </div>
     </div>
@@ -483,6 +491,17 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label for="form-qtd">Nº de visitantes</label>
+              <select id="form-qtd" name="qtd">
+                <option value="1">1 pessoa</option>
+                <option value="2" selected>2 pessoas</option>
+                <option value="3">3 pessoas</option>
+                <option value="4">4 pessoas</option>
+                <option value="5+">5 ou mais</option>
+              </select>
+            </div>
+
             <div id="itens-ingresso-wrap">
               <div class="item-ingresso" data-item>
                 <div class="form-row form-row-item">
@@ -515,21 +534,20 @@
                   </div>
                   <button type="button" class="item-remove-btn" onclick="removerItemIngresso(this)" title="Remover este ingresso" aria-label="Remover este ingresso" style="visibility:hidden;">✕</button>
                 </div>
+                <div class="item-preco"></div>
               </div>
             </div>
 
             <button type="button" class="btn btn-ghost-dark btn-sm" id="btn-add-item" onclick="adicionarItemIngresso()" style="margin-bottom:18px;">➕ Adicionar outro ingresso</button>
 
-            <div class="form-group">
-              <label for="form-qtd">Nº de visitantes</label>
-              <select id="form-qtd" name="qtd">
-                <option value="1">1 pessoa</option>
-                <option value="2" selected>2 pessoas</option>
-                <option value="3">3 pessoas</option>
-                <option value="4">4 pessoas</option>
-                <option value="5+">5 ou mais</option>
-              </select>
+            <div id="cotacao-total-wrap" class="cotacao-total-wrap" style="display:none;">
+              <div class="cotacao-total-info">
+                <span class="cotacao-total-label">Total estimado</span>
+                <span id="cotacao-total-count" class="cotacao-total-count"></span>
+              </div>
+              <span id="cotacao-total-valor" class="cotacao-total-valor"></span>
             </div>
+            <p id="cotacao-total-nota" class="price-note" style="display:none;margin:-8px 0 16px;">* Soma dos valores de referência por data selecionada, multiplicada pelo número de visitantes. O valor final é confirmado pela agência na cotação.</p>
 
             <div class="form-group">
               <label for="form-obs">Observações</label>
