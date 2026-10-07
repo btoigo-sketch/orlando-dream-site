@@ -86,6 +86,7 @@
         <a href="#ingressos-individuais-universal" style="font-weight:800;font-size:.88rem;color:var(--navy);white-space:nowrap;">🎢 Universal</a>
         <a href="sobre-orlando.html"               style="font-weight:800;font-size:.88rem;color:var(--navy);white-space:nowrap;">🌴 Sobre Orlando</a>
         <a href="dicas-viagem.html"                style="font-weight:800;font-size:.88rem;color:var(--navy);white-space:nowrap;">🧳 Dicas de Viagem</a>
+        <a href="#aluguel-carro"                   style="font-weight:800;font-size:.88rem;color:var(--navy);white-space:nowrap;">🚗 Aluguel de carro</a>
         <a href="#como-funciona"                   style="font-weight:800;font-size:.88rem;color:var(--navy);white-space:nowrap;">❓ Como funciona</a>
         <a href="#contato"                         style="font-weight:800;font-size:.88rem;color:var(--navy);white-space:nowrap;">💬 Contato</a>
       </nav>
@@ -607,6 +608,45 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ===== DESTAQUE: ALUGUEL DE CARRO (afiliado Rentcars) ===== -->
+  <section class="section-carro" id="aluguel-carro">
+    <div class="container carro-strip">
+      <div class="carro-strip-left">
+        <div class="carro-strip-text">
+          <span class="carro-strip-icon">🚗</span>
+          <div>
+            <strong>Vai alugar carro em Orlando?</strong>
+            <span>Compare preços de várias locadoras na Rentcars e reserve em reais.</span>
+          </div>
+        </div>
+        <div class="carro-strip-actions">
+          <a class="btn btn-gold btn-sm" href="https://www.rentcars.com/pt-br/?requestorid=11034&amp;utm_source=orlando-dream.netlify.app&amp;utm_medium=afiliado-link" target="_blank" rel="sponsored nofollow noopener">Ver carros →</a>
+          <a class="carro-strip-more" href="dica-aluguel-carro-eua.html">Como funciona</a>
+        </div>
+        <p class="carro-strip-aviso">Link de afiliado: podemos receber comissão, sem custo extra para você.</p>
+      </div>
+      <div class="carro-widget" id="carro-widget" data-src="https://widgets.rentcars.com/widget-v13.html?requestor=11034&amp;locale=pt-br&amp;utm_source=orlando-dream.netlify.app&amp;utm_medium=afiliado-widget"></div>
+    </div>
+    <script>
+      // Carrega o widget da Rentcars só quando a faixa aparece na tela (não pesa o início da página)
+      (function () {
+        var box = document.getElementById('carro-widget');
+        if (!box) return;
+        function load() {
+          if (box.firstChild) return;
+          var o = document.createElement('object');
+          o.data = box.dataset.src; o.width = 600; o.height = 400;
+          o.setAttribute('aria-label', 'Busca de aluguel de carro Rentcars');
+          box.appendChild(o);
+        }
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { load(); io.disconnect(); } }, { rootMargin: '300px' });
+          io.observe(box);
+        } else { load(); }
+      })();
+    </script>
   </section>
 
   <!-- ===== CONTATO ===== -->

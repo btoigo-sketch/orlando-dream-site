@@ -92,6 +92,35 @@
       text-transform: uppercase; letter-spacing: .6px; color: #1a1a2e; background: var(--accent-gold);
       padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
     }
+    .afiliado-box {
+      max-width: 483px; margin: 24px auto 32px; padding: 16px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(248,213,126,.14), rgba(248,213,126,.04));
+      border: 1px solid rgba(248,213,126,.4);
+    }
+    .afiliado-box > p { margin: 0 0 12px; font-size: .85rem; color: #f0eee0; line-height: 1.55; }
+    /* Widget original 600x400 reduzido para 69% (414x276) */
+    .afiliado-widget {
+      width: 414px; height: 292px; max-width: 100%; margin: 0 auto 16px;
+      background: #fff; border-radius: 12px; overflow: hidden; position: relative;
+    }
+    .afiliado-widget object {
+      display: block; width: 600px; height: 400px; border: 0;
+      transform: scale(.69); transform-origin: top left;
+    }
+    @media (max-width: 400px) {
+      .afiliado-widget { width: 300px; height: 214px; }
+      .afiliado-widget object { transform: scale(.5); }
+    }
+    .afiliado-btn {
+      display: block; text-align: center; background: var(--accent-gold); color: #1a1a2e !important;
+      font-weight: 900; font-size: 1rem; padding: 14px 24px; border-radius: 30px; text-decoration: none;
+    }
+    .afiliado-btn:hover { filter: brightness(1.06); }
+    .afiliado-aviso { margin: 12px 0 0 !important; font-size: .75rem !important; color: var(--text-sub) !important; }
+    .afiliado-topo {
+      display: inline-block; margin: 4px 0 8px; background: var(--accent-gold); color: #1a1a2e !important;
+      font-weight: 900; font-size: .9rem; padding: 10px 22px; border-radius: 30px; text-decoration: none;
+    }
     .update-box p { margin: 0; font-size: .95rem; color: #f0eee0; line-height: 1.65; }
     .update-box p + p { margin-top: 10px; }
     .update-box strong { color: var(--accent-gold); }
@@ -186,11 +215,7 @@
   <div class="article-tag">🚗 Aluguel de Carro</div>
   <h1>Aluguel de carro nos Estados Unidos: como alugar com desconto pela Rentcars</h1>
   <p class="article-lead">Ter um carro alugado facilita muito a vida em Orlando — do trajeto do aeroporto ao hotel até idas aos parques e outlets. Veja como funciona a Rentcars, o maior comparador de locadoras da América Latina, e o que é preciso para alugar um carro nos EUA.</p>
-
-  <div class="article-img-wrap">
-    <img src="https://www.melhoresdestinos.com.br/wp-content/uploads/2024/01/rentcars-confiavel-aluguel-carro-capa-820x430.jpg" alt="Aluguel de carro nos Estados Unidos" loading="lazy" />
-  </div>
-  <p class="article-img-caption">Ter carro próprio facilita muito o roteiro em Orlando.</p>
+  <a class="afiliado-topo" href="#reservar-carro">🚗 Pesquisar carros em Orlando →</a>
 
   <h2>O que é a Rentcars</h2>
   <p>A Rentcars é o maior site de locação de carros do Brasil e da América Latina, com mais de 16 anos de mercado. Em vez de ser uma locadora própria, ela funciona como um comparador: pesquisa preços em mais de 350 locadoras espalhadas por mais de 160 países — incluindo, claro, os Estados Unidos e a região de Orlando — e mostra tudo lado a lado para você escolher a melhor opção.</p>
@@ -204,7 +229,7 @@
 
   <h2>Passo a passo: como reservar o carro</h2>
   <ol class="steps-numbered">
-    <li><strong>Acesse o site ou app da Rentcars</strong> e informe onde o carro será retirado — pode ser uma cidade, um bairro ou direto o aeroporto (em Orlando, o aeroporto MCO costuma ser a opção mais prática).</li>
+    <li><strong>Acesse o <a href="https://www.rentcars.com/pt-br/?requestorid=11034&amp;utm_source=orlando-dream.netlify.app&amp;utm_medium=afiliado-link" target="_blank" rel="sponsored nofollow noopener" style="color:var(--accent-gold);">site da Rentcars</a> ou use a busca abaixo</strong> e informe onde o carro será retirado — pode ser uma cidade, um bairro ou direto o aeroporto (em Orlando, o aeroporto MCO costuma ser a opção mais prática).</li>
     <li><strong>Escolha as datas</strong> de retirada e devolução. Se for devolver em outra cidade, já marque essa opção na busca.</li>
     <li><strong>Compare os carros e as locadoras</strong> disponíveis: dá para filtrar por categoria (compacto, SUV, automático, com ar-condicionado etc.) e ver o preço final de cada combinação.</li>
     <li><strong>Escolha a proteção do veículo</strong> — a cobertura básica já vem inclusa no preço, mas dá para contratar proteções extras e itens como cadeirinha para criança.</li>
@@ -254,34 +279,17 @@
   <h2>Quanto custa alugar um carro nos EUA</h2>
   <p>O valor da diária varia bastante conforme o modelo do carro, a época da viagem e o tempo total de locação — quanto mais dias, geralmente menor o valor da diária. No Brasil a Rentcars lista diárias a partir de R$ 90 para carros compactos, chegando a mais de R$ 500 em modelos de luxo; nos EUA a faixa de preço segue lógica parecida, variando por cidade, temporada e categoria do veículo. O ideal é sempre pesquisar direto no site com as datas e o local exatos da sua viagem para ter o valor atualizado.</p>
 
-  <h2>🎟️ Cupom de desconto</h2>
-  <div class="update-box">
-    <div class="update-box-tag">💸 Economize na locação</div>
-    <p>A Rentcars costuma oferecer descontos ao longo do ano, e o pagamento via Pix já garante 5% de desconto adicional. Segundo o próprio site, o código promocional <strong>MELHORESDESTINOS5</strong> também pode ser aplicado na tela de pagamento para ativar desconto na locação — vale conferir se o cupom ainda está disponível no momento da sua reserva, já que cupons promocionais costumam ter prazo de validade.</p>
+  <h2>🔎 Compare e reserve seu carro em Orlando</h2>
+  <div class="afiliado-box" id="reservar-carro">
+    <div class="update-box-tag">🚗 Pesquise direto aqui</div>
+    <p>Informe o local de retirada (por exemplo, o aeroporto de Orlando — MCO), as datas e veja na hora os preços e as locadoras disponíveis. A busca abre o site da Rentcars já com a sua pesquisa preenchida.</p>
+    <div class="afiliado-widget">
+      <object data="https://widgets.rentcars.com/widget-v13.html?requestor=11034&amp;locale=pt-br&amp;utm_source=orlando-dream.netlify.app&amp;utm_medium=afiliado-widget" width="600" height="400" aria-label="Busca de aluguel de carro Rentcars"></object>
+    </div>
+    <a class="afiliado-btn" href="https://www.rentcars.com/pt-br/?requestorid=11034&amp;utm_source=orlando-dream.netlify.app&amp;utm_medium=afiliado-link" target="_blank" rel="sponsored nofollow noopener">🚗 Ver carros disponíveis na Rentcars →</a>
+    <p class="afiliado-aviso">Divulgação: este link é de afiliado. Se você reservar pela Rentcars por ele, a Orlando Dream Viagens pode receber uma comissão, sem nenhum custo adicional para você.</p>
   </div>
 
-  <h2>Vale a pena?</h2>
-  <div class="pros-cons">
-    <div class="pros-cons-box pros">
-      <h3>✅ Pontos positivos</h3>
-      <ul>
-        <li>Compara preços de dezenas de locadoras de uma vez só</li>
-        <li>Cobrança em reais, sem ágio de cartão internacional</li>
-        <li>Preço já inclui seguro básico, sem pegadinha</li>
-        <li>Suporte em português todos os dias da semana</li>
-        <li>Possibilidade de parcelamento</li>
-      </ul>
-    </div>
-    <div class="pros-cons-box cons">
-      <h3>⚠️ Pontos de atenção</h3>
-      <ul>
-        <li>Exige CNH + PID + cartão de crédito internacional</li>
-        <li>Idade mínima de 21 anos (taxa extra para menores de 25 em algumas locadoras)</li>
-        <li>Cancelamento de última hora pode gerar retenção de valores</li>
-        <li>Preço final ainda depende de taxas cobradas direto no balcão da locadora</li>
-      </ul>
-    </div>
-  </div>
   <p>Para quem vai a Orlando, ter carro alugado costuma valer muito a pena — facilita ir e voltar dos parques, fazer compras nos outlets e explorar a região no seu próprio ritmo. Reservar com antecedência pela Rentcars, comparando preços e já deixando todos os documentos organizados, deixa esse processo bem mais simples.</p>
 
   <div class="source-note">

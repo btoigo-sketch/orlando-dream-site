@@ -193,6 +193,28 @@ img { display: block; }
 .section-white  { background: var(--white); }
 .section-light  { background: var(--bg); }
 .section-navy   { background: var(--navy); }
+
+/* Faixa de destaque: aluguel de carro (afiliado) */
+.section-carro { background: #fff8e1; border-top: 1px solid rgba(0,0,0,.06); border-bottom: 1px solid rgba(0,0,0,.06); padding: 28px 0; scroll-margin-top: 90px; }
+.carro-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 40px; text-align: center; }
+.carro-strip-left { flex: 0 1 380px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.carro-widget {
+  width: 414px; height: 292px; max-width: 100%; flex: 0 0 auto;
+  background: #fff; border-radius: 12px; overflow: hidden; position: relative;
+  box-shadow: 0 4px 18px rgba(0,0,0,.12);
+}
+.carro-widget object { display: block; width: 600px; height: 400px; border: 0; transform: scale(.69); transform-origin: top left; }
+@media (max-width: 400px) {
+  .carro-widget { width: 300px; height: 214px; }
+  .carro-widget object { transform: scale(.5); }
+}
+.carro-strip-text { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.carro-strip-icon { font-size: 1.8rem; }
+.carro-strip-text strong { display: block; color: var(--navy); font-weight: 900; font-size: 1rem; }
+.carro-strip-text span:not(.carro-strip-icon) { color: var(--muted); font-size: .88rem; }
+.carro-strip-actions { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.carro-strip-more { color: var(--navy); font-weight: 800; font-size: .85rem; text-decoration: underline; }
+.carro-strip-aviso { margin: 0; font-size: .7rem; color: var(--muted); }
 .section-teal   { background: linear-gradient(135deg, #0D3B55, #005F73); }
 
 .section-header { margin-bottom: 24px; }
