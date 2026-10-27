@@ -72,8 +72,8 @@ img { display: block; }
 .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .logo-icon { font-size: 1.8rem; }
 .logo-icon-img { height: 46px; width: auto; flex-shrink: 0; }
-.logo-text { font-size: 1.35rem; font-weight: 900; color: #0a2fa0; letter-spacing: -.5px; line-height: 1; }
-.logo-text strong { color: #ffc72c; }
+.logo-text { font-family: 'Pacifico', cursive; font-size: 1.5rem; font-weight: 400; color: #0a2fa0; letter-spacing: 0; line-height: 1.15; }
+.logo-text strong { color: #ffc72c; font-weight: 400; margin-left: .18em; }
 .logo-sub { font-size: .65rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
 
 .header-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
